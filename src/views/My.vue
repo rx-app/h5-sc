@@ -5,7 +5,7 @@
       <div class="my">
         <div class="avatar2 level-2">
           <i class="icon-hat"></i>
-          <img :src="require('../assets/img/icon-my.png')" alt />
+          <img :src="require('../assets/img/main.png')" alt />
         </div>
         <div class="name">
           <span>{{info.nickname}}</span>

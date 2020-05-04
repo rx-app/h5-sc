@@ -1,15 +1,15 @@
 <template>
   <div class="xz-footer">
     <router-link tag="div" :to="{name:'main'}" exact class="icon ">
-      <i class="icon-main"></i>
-      <div class="txt">每日运势</div>
+      <span><i class="icon-main"></i></span>
+      <div class="txt">首页</div>
     </router-link>
-    <router-link tag="div" :to="{name:'message'}"  class="icon ">
-      <i class="icon-release"></i>
-      <div class="txt">塔罗屋</div>
+    <router-link tag="div" :to="{name:'main'}"  class="icon ">
+      <span><i class="icon-release"></i></span>
+      <div class="txt">分类</div>
     </router-link>
-    <router-link :to="{name:'my'}" tag="div" class="icon ">
-      <i class="icon-my"></i>
+    <router-link :to="{name:'main'}" tag="div" class="icon ">
+      <span><i class="icon-my"></i></span>
       <div class="txt">我的</div>
     </router-link>
   </div>
@@ -28,31 +28,39 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  lang="scss"  scoped>
 .xz-footer{
-  position: absolute;
+  position: fixed;
   width: 100vw;
-  height: 110px;
-  padding: 10px 0;
+  // height: 110px;
+  padding: 14px 0 30px;
   bottom: 0;
   display: flex;
-  background: #3B1A62;
+  background: #400E8D;
   z-index: 10;
   .icon{
     flex:1;
     text-align: center;
-    .txt{font-size:20px;color:#CA92FB;line-height: 28px;}
+    span{
+      display: inline-block;
+      width: 156px;
+      height: 120px;
+     
+    }
+    &.on span{background: url('../assets/img/nav-on.png') no-repeat;background-size: contain;}
+
     i{
       display: inline-block;
-      width: 54px;
-      height: 54px;
+      width: 114px;
+      height: 114px;
     }
-    .icon-main {background: url('../assets/img/icon-main.png') no-repeat;background-size: contain;}
-    .icon-release {background: url('../assets/img/icon-release.png') no-repeat;background-size: contain;}
-    .icon-my {background: url('../assets/img/icon-my.png') no-repeat;background-size: contain;}
+    .icon-main {background: url('../assets/img/main.png') no-repeat;background-size: contain;}
+    .icon-release {background: url('../assets/img/cate.png') no-repeat;background-size: contain;}
+    .icon-my {background: url('../assets/img/my.png') no-repeat;background-size: contain;}
     &.on{
-      .icon-main {background: url('../assets/img/icon-main-on.png') no-repeat;background-size: contain;}
-      .icon-release {background: url('../assets/img/icon-release-on.png') no-repeat;background-size: contain;}
-      .icon-my {background: url('../assets/img/icon-my-on.png') no-repeat;background-size: contain;}
+      // .icon-main {background: url('../assets/img/icon-main-on.png') no-repeat;background-size: contain;}
+      // .icon-release {background: url('../assets/img/icon-release-on.png') no-repeat;background-size: contain;}
+      // .icon-my {background: url('../assets/img/icon-my-on.png') no-repeat;background-size: contain;}
     }
+    .txt{font-size:30px;color:#E3BDF7;line-height: 50px;}
 
     
   }
