@@ -117,28 +117,28 @@ export default {
   background: #261A58;
   height: 100vh;
   overflow: scroll;
-  padding-top: 370px;
+  padding-top: 246px;
   position: relative;
   .header{
-    height: 783px;
+    height: 522px;
     width: 100vw;
     background: url('../assets/img/index-top.png') no-repeat;
     background-size: cover;
     position: absolute;
     top:0;
     .title{
-      font-size: 72px;
+      font-size: 48px;
       color: #fff;
       position: absolute;
       margin:0 auto;
-      top: 210px;
+      top: 140px;
       width: 100%;
       text-align: center;
     }
   }
   .banner{
     width: 100vw;
-    height: 834px;
+    height: 556px;
     background: url('../assets/img/banner.png') no-repeat;
     background-size: cover;
     position: absolute;  //不加会背景重叠
@@ -146,43 +146,43 @@ export default {
 
   }
   #main{
-    padding-top: 862px;
+    padding-top: 574px;
     padding-bottom: 1000px;
     
     .nav-card{
-      padding: 60px 60px 160px;
+      padding: 40px 40px 120px;
       position: relative;
       .title{
-        font-size: 56px;
+        font-size: 37px;
         color: #fff;
-        margin-bottom: 10px;
+        margin-bottom: 7px;
       }
       .bar{
         display: block;
-        margin-top: 8px;
-        width: 70px;
-        height: 12px;
+        margin-top: 5px;
+        width: 46px;
+        height: 8px;
         background:linear-gradient(90deg,rgba(43,235,249,1),rgba(116,135,254,1));
-        border-radius:6px;
+        border-radius:4px;
       }
       .more{
-        width:122px;
-        height:74px;
-        border:4px solid;
+        width:81px;
+        height:50px;
+        border:3px solid;
         border-image:linear-gradient(0deg, rgba(44,233,250,1), rgba(119,132,254,1)) 10 10;
         background:linear-gradient(0deg,rgba(44,233,250,1) 0%,rgba(119,132,254,1) 100%);
         border-radius:33px;
         position: absolute;
-        right: 60px;
-        top:20px;
+        right: 40px;
+        top:13px;
         span{
-          width:58px;
-          height:29px;
-          font-size:30px;
+          width:38px;
+          height:20px;
+          font-size:20px;
           font-family:PingFang SC;
           font-weight:bold;
           color:rgba(59,38,161,1);
-          line-height:30px;
+          line-height:20px;
 
           background:linear-gradient(0deg,rgba(35,245,249,1) 0%, rgba(130,116,255,1) 100%);
           -webkit-background-clip:text;
@@ -195,42 +195,42 @@ export default {
           display: flex;
           justify-content: space-between;
           .item{
-              width:312px;
-              height:348px;
+              width:208px;
+              height:232px;
               background:linear-gradient(0deg,rgba(28,93,226,1),rgba(104,225,255,1));
-              box-shadow:0px 9px 17px 1px rgba(8,4,27,0.5);
-              border-radius:20px;
-              padding: 100px 40px 32px;
+              box-shadow:0px 6px 12px 1px rgba(8,4,27,0.5);
+              border-radius:13px;
+              padding: 67px 26px 22px;
               position: relative;
               .title,.price{
-                font-size: 36px;
+                font-size: 24px;
                 color: #fff;
                 text-align: center;
-                line-height: 36px;
+                line-height: 24px;
               }
               .price{
-                margin:45px 0 36px;
+                margin:30px 0 24px;
               }
               .button{
-                width:234px;
-                height:72px;
+                width:156px;
+                height:48px;
                 background:rgba(255,255,255,1);
                 box-shadow:0px 0px 7px 0px rgba(71,24,10,0.7);
-                border-radius:36px;
-                font-size:30px;
+                border-radius:24px;
+                font-size:20px;
                 font-family:PingFang SC;
                 font-weight:bold;
                 color:rgba(41,115,231,1);
-                line-height:72px;
+                line-height:48px;
                 text-align: center;
               }
               .item-icon{
                 position: absolute;
-                width:160px;
-                height:160px;
-                border-radius:30px;
-                top:-80px;
-                left: 76px;
+                width:120px;
+                height:120px;
+                border-radius:20px;
+                top:-53px;
+                left: 52px;
                 img{
                   width: 100%;
                   height: 100%;
@@ -246,7 +246,7 @@ export default {
           
         }
         .nav1{
-          padding-top:180px;
+          padding-top:120px;
         }
         
       }
@@ -254,11 +254,11 @@ export default {
         .nav-items{
           display: flex;
           justify-content: space-between;
-          padding-top: 80px ;
+          padding-top: 53px ;
           .item{
             // flex:1;
-            height: 300px;
-            width: 480px;
+            height: 200px;
+            width: 320px;
           }
           .left{background: url('../assets/img/test2.png') no-repeat;background-size: cover;}
           .right{background: url('../assets/img/test1.png') no-repeat;background-size: cover;}
@@ -268,45 +268,45 @@ export default {
         .nav-items{
           display: flex;
           justify-content: space-between;
-          padding-top: 80px ;
+          padding-top: 53px ;
           .item{
             // flex:1;
-            height: 364px;
-            width: 1045px;
+            height: 241px;
+            width: 696px;
             background: #331473;
-            border-radius:30px;
-            padding:36px 40px;
+            border-radius:20px;
+            padding:24px 26px;
             display: flex;
             .left{
-              width: 545px;
+              width: 363px;
               .title{
-                font-size: 48px;
+                font-size: 24px;
                 vertical-align: top;
-                line-height: 60px;
-                height: 120px;
+                line-height: 40px;
+                height: 80px;
               }
               .cate{
-                width:263px;
-                height:66px;
+                width:175px;
+                height:44px;
                 background:linear-gradient(90deg,rgba(133,10,223,1),rgba(182,10,255,1));
-                border-radius:23px;
-                font-size: 28px;
-                line-height: 66px;
+                border-radius:15px;
+                font-size: 19px;
+                line-height: 44px;
                 text-align: center;
                 color: #fff;
                 vertical-align: middle;
-                margin: 20px 0 35px;
+                margin: 13px 0 24px;
               }
               .price{
-                font-size: 36px;color: #fff;
+                font-size: 24px;color: #fff;
                 .new{
-                  font-size: 48px;
+                  font-size: 32px;
                 }
               }
             }
             .right{
-              height: 288px;
-              width: 384px;
+              height: 192px;
+              width: 256px;
               img{width: 100%;height: 100%;}
             }
           }

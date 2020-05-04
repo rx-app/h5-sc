@@ -31,7 +31,7 @@ export default {
   position: fixed;
   width: 100vw;
   // height: 110px;
-  padding: 14px 0 30px;
+  padding: 9px 0 20px;
   bottom: 0;
   display: flex;
   background: #400E8D;
@@ -41,16 +41,16 @@ export default {
     text-align: center;
     span{
       display: inline-block;
-      width: 156px;
-      height: 120px;
+      width: 94px;
+      height: 80px;
      
     }
     &.on span{background: url('../assets/img/nav-on.png') no-repeat;background-size: contain;}
 
     i{
       display: inline-block;
-      width: 114px;
-      height: 114px;
+      width: 76px;
+      height: 76px;
     }
     .icon-main {background: url('../assets/img/main.png') no-repeat;background-size: contain;}
     .icon-release {background: url('../assets/img/cate.png') no-repeat;background-size: contain;}
@@ -60,7 +60,7 @@ export default {
       // .icon-release {background: url('../assets/img/icon-release-on.png') no-repeat;background-size: contain;}
       // .icon-my {background: url('../assets/img/icon-my-on.png') no-repeat;background-size: contain;}
     }
-    .txt{font-size:30px;color:#E3BDF7;line-height: 50px;}
+    .txt{font-size:20px;color:#E3BDF7;line-height: 34px;}
 
     
   }

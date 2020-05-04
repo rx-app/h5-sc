@@ -13,6 +13,18 @@
         <input class="password" type="password" v-model="password" placeholder="密码" />
       </div>
     </div>
+    <div class="login">
+      同意协议并登陆
+    </div>
+
+    <div class="wechat-login">
+      <div class="line"></div>
+      <div class="text">其它登录</div>
+      <div class="line"></div>
+    </div>
+    <div class="wechat-icon">
+      
+    </div>
     
       
   </div>
@@ -65,7 +77,7 @@ export default {
   background: url('../assets/img/login-2x.png') no-repeat;
   background-size: cover;
   position: relative;
-  padding: 600px 90px 0;
+  padding: 400px 60px 0;
   .back{
     width:72px;
     height:67px;
@@ -80,10 +92,12 @@ export default {
     .title{
       font-size: 60px;
       color: #fff;
-      margin-bottom: 150px;
+      margin-bottom: 122px;
     }
     .input-box{
       width: 100%;
+      position: relative;
+      margin-bottom: 88px;
       input{
         width: 100%;
         border: none;background: #261A58;color:#fff;font-size: 28px;line-height: 3em;
@@ -97,8 +111,50 @@ export default {
         border-radius:50%;
         position: absolute;
         right: 0px;
+        bottom:28px;
       }
     }
   }
+  .login{
+    width:690px;
+    height:96px;
+    margin:0 -30px;
+    background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
+    border-radius:0px 48px 48px 72px;
+    font-size:36px;
+    // font-family:PingFang SC;
+    // font-weight:bold;
+    color:rgba(255,255,255,1);
+    line-height:96px;
+    text-align: center;
+  }
+  .wechat-login{
+    position: relative;
+    margin:125px 100px 0;
+    display: flex;
+    .text{
+      color:#9C8DBE;
+      font-size: 26px;
+      width: 170px;
+      // flex: 1;
+      text-align: center;
+      // z-index: 100;
+    }
+    .line{
+      width:145px;
+      height:3px;
+      background:rgba(79,25,162,1);
+      margin-top: 11px;
+    }
+   
+  }
+   .wechat-icon{
+      height: 60px;
+      width: 60px;
+      margin-left: 285px;
+      margin-top: 50px;
+      background: url('../assets/img/wechat.png') no-repeat;
+      background-size: contain;
+    }
 }
 </style>
