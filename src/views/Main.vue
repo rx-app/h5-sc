@@ -234,16 +234,17 @@ export default {
               background:linear-gradient(0deg,rgba(28,93,226,1),rgba(104,225,255,1));
               box-shadow:0px 6px 12px 1px rgba(8,4,27,0.5);
               border-radius:13px;
-              padding: 67px 26px 22px;
+              padding: 68px 26px 21px;
               position: relative;
               .title,.price{
                 font-size: 24px;
                 color: #fff;
                 text-align: center;
                 line-height: 24px;
+                // margin-top: 20px;
               }
               .price{
-                margin:30px 0 24px;
+                margin:30px 0 22px;
               }
               .button{
                 width:156px;
@@ -260,14 +261,15 @@ export default {
               }
               .item-icon{
                 position: absolute;
-                width:120px;
-                height:120px;
+                width:107px;
+                height:107px;
                 border-radius:20px;
                 top:-53px;
                 left: 52px;
                 img{
                   width: 100%;
                   height: 100%;
+                  border-radius:20px;
                 }
                 // background: chartreuse;
               }
@@ -302,7 +304,7 @@ export default {
         .nav-items{
           // display: flex;
           // justify-content: space-between;
-          // padding-top: 53px ;
+          padding-top: 53px ;
           .item{
             // flex:1;
             height: 242px;
@@ -325,7 +327,7 @@ export default {
               .cate{
                 width:175px;
                 height:44px;
-                background:linear-gradient(90deg,rgba(133,10,223,1),rgba(182,10,255,1));
+                background:linear-gradient(90deg,#2f00ff,#8500fc);
                 border-radius:15px;
                 font-size: 19px;
                 line-height: 44px;
@@ -354,7 +356,8 @@ export default {
             .right{
               height: 192px;
               width: 256px;
-              img{width: 100%;height: 100%;}
+              border-radius:13px;
+              img{width: 100%;height: 100%;border-radius:13px;}
             }
           }
           

@@ -130,6 +130,7 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 26px;
+    border-radius:13px;
     // justify-content: center;
     .option{
       width:96px;
