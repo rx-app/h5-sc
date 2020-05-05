@@ -45,7 +45,7 @@ export default {
   background: #261A58;
   background-size: cover;
   position: relative;
-  padding: 50px 0 0;
+  padding: 40px 0 0; // 50px -> 40px
   .back{
     width:72px;
     height:68px;
