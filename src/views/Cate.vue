@@ -214,7 +214,9 @@ export default {
               }
               .price{
                 display: flex;
-                font-size: 24px;color:rgba(255,255,255,0.5);
+                font-size: 24px;
+                line-height: 24px;
+                color:rgba(255,255,255,0.5);
                 .new{
                   font-size: 32px;
                   color: #fff;

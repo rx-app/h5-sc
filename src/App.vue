@@ -14,5 +14,6 @@ export default {
 body{height:100%;overflow: hidden;user-select: none;
 line-height: 100%;
 }
+div{line-height: 1em;}
 #app{height: 100vh;overflow: hidden;}
 </style>

@@ -75,7 +75,7 @@ export default {
   background: #261A58;
   background-size: cover;
   position: relative;
-  padding: 50px 28px 0;
+  padding: 40px 28px 0;  //ios 6sp和安卓上 title位置偏上 50px -> 40px
   .back{
     width:72px;
     height:68px;
@@ -110,8 +110,9 @@ export default {
   }
   .box{// 这里的写法可能有问题，不确定问题的高度
     height: calc( 100vh - 50px - 20px - 48px - 50px - 24px - 230px);
-    overflow: scroll;
-    padding-bottom: 200px;
+    overflow-y: scroll;
+    padding-bottom: 300px;
+    overflow-x:hidden;
   }
   .question{
     font-size: 32px;
@@ -131,6 +132,7 @@ export default {
     align-items: center;
     margin-bottom: 26px;
     border-radius:13px;
+    
     // justify-content: center;
     .option{
       width:96px;
@@ -164,7 +166,7 @@ export default {
   }
   .pre{
     margin-top: 28px;
-    width:696px;
+    width:690px;
     height:106px;
     line-height: 106px;
     color: #fff;
