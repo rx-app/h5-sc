@@ -13,11 +13,13 @@
             <div class="text">栏目测试</div> 
             <span class="bar"></span>
           </div>
-          <div class="more"><span>更多</span></div>
+          <div class="more">
+            <!-- <span>更多</span> -->
+          </div>
           <div class="nav-items nav1">
             <div class="item item1">
               <div class="item-icon">
-                <img :src="require('../assets/img/return.png')" alt />
+                <img :src="require('../assets/img/img2.png')" alt />
               </div>
               <div class="title">人格原型测试</div>
               <div class="price">¥99.0</div>
@@ -25,7 +27,7 @@
             </div>
             <div class="item item2">
               <div class="item-icon">
-                <img :src="require('../assets/img/return.png')" alt />
+                <img :src="require('../assets/img/img2.png')" alt />
               </div>
               <div class="title">人格原型测试</div>
               <div class="price">¥99.0</div>
@@ -33,7 +35,7 @@
             </div>
             <div class="item item3">
               <div class="item-icon">
-                <img :src="require('../assets/img/return.png')" alt />
+                <img :src="require('../assets/img/img2.png')" alt />
               </div>
               <div class="title">人格原型测试</div>
               <div class="price">¥99.0</div>
@@ -71,7 +73,35 @@
                 </div>
               </div>
               <div class="right">
-                <img :src="require('../assets/img/return.png')" alt="">
+                <img :src="require('../assets/img/img1.png')" alt="">
+              </div>
+            </div>
+            <div class="item ">
+              <div class="left">
+                <div class="title">2020年最流行的测试</div>
+                <div class="cate">职业性格测试</div>
+                <div class="price">
+                  <span class="new">¥ 99.0</span>
+                  <span class="old">¥299</span>
+                  <span class="time">572已测</span>
+                </div>
+              </div>
+              <div class="right">
+                <img :src="require('../assets/img/img1.png')" alt="">
+              </div>
+            </div>
+            <div class="item ">
+              <div class="left">
+                <div class="title">2020年最流行的测试</div>
+                <div class="cate">职业性格测试</div>
+                <div class="price">
+                  <span class="new">¥ 99.0</span>
+                  <span class="old">¥299</span>
+                  <span class="time">572已测</span>
+                </div>
+              </div>
+              <div class="right">
+                <img :src="require('../assets/img/img1.png')" alt="">
               </div>
             </div>
           </div>
@@ -153,28 +183,32 @@ export default {
       padding: 40px 40px 120px;
       position: relative;
       .title{
-        font-size: 37px;
-        color: #fff;
-        margin-bottom: 7px;
+        .text{
+          font-size: 38px;
+          color: #fff;
+          margin-bottom: 10px;
+        }
+        .bar{
+          display: block;
+          // margin-top: 5px;
+          width: 46px;
+          height: 8px;
+          background:linear-gradient(90deg,rgba(43,235,249,1),rgba(116,135,254,1));
+          border-radius:4px;
+        }
+        
       }
-      .bar{
-        display: block;
-        margin-top: 5px;
-        width: 46px;
-        height: 8px;
-        background:linear-gradient(90deg,rgba(43,235,249,1),rgba(116,135,254,1));
-        border-radius:4px;
-      }
+      
       .more{
         width:81px;
         height:50px;
         border:3px solid;
         border-image:linear-gradient(0deg, rgba(44,233,250,1), rgba(119,132,254,1)) 10 10;
         background:linear-gradient(0deg,rgba(44,233,250,1) 0%,rgba(119,132,254,1) 100%);
-        border-radius:33px;
+        border-radius:25px;
         position: absolute;
         right: 40px;
-        top:13px;
+        top:35px;
         span{
           width:38px;
           height:20px;
@@ -266,21 +300,24 @@ export default {
       }
       &.section3{
         .nav-items{
-          display: flex;
-          justify-content: space-between;
-          padding-top: 53px ;
+          // display: flex;
+          // justify-content: space-between;
+          // padding-top: 53px ;
           .item{
             // flex:1;
-            height: 241px;
+            height: 242px;
             width: 696px;
             background: #331473;
             border-radius:20px;
             padding:24px 26px;
             display: flex;
+            color: #fff;
+            margin-bottom: 26px;
             .left{
               width: 363px;
+              margin-right: 27px;
               .title{
-                font-size: 24px;
+                font-size: 32px;
                 vertical-align: top;
                 line-height: 40px;
                 height: 80px;
@@ -298,9 +335,19 @@ export default {
                 margin: 13px 0 24px;
               }
               .price{
-                font-size: 24px;color: #fff;
+                display: flex;
+                font-size: 24px;color:rgba(255,255,255,0.5);
+                line-height: 1em;
                 .new{
                   font-size: 32px;
+                  color: #fff;
+                  margin-right: 14px;
+                }
+                .old{
+                  flex: 1;
+                }
+                .time{
+                  // margin-left: 90px;
                 }
               }
             }

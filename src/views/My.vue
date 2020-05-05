@@ -1,189 +1,154 @@
 <template>
-  <div class="hello">
-    <Header></Header>
-    <div class="main">
-      <div class="my">
-        <div class="avatar2 level-2">
-          <i class="icon-hat"></i>
-          <img :src="require('../assets/img/main.png')" alt />
+  <div class="page-my">
+    <div class="title">个人中心</div>
+    <div class="card-list">
+      <div class="card">
+        <div class="top">疫情期间心理健康自评表</div>
+        <div class="main">
+          <div class="price">
+            <span class="new"> ¥ 99.0 </span><span class="old">¥299</span>
+          </div>
+          <div class="time">
+            完成时间: 2020.3.18 16:20:30 
+          </div>
+          <div class="number">
+            订单标号: 12345678998745632100
+          </div>
+
         </div>
-        <div class="name">
-          <span>{{info.nickname}}</span>
-        </div>
-        <div class="level">
-          <span v-if="info.level==3" class="level-4">包年会员</span>
-          <span v-if="info.level==2" class="level-3">包月会员</span>
-          <span v-if="info.level==1" class="level-2">普通会员</span>
-          <span v-if="info.level==0" class="level-1">普通用户</span>
-        </div>
+        <div class="bottom">查看报告</div>
       </div>
-      <div class="list">
-        <router-link tag="div" :to="{name:'history'}" class="item">
-          <i class="iconfont icon-lishi1"></i>
-          <div class="text">历史记录</div>
-          <span class="iconfont icon-arr-right"></span>
-        </router-link>
-        <div class="item">
-          <i class="iconfont icon-duihua"></i>
-          <div class="text">在线客服</div>
-          <span class="iconfont icon-arr-right"></span>
+      <div class="card">
+        <div class="top">疫情期间心理健康自评表</div>
+        <div class="main">
+          <div class="price">
+            <span class="new"> ¥ 99.0 </span><span class="old">¥299</span>
+          </div>
+          <div class="time">
+            完成时间: 2020.3.18 16:20:30 
+          </div>
+          <div class="number">
+            订单标号: 12345678998745632100
+          </div>
+
         </div>
+        <div class="bottom">查看报告</div>
+      </div>
+      <div class="card">
+        <div class="top">疫情期间心理健康自评表</div>
+        <div class="main">
+          <div class="price">
+            <span class="new"> ¥ 99.0 </span><span class="old">¥299</span>
+          </div>
+          <div class="time">
+            完成时间: 2020.3.18 16:20:30 
+          </div>
+          <div class="number">
+            订单标号: 12345678998745632100
+          </div>
+
+        </div>
+        <div class="bottom">查看报告</div>
+      </div>
+      <div class="card">
+        <div class="top">疫情期间心理健康自评表</div>
+        <div class="main">
+          <div class="price">
+            <span class="new"> ¥ 99.0 </span><span class="old">¥299</span>
+          </div>
+          <div class="time">
+            完成时间: 2020.3.18 16:20:30 
+          </div>
+          <div class="number">
+            订单标号: 12345678998745632100
+          </div>
+
+        </div>
+        <div class="bottom">查看报告</div>
       </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 export default {
   data() {
     return {
       info:{}
     };
   },
-  components: {
-    Header,
-    Footer
-  },
   mounted(){
-    this.getUserInfo();
+    
   },
   methods:{
-    getUserInfo(){
-      let info = localStorage.getItem('info')
-      info = JSON.parse(info)
-      this.info = info
-      console.log(this.info)
-      // 这里可能需要判断info是否info是否存在
-    },
+    
   },
 };
 </script>
 
 <style  lang="scss"  scoped>
-.main {
-  background: #270e3b;
-  height: calc( 100vh - 84px - 110px );
-  padding-top: 80px;
-      // background: url('../assets/img/icon-star.png') no-repeat;
-
-  .my {
-      // background: url('../assets/img/icon-star.png') no-repeat;
+.page-my{
+  background: #261A58;
+  padding: 100px 26px 0;
+  
+  .title{
+    font-size: 48px;
+    color: #fff;
     text-align: center;
-    .avatar2{
-      position: relative;
-      display: inline-block;
-      width: 186px;
-      height: 186px;
-      margin: 0 0 30px;
-      border: 6px solid #FFC38E;
-      border-radius: 50%;
-      // background: chartreuse;
-      // background: url('../assets/img/icon-my.png') no-repeat;
-      background-size: cover;
-      &.level-0{
-        border-color:#AE7BEE ;
-      }
-      &.level-1{
-        border-color:#FFC38E ;
-      }
-      &.level-2{
-        
-        border-color:#C0C4C7 ;
-        
-        .icon-hat{
-          position: absolute;
-          right: -16px;
-          top: -16px;
-          width: 76px;
-          height: 76px;
-          background:url('../assets/img/level-2.png') no-repeat;
-          transform: rotate(22deg);
-          background-size: cover;
-          }
-      }
-      &.level-3{
-        border-color:#F9CF7E ;
-      }
-      img{
-        display: block;
-        width: 166px;
-      height: 166px;
-      border-radius: 50%;
-      //  background: url('../assets/img/icon-my.png') no-repeat;
-      }
-    }
-    .name {
-      height: 50px;
-      span {
-        font-size: 36px;
-        line-height: 50px;
-        color: #fff;
-      }
-    }
-    .level {
-      margin: 25px 0 115px 0;
-      span {
-        font-size: 22px;
-        color: #3c1d63;
-        padding: 8px 30px;
-
-        border-radius: 19px;
-        &.level-4 {
-          background: linear-gradient(
-            90deg,
-            rgba(255, 224, 158, 1) 0%,
-            rgba(245, 193, 100, 1) 100%
-          );
-        }
-        &.level-3 {
-          background:linear-gradient(90deg,rgba(225,228,229,1) 0%,rgba(170,176,181,1) 100%);
-        }
-        &.level-2 {
-          background:linear-gradient(90deg,rgba(255,220,188,1) 0%,rgba(255,195,142,1) 100%);
-        }
-        &.level-1 {
-          background:rgba(174,123,238,1);
-          color: #fff;
-        }
-      }
-    }
+    margin-bottom: 78px;
   }
-  .list {
-    .item {
-      background: #2e1148;
-      display: flex;
-      padding: 35px 30px;
-      border-bottom: 1px solid #321a4c;
-      &:last-child{
-        border: none;
-      }
-      i {
-        display: inline-block;
-        color: #f7c770;
-        font-size: 34px;
-        line-height: 34px;
-        vertical-align: top;
-        width: 60px;
-        // margin-right: 20px;
-        &.icon-lishi{
-          font-size: 44px;
-          line-height: 44px;
-          // margin-right: 8px;
-        }
-        // width: 35px;
-      }
-      .text {
-        font-size: 34px;
-        line-height: 34px;
+  .card-list{
+    height: calc(100vh - 100px - 48px - 78px );
+    overflow: scroll;
+    padding-bottom: 100px;
+    .card{
+      width:698px;
+      // height:353px;
+      background:rgba(64,14,141,0.5);
+      border-radius:20px;
+      margin-bottom: 26px;
+      .top{
+        background: #4C2797;
+        height: 72px;
+        border-radius:20px 20px 0 0;
+        line-height: 72px;
         color: #fff;
-        flex: 1;
+        font-size: 32px;
+        text-align: center;;
       }
-      span {
-        font-size: 34px;
-        color: #BDA6DA;
+      .main{
+        // height: 180px;
+        padding:33px 0 0 37px;
+        font-size: 24px;
+        color:rgba(255,255,255,0.5);
+        .new{
+          color:#fff;
+          font-size: 32px;
+          margin-right: 15px;
+        }
+        .time{
+          margin: 26px 0;
+        }
+        .number{
+          margin-bottom: 26px;
+        }
+        border-bottom: 1px solid #4F19A2;
+      }
+      .bottom{
+        width:100%;
+        height:100px;
+        font-size:32px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(255,255,255,1);
+        line-height:100px;
+        text-align: center;
+
+        background:linear-gradient(0deg,rgba(72,197,255,1) 0%, rgba(144,77,255,1) 100%);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-position: center;
+        // padding-left: 200px;
       }
     }
   }

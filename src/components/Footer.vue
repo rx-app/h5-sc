@@ -4,11 +4,11 @@
       <span><i class="icon-main"></i></span>
       <div class="txt">首页</div>
     </router-link>
-    <router-link tag="div" :to="{name:'main'}"  class="icon ">
+    <router-link tag="div" :to="{name:'cate'}"  class="icon ">
       <span><i class="icon-release"></i></span>
       <div class="txt">分类</div>
     </router-link>
-    <router-link :to="{name:'main'}" tag="div" class="icon ">
+    <router-link :to="{name:'my'}" tag="div" class="icon ">
       <span><i class="icon-my"></i></span>
       <div class="txt">我的</div>
     </router-link>

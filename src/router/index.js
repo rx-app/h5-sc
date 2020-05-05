@@ -11,6 +11,21 @@ export default new Router({
       name: 'main',
       component: resolve => require(['@/views/Main'], resolve)
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: resolve => require(['@/views/Test'], resolve)
+    },
+    {
+      path: '/cate',
+      name: 'cate',
+      component: resolve => require(['@/views/Cate'], resolve)
+    },
+    {
+      path: '/tips',
+      name: 'tips',
+      component: resolve => require(['@/views/Tips'], resolve)
+    },
     // {
     //   path: '/home',
     //   name: 'home',
@@ -21,11 +36,11 @@ export default new Router({
     //   name: 'detail',
     //   component: resolve => require(['@/views/Main-detail'], resolve)
     // },
-    // {
-    //   path: '/my',
-    //   name: 'my',
-    //   component: resolve => require(['@/views/My'], resolve)
-    // },
+    {
+      path: '/my',
+      name: 'my',
+      component: resolve => require(['@/views/My'], resolve)
+    },
     // {
     //   path: '/question',
     //   name: 'question',
