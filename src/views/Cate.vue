@@ -61,6 +61,34 @@
             <img :src="require('../assets/img/img1.png')" alt="">
           </div>
       </div>
+      <div class="item">
+          <div class="left">
+            <div class="title">2020年最流行的测试</div>
+            <div class="cate">职业性格测试</div>
+            <div class="price">
+              <span class="new">¥ 99.0</span>
+              <span class="old">¥299</span>
+              <span class="time">572已测</span>
+            </div>
+          </div>
+          <div class="right">
+            <img :src="require('../assets/img/img1.png')" alt="">
+          </div>
+      </div>
+      <div class="item">
+          <div class="left">
+            <div class="title">2020年最流行的测试</div>
+            <div class="cate">职业性格测试</div>
+            <div class="price">
+              <span class="new">¥ 99.0</span>
+              <span class="old">¥299</span>
+              <span class="time">572已测</span>
+            </div>
+          </div>
+          <div class="right">
+            <img :src="require('../assets/img/img1.png')" alt="">
+          </div>
+      </div>
     </div>
 
     
@@ -109,14 +137,14 @@ export default {
     margin:10px 0px 104px 96px;
   }
   .nav-bar{
-    width: 80vw;
+    width:calc( 100vw - 25px );
     overflow-x: scroll;
     height: 60px;
     // display: flex;
     .nav-list{
-      width: 200vw;
+      width: 200vw;//这个宽度可能需要js重新计算
       height: 60px;
-      overflow-y: hidden;
+      overflow-y: hidden; //滚动时 ios 上会上下滑动
       .item{
         vertical-align: top;
         width: 116px;
@@ -150,6 +178,9 @@ export default {
           // display: flex;
           // justify-content: space-between;
           // padding-top: 53px ;
+          height: calc(100vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
+          overflow-y: scroll;
+          padding-bottom: 400px;
           .item{
             // flex:1;
             height: 242px;

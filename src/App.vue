@@ -12,5 +12,5 @@ export default {
 
 <style>
 body{height:100%;overflow: hidden;user-select: none;}
-/* #app{height: 100vh;overflow: scroll;} */
+#app{height: 100vh;overflow: hidden;}
 </style>
