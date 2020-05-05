@@ -17,14 +17,14 @@
             <!-- <span>更多</span> -->
           </div>
           <div class="nav-items nav1">
-            <div class="item item1">
+            <router-link :to="{name:'share'}" tag="div" class="item item1">
               <div class="item-icon">
                 <img :src="require('../assets/img/img2.png')" alt />
               </div>
               <div class="title">人格原型测试</div>
               <div class="price">¥99.0</div>
               <div class="button">去看看</div>
-            </div>
+            </router-link>
             <div class="item item2">
               <div class="item-icon">
                 <img :src="require('../assets/img/img2.png')" alt />

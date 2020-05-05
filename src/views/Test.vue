@@ -15,7 +15,7 @@
           如果文字文字太多需要回行的
 
         </div>
-        <div class="button">√</div>
+        <div class="button on"><span class="iconfont icon-1"></span></div>
       </div>
       <div class="ans">
         <div class="option"><span>B</span></div>
@@ -156,8 +156,10 @@ export default {
       // }
     }
     .text{flex:1;font-size: 32px;line-height: 48px;color: #fff;}
-    .button{color:#fff;font-size: 30px;line-height: 54px;text-align: center; width: 54px;height: 54px;border: 3px solid #fff;border-radius: 50%;margin-left: 50px;}
-
+    .button{color:#fff;font-size: 30px;line-height: 54px;text-align: center; width: 54px;height: 54px;border: 3px solid #B5A8D1;border-radius: 50%;margin-left: 50px;}
+    .button.on{
+      border-color: #fff;
+    }
   }
   .pre{
     margin-top: 28px;
