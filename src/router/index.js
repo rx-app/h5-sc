@@ -26,6 +26,11 @@ export default new Router({
       name: 'tips',
       component: resolve => require(['@/views/Tips'], resolve)
     },
+    {
+      path: '/share',
+      name: 'share',
+      component: resolve => require(['@/views/Share'], resolve)
+    },
     // {
     //   path: '/home',
     //   name: 'home',

@@ -1,6 +1,6 @@
 <template>
   <div class="page-test">
-    <div class="back"></div>
+    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">测试大厅</div>
     <div class="process-bar"></div>
     <div class="info">

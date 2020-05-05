@@ -2,11 +2,11 @@
   <div>
     <div class="page-main">
       <div class="header">
-        <div class="title">测试大厅</div>
+        <!-- <div class="title">测试大厅</div> -->
       </div>
-      <div class="banner">
+      <router-link :to="{name:'tips'}" tag="div" class="banner">
         <div class="img"></div>
-      </div>
+      </router-link>
       <div id="main">
         <div class="nav-card section1">
           <div class="title">

@@ -1,6 +1,6 @@
 <template>
   <div class="page-tips">
-    <div class="back"></div>
+    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">测试大厅</div>
     <div class="tips-bar">
     </div>
@@ -13,9 +13,7 @@
 
 2>本测试8道题，5个答案，系统自动跳转。仅
 供娱乐，非专业心理指导。
-<div class="go">
-      GO
-    </div>
+<router-link tag="div" :to="{name:'test'}" class="go">GO</router-link>
     </div>
     
     

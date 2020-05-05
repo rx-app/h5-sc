@@ -1,6 +1,6 @@
 <template>
   <div class="page-cate">
-    <div class="back"></div>
+    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="top-title">专业心理测评</div>
     <div class="nav-bar">
       <div class="nav-list">
