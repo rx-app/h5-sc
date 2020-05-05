@@ -93,14 +93,15 @@ export default {
   
   .title{
     font-size: 48px;
+    line-height: 48px;
     color: #fff;
     text-align: center;
     margin-bottom: 78px;
   }
   .card-list{
     height: calc(100vh - 100px - 48px - 78px );
-    overflow: scroll;
-    padding-bottom: 100px;
+    overflow-y: scroll;
+    padding-bottom: 300px;// ios 只设置100px,在iPhone 6p 下不够
     .card{
       width:698px;
       // height:353px;
@@ -120,6 +121,7 @@ export default {
         // height: 180px;
         padding:33px 0 0 37px;
         font-size: 24px;
+        line-height: 24px; // ios 8p x 下卡牌会特别高
         color:rgba(255,255,255,0.5);
         .new{
           color:#fff;
