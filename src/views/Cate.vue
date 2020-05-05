@@ -103,24 +103,29 @@ export default {
   .top-title{
     font-size:48px;
     color:rgba(255,255,255,1);
+    line-height: 48px;
     // line-height:44px;
-    text-shadow:0px 2px 5px rgba(0, 0, 0, 0.3);
-    margin:20px 0px 104px 96px;
+    // text-shadow:0px 2px 5px rgba(0, 0, 0, 0.3);
+    margin:10px 0px 104px 96px;
   }
   .nav-bar{
-    width: 700px;
+    width: 80vw;
     overflow-x: scroll;
     height: 60px;
     // display: flex;
     .nav-list{
       width: 200vw;
+      height: 60px;
+      overflow-y: hidden;
       .item{
+        vertical-align: top;
         width: 116px;
         height: 60px;
         color: #AFA0D2;
         line-height: 60px;
         text-align: center;
         display: inline-block;
+        font-size: 24px;
         &.on{
           background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
           border-radius:30px;

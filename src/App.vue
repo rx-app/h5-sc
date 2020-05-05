@@ -11,6 +11,6 @@ export default {
 </script>
 
 <style>
-body{height:100%;overflow: hidden;}
+body{height:100%;overflow: hidden;user-select: none;}
 /* #app{height: 100vh;overflow: scroll;} */
 </style>
