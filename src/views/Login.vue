@@ -1,6 +1,6 @@
 <template>
   <div class="page-login">
-    <div class="back"></div>
+    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="container">
       <div class="title">
         手机号登录
