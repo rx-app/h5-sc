@@ -13,8 +13,8 @@
         <input class="password" type="password" v-model="password" placeholder="密码" />
       </div>
     </div>
-    <div @click="login" class="login">
-      同意协议并登陆aaa3332
+    <div @click="getRequest" class="login">
+      同意协议并登陆aaa
     </div>
 
     <div class="wechat-login">
@@ -38,8 +38,7 @@ export default {
   data() {
     return {
       username: "123456789",
-      password: "111111",
-      res:'',
+      password: "111111"
     };
   },
 //   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
@@ -69,58 +68,14 @@ export default {
         console.log(reurl)
         var url =
         `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb3f4414e7bfb9c9e&redirect_uri=${reurl}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`;
-        // window.location.href = url;
-        return url;
+        window.location.href = url;
+        // return url;
       // }
-    },
-    getContent(){
-        let ele = iframe.contentWindow.document.getElementById('iToolCode')
-        // console.log( iframe.contentWindow.document.getElementById('t').innerHTML )
-        if(!ele){
-            n++;
-            setTimeout(this.getContent,200)
-        }else{
-            let res = ele.innerHTML;
-            res = res.replace(/<span.+?>/g,'').replace(/<\/span>/g,'');
-            alert(res)
-            res = JSON.parse(res)
-            this.res = res;
-            alert(res.data.open_id)
-
-        }
-        
     },
     async login(){
       let url = this.getRequest();
-      // alert(url)
-      var iframe = document.getElementById('iframe');
-      iframe.contentWindow.location=url;
-      this.getContent()
-      // alert( iframe.contentWindow )
-      // alert( iframe.contentWindow.document.getElementById('iToolCode').innerHTML )
-      // console.log(iframe)
-
-      // window.location.href = url;
-      // alert(url)
-      //  axios.get(url).then(r=>{
-      //    alert(r)
-      //  },e=>{
-      //    alert(e)
-      //  })
-      // alert(res)
-      // console.log(res)
-
-      // fetch(url, {
-      //     method: 'GET'
-      // })
-      // .then((res)=>{
-      //   return res.json();
-      // })
-      // .then((res)=>{
-      //   alert(res) // res是最终的结果
-      // }).catch(r=>alert(r))
-      
-      // alert( JSON.stringify(res) )
+      let res = axios.get(url);
+      alert( JSON.stringify(res) )
       // alert( res.data.openid )
     },
     // async login() {
