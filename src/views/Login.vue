@@ -77,7 +77,7 @@ export default {
         let ele = iframe.contentWindow.document.getElementById('iToolCode')
         // console.log( iframe.contentWindow.document.getElementById('t').innerHTML )
         if(!ele){
-            n++;
+            // n++;
             setTimeout(this.getContent,200)
         }else{
             let res = ele.innerHTML;
