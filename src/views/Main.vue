@@ -82,7 +82,7 @@
                 <div class="price">
                   <span class="new">¥ {{item.present_price | cy}}</span>
                   <span class="old">¥{{item.origin_price | cy}}</span>
-                  <span class="time">{{item.test_number | cy}}已测</span>
+                  <span class="time">{{item.test_number}}已测</span>
                 </div>
               </div>
               <div class="right">
