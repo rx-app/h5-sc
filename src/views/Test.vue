@@ -115,13 +115,18 @@ export default {
     overflow-x:hidden;
   }
   .question{
-    font-size: 32px;
+    font-size: 32px!important;
     color:#fff;
-    line-height: 52px;
+    line-height: 52px!important;
     width: 515px;
     margin-left: 90px;
     text-align: center;
     margin-bottom: 40px;
+    .on{
+      span:before{
+
+      }
+    }
   }
   .ans{
     width: 696px;

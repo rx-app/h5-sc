@@ -6,11 +6,13 @@
         手机号登录
       </div>
       <div class="input-box">
-        <input class="username" type="text" v-model="username" placeholder="用户名" />
-        <span class="close"></span>
+        <input class="username" type="text" v-model="mobile" placeholder="手机号" />
+        <span v-show="mobile" @click="mobile=''" class="close"></span>
       </div>
       <div class="input-box">
-        <input class="password" type="password" v-model="password" placeholder="密码" />
+        <input class="password" type="text" v-model="code" placeholder="验证码" />
+        <span v-show="code" @click="code=''" class="close"></span>
+        <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
     </div>
     <div @click="login" class="login">
@@ -37,9 +39,13 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      username: "123456789",
-      password: "111111",
+      mobile: '',
+      code: '',
       res:'',
+      time:60,
+      isShow:true,
+      timer:null,
+      code:''
     };
   },
 //   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
@@ -58,6 +64,7 @@ export default {
         .replace(/[&]/g, "%26")
         .replace(/[=]/g, "%3d");
         let reurl='https://www.morninghappy.cn/mh-mall-web-api/auth/wx/receive_code';
+        reurl = location.href
         console.log(reurl)
         // reurl= encodeURI(reurl)
         reurl= encodeURIComponent(reurl)
@@ -69,8 +76,8 @@ export default {
         console.log(reurl)
         var url =
         `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb3f4414e7bfb9c9e&redirect_uri=${reurl}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`;
-        // window.location.href = url;
-        return url;
+        window.location.href = url;
+        // return url;
       // }
     },
     getContent(){
@@ -91,11 +98,41 @@ export default {
         
     },
     async login(){
-      let url = this.getRequest();
+      if(!/^\d{11}$/.test(this.mobile)){
+        
+        return false
+      }
+      const res = await this.$http.post("auth/verification_code/login", {
+        mobile: this.mobile,
+        code: this.code
+      });
+      if (res.code == 200) {
+        
+        // this.$message({
+        //   type: "success",
+        //   message: "登录成功"
+        // });
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("name", this.username);
+        let userInfo = await this.$http.get("auth/info")
+        localStorage.setItem('info',JSON.stringify(userInfo.data))
+        this.$router.push("/");
+      } else {
+        // this.$message({
+        //   type: "error",
+        //   message: res.data.msg
+        // });
+      }
+
+
+      // let url = this.getRequest();
+
       // alert(url)
-      var iframe = document.getElementById('iframe');
-      iframe.contentWindow.location=url;
-      this.getContent()
+      // var iframe = document.getElementById('iframe');
+      // console.log(iframe.contentWindow.document)
+      // iframe.contentWindow.location=url;
+      // this.getContent()
+
       // alert( iframe.contentWindow )
       // alert( iframe.contentWindow.document.getElementById('iToolCode').innerHTML )
       // console.log(iframe)
@@ -122,6 +159,24 @@ export default {
       
       // alert( JSON.stringify(res) )
       // alert( res.data.openid )
+    },
+    async getValidCode(){
+      const res = await this.$http.get(`sms/send/${this.mobile}/4`);
+      if( res.code == 200 ){
+        this.isShow = false;
+        this.timer = setInterval(() => {
+          this.$nextTick(()=>{
+            this.time--;
+          })
+          
+          if(this.time<=0){
+            this.isShow = true
+            clearInterval(this.timer)
+            this.timer = null;
+          }
+        }, 1000);
+      }
+
     },
     // async login() {
     //   let pwd = md5(this.password);
@@ -156,6 +211,7 @@ export default {
 <style lang="scss" scoped>
 .page-login{
   height: 100vh;
+  width: 101vw; //这个地方如果不设置101vw,右上位置的背景图片会有一个小小的白色间隙
   background: url('../assets/img/login-2x.png') no-repeat;
   background-size: cover;
   position: relative;
@@ -194,6 +250,13 @@ export default {
         position: absolute;
         right: 0px;
         bottom:28px;
+      }
+      .send-code{
+        color: #A19AB9;
+        font-size: 28px;
+        position: absolute;
+        right: 68px;
+        bottom: 28px;
       }
     }
   }

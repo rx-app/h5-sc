@@ -17,6 +17,12 @@ export default new Router({
       component: resolve => require(['@/views/Test'], resolve)
     },
     {
+      path: '/detail/:id',
+      name: 'detail',
+      props: true,
+      component: resolve => require(['@/views/Detail'], resolve)
+    },
+    {
       path: '/cate',
       name: 'cate',
       component: resolve => require(['@/views/Cate'], resolve)

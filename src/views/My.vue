@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="page-my">
     <div class="title">个人中心</div>
     <div class="card-list">
@@ -67,21 +68,36 @@
         <div class="bottom">查看报告</div>
       </div>
     </div>
+
+  </div>
+  <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer  from "../components/Footer";
 export default {
   data() {
     return {
-      info:{}
+      info:{},
+      list:[],
+      page_index:1,
+      page_size:5,
     };
   },
+  components:{
+    // Header,
+    Footer,
+  },
   mounted(){
-    
+    this.getList();
   },
   methods:{
-    
+    async getList(){
+      let res = await this.$http.get(
+        `test/question/paid/page`,{params:{page_index:this.page_index,page_size:this.page_size,evaluation_status:0} }
+      );
+    }
   },
 };
 </script>

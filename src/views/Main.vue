@@ -4,20 +4,26 @@
       <div class="header">
         <!-- <div class="title">测试大厅</div> -->
       </div>
-      <router-link :to="{name:'tips'}" tag="div" class="banner">
+      <!-- <router-link :to="{name:'tips'}" tag="div" class="banner">
         <div class="img"></div>
-      </router-link>
+      </router-link> -->
+      <van-swipe class="banner" :autoplay="3000" indicator-color="white">
+        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
+        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
+        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
+        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
+      </van-swipe>
       <div id="main">
         <div class="nav-card section1">
           <div class="title">
             <div class="text">栏目测试</div> 
             <span class="bar"></span>
           </div>
-          <div class="more">
-            <!-- <span>更多</span> -->
+          <div @click="$router.push({name:'cate'})" class="more">
+            
           </div>
           <div class="nav-items nav1">
-            <router-link :to="{name:'share'}" tag="div" class="item item1">
+            <!-- <router-link :to="{name:'share'}" tag="div" class="item item1">
               <div class="item-icon">
                 <img :src="require('../assets/img/img2.png')" alt />
               </div>
@@ -32,14 +38,14 @@
               <div class="title">人格原型测试</div>
               <div class="price">¥99.0</div>
               <div class="button">去看看</div>
-            </router-link>
-            <div class="item item3">
+            </router-link> -->
+            <div v-for="(item,index) in list1" :key="index" class="item " :class="`item${index+1}`">
               <div class="item-icon">
                 <img :src="require('../assets/img/img2.png')" alt />
               </div>
-              <div class="title">人格原型测试</div>
-              <div class="price">¥99.0</div>
-              <div class="button">去看看</div>
+              <div class="title">{{item.name}}</div>
+              <div class="price">¥{{item.present_price | cy}}</div>
+              <div class="button" @click="getDetail(item)" >去看看</div>
             </div>
           </div>
         </div>
@@ -49,7 +55,7 @@
             <div class="text">精彩测评</div> 
             <span class="bar"></span>
           </div>
-          <div class="more"><span>更多</span></div>
+          <div @click="$router.push({name:'cate'})" class="more"></div>
           <div class="nav-items nav2">
             <div class="item left"></div>
             <div class="item right"></div>
@@ -60,51 +66,32 @@
             <div class="text">精彩测评</div> 
             <span class="bar"></span>
           </div>
-          <div class="more"><span>更多</span></div>
+          <div class="more" @click="$router.push({name:'cate'})"></div>
+          <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getList3"
+      class="card-list"
+    >
           <div class="nav-items nav3">
-            <div class="item ">
+            <div  @click="getDetail(item)" v-for="(item,index) in list3" :key="index" class="item ">
               <div class="left">
-                <div class="title">2020年最流行的测试</div>
-                <div class="cate">职业性格测试</div>
+                <div class="title">{{item.name}}</div>
+                <div class="cate">{{item.category_name}}</div>
                 <div class="price">
-                  <span class="new">¥ 99.0</span>
-                  <span class="old">¥299</span>
-                  <span class="time">572已测</span>
+                  <span class="new">¥ {{item.present_price | cy}}</span>
+                  <span class="old">¥{{item.origin_price | cy}}</span>
+                  <span class="time">{{item.test_number | cy}}已测</span>
                 </div>
               </div>
               <div class="right">
                 <img :src="require('../assets/img/img1.png')" alt="">
               </div>
             </div>
-            <div class="item ">
-              <div class="left">
-                <div class="title">2020年最流行的测试</div>
-                <div class="cate">职业性格测试</div>
-                <div class="price">
-                  <span class="new">¥ 99.0</span>
-                  <span class="old">¥299</span>
-                  <span class="time">572已测</span>
-                </div>
-              </div>
-              <div class="right">
-                <img :src="require('../assets/img/img1.png')" alt="">
-              </div>
-            </div>
-            <div class="item ">
-              <div class="left">
-                <div class="title">2020年最流行的测试</div>
-                <div class="cate">职业性格测试</div>
-                <div class="price">
-                  <span class="new">¥ 99.0</span>
-                  <span class="old">¥299</span>
-                  <span class="time">572已测</span>
-                </div>
-              </div>
-              <div class="right">
-                <img :src="require('../assets/img/img1.png')" alt="">
-              </div>
-            </div>
+            
           </div>
+            </van-list>
         </div>
       </div>
     </div>
@@ -118,7 +105,12 @@ import Footer  from "../components/Footer";
 export default {
   data () {
     return {
-      
+      list1:[],
+      list2:[],
+      list3:[],
+      count:0,
+      loading: false,
+      finished: false,
     }
   },
   methods:{
@@ -130,8 +122,44 @@ export default {
       }
       
     },
+    async getList1(params){
+      let res = await this.$http.get(
+        "test/question/page",
+        {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2}}
+      );
+      this.list1 = res.data.result;
+      console.log(this.list1)
+    },
+    async getList2(params){
+      let res = await this.$http.get(
+        "test/question/page",
+        {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0}}
+      );
+      this.list2 = res.data.result;
+      console.log(this.list2)
+    },
+    async getList3(params){
+      let res = await this.$http.get(
+        "test/question/page",
+        {params:{page_index:1,page_size:5,order_type:'DESC',order_by:1}}
+      );
+      // this.list3 = res.data.result;
+      this.list3 = [...this.list3,...res.data.result]
+      this.count = res.data.total_count;
+      this.loading = false;
+      if(this.list3.length>=this.count){
+        this.finished = true;
+      }
+      console.log(this.list3)
+    },
+    getDetail(item){
+      this.$router.push({name:'detail',params:{id:item.id}})
+    },
   },
   mounted(){
+    this.getList1();
+    this.getList2();
+    this.getList3();
     // this.fetch();
     // this.getUserInfo();
   },
@@ -147,7 +175,8 @@ export default {
   background: #261A58;
   height: 100vh;
   overflow: scroll;
-  padding-top: 246px;
+  // padding-top: 246px;   //头部空出的部分去掉
+  padding-top: 30px;
   position: relative;
   .header{
     height: 522px;
@@ -167,17 +196,18 @@ export default {
     }
   }
   .banner{
+    img{
     width: 100vw;
     height: 556px;
     background: url('../assets/img/banner.png') no-repeat;
     background-size: cover;
-    position: absolute;  //不加会背景重叠
+    // position: absolute;  //不加会背景重叠
     // margin-top:370px  这里不用margin-top，要给父元素加padding-top，否则背景色会丢失
-
+    }
   }
   #main{
-    padding-top: 574px;
-    padding-bottom: 1000px;
+    padding-top: 50px;
+    padding-bottom: 200px;
     
     .nav-card{
       padding: 40px 40px 120px;
@@ -202,25 +232,36 @@ export default {
       .more{
         width:81px;
         height:50px;
-        border:3px solid;
-        border-image:linear-gradient(0deg, rgba(44,233,250,1), rgba(119,132,254,1)) 10 10;
-        background:linear-gradient(0deg,rgba(44,233,250,1) 0%,rgba(119,132,254,1) 100%);
+        font-size: 0;
+        // border:3px solid;
+        // border-image:linear-gradient(0deg, rgba(44,233,250,1), rgba(119,132,254,1)) 10 10;
+        // background:linear-gradient(0deg,rgba(44,233,250,1) 0%,rgba(119,132,254,1) 100%);
+        // background:rgb(44,55,131);
         border-radius:25px;
         position: absolute;
         right: 40px;
         top:35px;
+        // text-align: center;
+        // vertical-align: top;
+        // padding: 15px 0;
+        background: url('../assets/img/more.png') no-repeat;
+        background-size: contain;
+        
         span{
+          line-height: 20px;
           width:38px;
-          height:20px;
+          // height:20px;
           font-size:20px;
           font-family:PingFang SC;
           font-weight:bold;
           color:rgba(59,38,161,1);
           line-height:20px;
 
-          background:linear-gradient(0deg,rgba(35,245,249,1) 0%, rgba(130,116,255,1) 100%);
-          -webkit-background-clip:text;
-          -webkit-text-fill-color:transparent;
+          background-image: -webkit-gradient(linear, left 0, right 0, from(rgba(35,245,249,1)), to(rgba(130,116,255,1)));
+          /*必需加前缀 -webkit- 才支持这个text值 */
+          -webkit-background-clip: text;
+          /*text-fill-color会覆盖color所定义的字体颜色： */
+          -webkit-text-fill-color: transparent;
         }
 
       }
@@ -243,8 +284,11 @@ export default {
                 line-height: 24px;
                 // margin-top: 20px;
               }
+              .title{
+                height: 48px;
+              }
               .price{
-                margin:30px 0 22px;
+                margin:6px 0 22px;
               }
               .button{
                 width:156px;
@@ -347,6 +391,8 @@ export default {
                 }
                 .old{
                   flex: 1;
+                  text-decoration:line-through
+
                 }
                 .time{
                   // margin-left: 90px;

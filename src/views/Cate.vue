@@ -1,113 +1,146 @@
 <template>
+<div>
   <div class="page-cate">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="top-title">专业心理测评</div>
     <div class="nav-bar">
       <div class="nav-list">
-        <div class="item on">全部</div>
-        <div class="item">性格</div>
+        <div class="item" :class="{on:cate_index==-1}" @click="searchAll" >全部</div>
+        <div v-for="(item,index) in categories" :key="index" :class="{on:cate_index==index}" @click="search(item,index)" class="item">{{item.name}}</div>
+        <!-- <div class="item">性格</div>
         <div class="item">情感</div>
         <div class="item">职场</div>
         <div class="item">健康</div>
         <div class="item">人际</div>
-        <div class="item">亲子</div>
+        <div class="item">亲子</div> -->
       </div>
     </div>
     <div class="sort">
-      <span>综合排序</span>
-      <span class="active">按时间</span>
-      <span>按热度</span>
+      <span @click="searchByOrder(0)" :class="{active:order_index==0}">综合排序</span>
+      <span @click="searchByOrder(1)" :class="{active:order_index==1}">按时间</span>
+      <span @click="searchByOrder(2)" :class="{active:order_index==2}">按热度</span>
     </div>
-    <div class="card-list">
-      <div class="item">
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getTestList"
+      class="card-list"
+      v-if="(list.length>0 || firstLoad)"
+    >
+    <div @click="getDetail(item)" v-for="(item,index) in list" :key="index" class="item">
           <div class="left">
-            <div class="title">2020年最流行的测试</div>
-            <div class="cate">职业性格测试</div>
+            <div class="title">{{item.name}}</div>
+            <div class="cate">{{item.category_name}}</div>
             <div class="price">
-              <span class="new">¥ 99.0</span>
-              <span class="old">¥299</span>
-              <span class="time">572已测</span>
+              <span class="new">¥ {{item.present_price | cy}}</span>
+              <span class="old">¥{{item.origin_price | cy}}</span>
+              <span class="time">{{item.test_number}}已测</span>
             </div>
           </div>
           <div class="right">
             <img :src="require('../assets/img/img1.png')" alt="">
           </div>
       </div>
-      <div class="item">
-          <div class="left">
-            <div class="title">2020年最流行的测试</div>
-            <div class="cate">职业性格测试</div>
-            <div class="price">
-              <span class="new">¥ 99.0</span>
-              <span class="old">¥299</span>
-              <span class="time">572已测</span>
-            </div>
-          </div>
-          <div class="right">
-            <img :src="require('../assets/img/img1.png')" alt="">
-          </div>
-      </div>
-      <div class="item">
-          <div class="left">
-            <div class="title">2020年最流行的测试</div>
-            <div class="cate">职业性格测试</div>
-            <div class="price">
-              <span class="new">¥ 99.0</span>
-              <span class="old">¥299</span>
-              <span class="time">572已测</span>
-            </div>
-          </div>
-          <div class="right">
-            <img :src="require('../assets/img/img1.png')" alt="">
-          </div>
-      </div>
-      <div class="item">
-          <div class="left">
-            <div class="title">2020年最流行的测试</div>
-            <div class="cate">职业性格测试</div>
-            <div class="price">
-              <span class="new">¥ 99.0</span>
-              <span class="old">¥299</span>
-              <span class="time">572已测</span>
-            </div>
-          </div>
-          <div class="right">
-            <img :src="require('../assets/img/img1.png')" alt="">
-          </div>
-      </div>
-      <div class="item">
-          <div class="left">
-            <div class="title">2020年最流行的测试</div>
-            <div class="cate">职业性格测试</div>
-            <div class="price">
-              <span class="new">¥ 99.0</span>
-              <span class="old">¥299</span>
-              <span class="time">572已测</span>
-            </div>
-          </div>
-          <div class="right">
-            <img :src="require('../assets/img/img1.png')" alt="">
-          </div>
-      </div>
-    </div>
+    <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
+  </van-list>
 
     
-      
+
+    
+  
+  </div>
+   <Footer></Footer>
   </div>
 </template>
 
 <script>
 import md5 from 'js-md5';
+import Footer  from "../components/Footer";
 
 export default {
   data() {
     return {
-     
+      page_size:5,
+      page_index:1,
+      order_by:1,
+      order_type:'DESC',
+      category_id:'',
+      keyword:'',
+      list:[],
+      count:0,
+      loading: false,
+      finished: false,
+      categories:[],
+      cate_index:-1,
+      order_index:1,
+      firstLoad:true,
     };
   },
+  components:{
+    // Header,
+    Footer,
+  },
   methods: {
-  
-  }
+    getDetail(item){
+      this.$router.push({name:'detail',params:{id:item.id}})
+    },
+    async getTestList(){
+      let res = await this.$http.get(
+        "test/question/page",
+        {params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:this.keyword}}
+      );
+      this.list = [...this.list,...res.data.result]
+      this.count = res.data.total_count;
+      this.loading = false;
+      if(this.list.length>=this.count){
+        this.finished = true;
+      }
+      console.log(res)
+    },
+    async getCategories(){
+      let res = await this.$http.get(
+        "test/category/page",
+        {params:{page_index:1,page_size:100,}}
+      );
+      console.log(res)
+      
+      this.categories = res.data.result
+    },
+    search(item,index){
+      this.cate_index = index
+      this.category_id = item.id;
+      this.list = [];
+      this.page_index = 1;
+      this.count = 0;
+      this.finished = false;
+      this.getTestList();
+    },
+    searchByOrder(index){
+      this.order_index = index
+      this.order_by = index;
+      this.list = [];
+      this.page_index = 1;
+      this.count = 0;
+      this.finished = false;
+      this.getTestList();
+    },
+    searchAll(item,index){
+      this.cate_index = -1;
+      this.category_id = '';
+      this.list = [];
+      this.page_index = 1;
+      this.count = 0;
+      this.finished = false;
+      this.getTestList();
+    }
+  },
+  mounted(){
+    // this.$nextTick()
+    this.getCategories();
+    this.firstLoad = false
+    this.getTestList();  // 本来是不需要的，加了v-if之后，第一次不会执行    vant-list 的 v-if的作用是点击排序按钮的时候防止数据重复加载
+  },
 };
 </script>
 
@@ -142,7 +175,7 @@ export default {
     height: 60px;
     // display: flex;
     .nav-list{
-      width: 200vw;//这个宽度可能需要js重新计算
+      width: 130vw;//这个宽度可能需要js重新计算
       height: 60px;
       overflow-y: hidden; //滚动时 ios 上会上下滑动
       .item{
@@ -224,6 +257,7 @@ export default {
                 }
                 .old{
                   flex: 1;
+                  text-decoration:line-through
                 }
                 .time{
                   // margin-left: 90px;
