@@ -173,6 +173,7 @@ export default {
             this.isShow = true
             clearInterval(this.timer)
             this.timer = null;
+            this.time=60;
           }
         }, 1000);
       }

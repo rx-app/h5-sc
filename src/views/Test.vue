@@ -7,43 +7,17 @@
       <span class="all"><span class="left">第<span class="index">14</span>题</span>/共30题目</span>
     </div>
     
-      <div class="question">根据您最近一个星期的实际情况选择 最符合的选项32px加粗</div>
+      <div class="question">{{list[current_index].name}}</div>
     <div class="box">
-      <div class="ans">
-        <div class="option on"><span>A</span></div>
+      <div @click="select(item)" v-for="(item,index)  in  list[current_index].option_list" :key="index" class="ans">
+        <div class="option"><span>A</span></div>
         <div class="text">
-          如果文字文字太多需要回行的
+          {{item.name}}
 
         </div>
         <div class="button on"><span class="iconfont icon-1"></span></div>
       </div>
-      <div class="ans">
-        <div class="option"><span>B</span></div>
-        <div class="text">
-          如果文字文字太多需要回行的
-        </div>
-        <div class="button"></div>
-      </div>
-      <div class="ans">
-        <div class="option"><span>C</span></div>
-        <div class="text">
-          如果文字文字太多需要回行的
-          如果文字文字太多需要回行的
-          如果文字文字太多需要回行的
-          如果文字文字太多需要回行的
-          如果文字文字太多需要回行的
-        </div>
-        <div class="button"></div>
-      </div>
-      <div class="ans">
-        <div class="option"><span>D</span></div>
-        <div class="text">
-          如果文字文字太多需要回行的
-          如果文字文字太多需要回行的
-        </div>
-        <div class="button"></div>
-      </div>
-      <div class="pre">
+      <div @click="current_index--" class="pre">
         上一题
       </div>
     </div>
@@ -58,12 +32,69 @@ import md5 from 'js-md5';
 export default {
   data() {
     return {
-      username: "123456789",
-      password: "111111"
+      id:24,
+      list:[],
+      current_index:0,
+      length:0,
+      result:{
+        "member_test_question_id": 0,
+        "option_list": [
+          {
+            "question_item_id": 0,
+            "question_item_option_id": 0
+          }
+        ]
+      },
     };
   },
   methods: {
-  
+    async select(item){
+      console.log(this.result)
+      this.result.option_list[this.current_index].question_item_id = this.list[this.current_index].id
+      this.result.option_list[this.current_index].question_item_option_id = item.id
+      if(this.current_index == this.length){
+        let res =this.addResult()
+      }else{
+        
+        this.current_index ++;
+        
+      }
+
+    },
+    async addResult(){
+      let res = await this.$http.post(
+        `test/question//result/create`,this.result
+      );
+      return res;
+    },
+    async getData(){
+      let res = await this.$http.get(
+        `test/question/${this.id}`
+      );
+      console.log(res)
+      // debugger
+      this.list = res.data.item_list
+      this.result.member_test_question_id = res.data.id;
+      this.length = this.list.length
+      this.result.option_list=Array( this.length ).fill({
+            // "question_item_id": 0,
+            // "question_item_option_id": 0
+          })
+      
+      this.result.option_list = this.result.option_list.map(v=>{
+        return  {
+            "question_item_id": 0,
+            "question_item_option_id": 0
+          }//JSON.parse( JSON.stringify(v) )
+      })
+      // this.result.option_list[0].question_item_id =2;
+      // console.log(this.list)
+      // console.log(this.result.option_list[1].question_item_id)
+      // console.log(this.result)
+    }
+  },
+  mounted(){
+    this.getData();
   }
 };
 </script>
