@@ -85,7 +85,7 @@ export default {
       return res.data.open_id
     },
     async wLongin(openid){
-      const res = await this.$http.post(`auth/wx/login/${openid}`);
+      let res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
       alert(res.code)
       alert(res.msg)

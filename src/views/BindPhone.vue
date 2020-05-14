@@ -77,8 +77,13 @@ export default {
         "openid": this.openid
       });
       alert(res.msg)
+      if(res.code==200){
+        let res = await this.$http.post(`auth/wx/login/${this.openid}`);
+        alert(res.code)
+        alert(res.msg)
+      }
       // alert(res.data.open_id)
-      return res.data.open_id
+      // return res.data.open_id
     },
     
     
