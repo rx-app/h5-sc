@@ -4,6 +4,14 @@ import Vue from 'vue'
 import App from './App'
 
 import router from './router'
+// router.beforeEach((to, from, next)=>{
+//   alert(to)
+//   // alert(localStorage.href)
+//   next(vm => {
+//     // 通过 `vm` 访问组件实例
+//     vm.deleteScan();
+//   })
+// })
 import 'lib-flexible/flexible.js';
 
 import './assets/font/iconfont.css'

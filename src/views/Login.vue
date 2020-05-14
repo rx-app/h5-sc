@@ -48,26 +48,26 @@ export default {
       code:''
     };
   },
-  // updated(){
-  //   alert('update'+location.href)
-  // },
-  // mounted(){
-  //   alert('mounted'+location.href)
-  // },
-  // created(){
-  //   alert('created'+location.href)
-  // },
-  // beforeRouteEnter (to, from, next) {
-  //   // alert(to)
-  //   alert(from)
-  //   next(vm => {
-  //     // 通过 `vm` 访问组件实例
-  //     vm.deleteScan();
-  //   })
-  // },
-  // beforeCreate(){
-  //   alert('beforeCreate'+location.href)
-  // },
+  updated(){
+    alert('update'+location.href)
+  },
+  mounted(){
+    alert('mounted'+location.href)
+  },
+  created(){
+    alert('created'+location.href)
+  },
+  beforeRouteEnter (to, from, next) {
+    // alert(to)
+    alert(from)
+    next(vm => {
+      // 通过 `vm` 访问组件实例
+      vm.deleteScan();
+    })
+  },
+  beforeCreate(){
+    alert('beforeCreate'+location.href)
+  },
 //   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 
 
