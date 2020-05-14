@@ -71,7 +71,7 @@ export default {
   methods: {
     async bind(code){
       alert(this.openid)
-      const res = await this.$http.get(`auth/wx/bind_phone`,{
+      const res = await this.$http.post(`auth/wx/bind_phone`,{
         "code": this.code,
         "mobile": this.mobile,
         "openid": this.openid
