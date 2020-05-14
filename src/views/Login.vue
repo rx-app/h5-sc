@@ -15,8 +15,8 @@
         <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
     </div>
-    <div @click="login" class="login">
-      同意协议并登陆aaa3332
+    <div @click="wechateLogin" class="login">
+      同意协议并登陆
     </div>
 
     <div class="wechat-login">
@@ -24,7 +24,7 @@
       <div class="text">其它登录</div>
       <div class="line"></div>
     </div>
-    <div @click="getRequest" class="wechat-icon">
+    <div @click="wechateLogin"  class="wechat-icon">
       
     </div>
     
@@ -80,6 +80,42 @@ export default {
         // return url;
       // }
     },
+     async wechateLogin(){
+      let url = this.getRequest();
+
+      // alert(url)
+      // var iframe = document.getElementById('iframe');
+      // console.log(iframe.contentWindow.document)
+      // iframe.contentWindow.location=url;
+      // this.getContent()
+
+      // alert( iframe.contentWindow )
+      // alert( iframe.contentWindow.document.getElementById('iToolCode').innerHTML )
+      // console.log(iframe)
+
+      // window.location.href = url;
+      // alert(url)
+      //  axios.get(url).then(r=>{
+      //    alert(r)
+      //  },e=>{
+      //    alert(e)
+      //  })
+      // alert(res)
+      // console.log(res)
+
+      // fetch(url, {
+      //     method: 'GET'
+      // })
+      // .then((res)=>{
+      //   return res.json();
+      // })
+      // .then((res)=>{
+      //   alert(res) // res是最终的结果
+      // }).catch(r=>alert(r))
+      
+      // alert( JSON.stringify(res) )
+      // alert( res.data.openid )
+    },
     getContent(){
         let ele = iframe.contentWindow.document.getElementById('iToolCode')
         // console.log( iframe.contentWindow.document.getElementById('t').innerHTML )
@@ -125,41 +161,9 @@ export default {
       }
 
 
-      // let url = this.getRequest();
-
-      // alert(url)
-      // var iframe = document.getElementById('iframe');
-      // console.log(iframe.contentWindow.document)
-      // iframe.contentWindow.location=url;
-      // this.getContent()
-
-      // alert( iframe.contentWindow )
-      // alert( iframe.contentWindow.document.getElementById('iToolCode').innerHTML )
-      // console.log(iframe)
-
-      // window.location.href = url;
-      // alert(url)
-      //  axios.get(url).then(r=>{
-      //    alert(r)
-      //  },e=>{
-      //    alert(e)
-      //  })
-      // alert(res)
-      // console.log(res)
-
-      // fetch(url, {
-      //     method: 'GET'
-      // })
-      // .then((res)=>{
-      //   return res.json();
-      // })
-      // .then((res)=>{
-      //   alert(res) // res是最终的结果
-      // }).catch(r=>alert(r))
       
-      // alert( JSON.stringify(res) )
-      // alert( res.data.openid )
     },
+   
     async getValidCode(){
       const res = await this.$http.get(`sms/send/${this.mobile}/4`);
       if( res.code == 200 ){
