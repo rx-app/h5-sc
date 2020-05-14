@@ -75,6 +75,7 @@ export default {
         "mobile": this.mobile,
         "openid": this.openid
       });
+      alert(res.msg)
       // alert(res.data.open_id)
       return res.data.open_id
     },
