@@ -49,32 +49,48 @@ export default {
     };
   },
   updated(){
-    alert('update'+location.href)
+    // alert('update'+location.href)
   },
   mounted(){
-    alert('mounted'+location.href)
+    // alert('mounted'+location.href)
+    
   },
   created(){
-    alert('created'+location.href)
+    let code = this.getUrlParam('code')
+    if(code){
+      this.getOpenid(code)
+    }
   },
-  beforeRouteEnter (to, from, next) {
-    // alert(to)
-    alert(from)
-    next(vm => {
-      // 通过 `vm` 访问组件实例
-      vm.deleteScan();
-    })
-  },
-  beforeCreate(){
-    alert('beforeCreate'+location.href)
-  },
+  // beforeRouteEnter (to, from, next) {
+  //   // alert(to)
+  //   alert(from)
+  //   next(vm => {
+  //     // 通过 `vm` 访问组件实例
+  //     vm.deleteScan();
+  //   })
+  // },
+  // beforeCreate(){
+  //   alert('beforeCreate'+location.href)
+  // },
 //   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 
 
 // https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
   methods: {
-    send1(){
-      alert(location.href)
+    async getOpenid(code){
+      const res = await this.$http.get(`auth/wx/openid/${code}`);
+      alert(res.data.open_id)
+      return res.data.open_id
+    },
+    async wLongin(openid){
+      const res = await this.$http.post(`auth/wx/openid/${openid}`);
+      alert(res.data.token)
+    },
+    getUrlParam(name) {//封装方法
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg); //匹配目标参数
+      if (r != null) return unescape(r[2]);
+      return null; //返回参数值
     },
     getRequest(){
       // if (getRequest.code) {
