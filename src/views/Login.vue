@@ -87,6 +87,14 @@ export default {
     async wLongin(openid){
       const res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
+      if(code==40006){
+        this.$router.push({name:'bindPhone',params:{openid}})
+      }else if(code==200){
+        localStorage.setItem('token',res.data.token)
+        this.$router.push({name:'main'})
+      }else{
+        alert('异常')
+      }
       alert(res.msg)
     },
     getUrlParam(name) {//封装方法

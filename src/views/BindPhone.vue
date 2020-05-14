@@ -3,28 +3,30 @@
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="container">
       <div class="title">
-        手机号登录
+        绑定手机号
       </div>
       <div class="input-box">
-        <input class="username" type="text" v-model="username" placeholder="用户名" />
-        <span class="close"></span>
+        <input class="username" type="text" v-model="mobile" placeholder="手机号" />
+        <span v-show="mobile" @click="mobile=''" class="close"></span>
       </div>
       <div class="input-box">
-        <input class="password" type="password" v-model="password" placeholder="密码" />
+        <input class="password" type="text" v-model="code" placeholder="验证码" />
+        <span v-show="code" @click="code=''" class="close"></span>
+        <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
     </div>
-    <div @click="getRequest" class="login">
-      同意协议并登陆aaa
+    <div @click="bind" class="login">
+      绑定
     </div>
 
-    <div class="wechat-login">
+    <!-- <div class="wechat-login">
       <div class="line"></div>
       <div class="text">其它登录</div>
       <div class="line"></div>
     </div>
-    <div @click="getRequest" class="wechat-icon">
+    <div @click="wechateLogin"  class="wechat-icon">
       
-    </div>
+    </div> -->
     
       
   </div>
@@ -35,48 +37,68 @@ import md5 from 'js-md5';
 import axios from 'axios'
 
 export default {
+  props:{
+    openid:'',
+  },
   data() {
     return {
-      username: "123456789",
-      password: "111111"
+      mobile: '',
+      code: '',
+      res:'',
+      time:60,
+      isShow:true,
+      timer:null,
+      code:''
     };
   },
-//   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+  updated(){
+    // alert('update'+location.href)
+  },
+  mounted(){
+    // alert('mounted'+location.href)
+    
+  },
+  async created(){
+    let code = this.getUrlParam('code')
+    if(code){
+      let openid = await this.getOpenid(code)
+      alert(`openid: ${openid}`)
+       let res = await this.wLongin(openid);
+       
+    }
+  },
 
-
-// https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
   methods: {
-    getRequest(){
-      // if (getRequest.code) {
-      //   this.code = getRequest.code;
-      // } else {
-        var pageUrl = window.location.href
-        .replace(/[/]/g, "%2f")
-        .replace(/[:]/g, "%3a")
-        .replace(/[#]/g, "%23")
-        .replace(/[&]/g, "%26")
-        .replace(/[=]/g, "%3d");
-        let reurl='https://www.morninghappy.cn/mh-mall-web-api/auth/wx/receive_code';
-        console.log(reurl)
-        // reurl= encodeURI(reurl)
-        reurl= encodeURIComponent(reurl)
-        // reurl = reurl.replace(/[/]/g, "%2f")
-        // .replace(/[:]/g, "%3a")
-        // .replace(/[#]/g, "%23")
-        // .replace(/[&]/g, "%26")
-        // .replace(/[=]/g, "%3d");
-        console.log(reurl)
-        var url =
-        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb3f4414e7bfb9c9e&redirect_uri=${reurl}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`;
-        window.location.href = url;
-        // return url;
-      // }
+    async bind(code){
+      const res = await this.$http.get(`auth/wx/bind_phone`,{
+        "code": this.code,
+        "mobile": this.mobile,
+        "openid": this.openid
+      });
+      // alert(res.data.open_id)
+      return res.data.open_id
     },
-    async login(){
-      let url = this.getRequest();
-      let res = axios.get(url);
-      alert( JSON.stringify(res) )
-      // alert( res.data.openid )
+    
+    
+   
+    async getValidCode(){
+      const res = await this.$http.get(`sms/send/${this.mobile}/4`);
+      if( res.code == 200 ){
+        this.isShow = false;
+        this.timer = setInterval(() => {
+          this.$nextTick(()=>{
+            this.time--;
+          })
+          
+          if(this.time<=0){
+            this.isShow = true
+            clearInterval(this.timer)
+            this.timer = null;
+            this.time=60;
+          }
+        }, 1000);
+      }
+
     },
     // async login() {
     //   let pwd = md5(this.password);
@@ -111,6 +133,7 @@ export default {
 <style lang="scss" scoped>
 .page-login{
   height: 100vh;
+  width: 101vw; //这个地方如果不设置101vw,右上位置的背景图片会有一个小小的白色间隙
   background: url('../assets/img/login-2x.png') no-repeat;
   background-size: cover;
   position: relative;
@@ -149,6 +172,13 @@ export default {
         position: absolute;
         right: 0px;
         bottom:28px;
+      }
+      .send-code{
+        color: #A19AB9;
+        font-size: 28px;
+        position: absolute;
+        right: 68px;
+        bottom: 28px;
       }
     }
   }

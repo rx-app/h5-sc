@@ -67,6 +67,12 @@ export default new Router({
       name: 'login',
       component: resolve => require(['@/views/Login'], resolve)
     },
+    {
+      path: '/bindPhone/:openid',
+      name: 'bindPhone',
+      props: true,
+      component: resolve => require(['@/views/BindPhone'], resolve)
+    },
     // {
     //   path: '/register',
     //   name: 'register',
