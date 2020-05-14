@@ -86,8 +86,8 @@ export default {
     },
     async wLongin(openid){
       const res = await this.$http.post(`auth/wx/login/${openid}`);
-      localStorage.setItem('token',res.data.token)
-      alert(res.data.token)
+      // localStorage.setItem('token',res.data.token)
+      alert(res.msg)
     },
     getUrlParam(name) {//封装方法
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
