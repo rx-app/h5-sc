@@ -58,7 +58,8 @@ export default {
   created(){
     let code = this.getUrlParam('code')
     if(code){
-      this.getOpenid(code)
+      let openid = this.getOpenid(code)
+      this.wLongin(openid)
     }
   },
   // beforeRouteEnter (to, from, next) {
@@ -84,6 +85,7 @@ export default {
     },
     async wLongin(openid){
       const res = await this.$http.post(`auth/wx/openid/${openid}`);
+      localStorage.setItem('token',res.data.token)
       alert(res.data.token)
     },
     getUrlParam(name) {//封装方法
