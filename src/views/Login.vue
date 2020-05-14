@@ -87,15 +87,17 @@ export default {
     async wLongin(openid){
       const res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
-      if(code==40006){
+      alert(res.code)
+      alert(res.msg)
+      if(res.code==40006){
         this.$router.push({name:'bindPhone',params:{openid}})
-      }else if(code==200){
+      }else if(res.code==200){
         localStorage.setItem('token',res.data.token)
         this.$router.push({name:'main'})
       }else{
         alert('异常')
       }
-      alert(res.msg)
+      
     },
     getUrlParam(name) {//封装方法
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
