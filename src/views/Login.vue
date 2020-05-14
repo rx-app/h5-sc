@@ -48,11 +48,34 @@ export default {
       code:''
     };
   },
+  // updated(){
+  //   alert('update'+location.href)
+  // },
+  // mounted(){
+  //   alert('mounted'+location.href)
+  // },
+  // created(){
+  //   alert('created'+location.href)
+  // },
+  // beforeRouteEnter (to, from, next) {
+  //   // alert(to)
+  //   alert(from)
+  //   next(vm => {
+  //     // 通过 `vm` 访问组件实例
+  //     vm.deleteScan();
+  //   })
+  // },
+  // beforeCreate(){
+  //   alert('beforeCreate'+location.href)
+  // },
 //   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 
 
 // https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
   methods: {
+    send1(){
+      alert(location.href)
+    },
     getRequest(){
       // if (getRequest.code) {
       //   this.code = getRequest.code;
@@ -65,7 +88,7 @@ export default {
         .replace(/[=]/g, "%3d");
         let reurl='https://www.morninghappy.cn/mh-mall-web-api/auth/wx/receive_code';
         reurl = location.href
-        reurl = 'https://wwww.morninghappy.cn/sr/index.html#/login'
+        reurl = 'https://www.morninghappy.cn/sr/index.html#/login'
         console.log(reurl)
         // reurl= encodeURI(reurl)
         reurl= encodeURIComponent(reurl)
@@ -77,6 +100,7 @@ export default {
         console.log(reurl)
         var url =
         `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb3f4414e7bfb9c9e&redirect_uri=${reurl}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`;
+        // alert(url)
         window.location.href = url;
         return url;
       // }
