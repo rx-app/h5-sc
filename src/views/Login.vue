@@ -65,6 +65,7 @@ export default {
         .replace(/[=]/g, "%3d");
         let reurl='https://www.morninghappy.cn/mh-mall-web-api/auth/wx/receive_code';
         reurl = location.href
+        reurl = 'https://morninghappy.cn/sr/index.html#/login'
         console.log(reurl)
         // reurl= encodeURI(reurl)
         reurl= encodeURIComponent(reurl)
@@ -77,11 +78,12 @@ export default {
         var url =
         `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb3f4414e7bfb9c9e&redirect_uri=${reurl}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect`;
         window.location.href = url;
-        // return url;
+        return url;
       // }
     },
      async wechateLogin(){
       let url = this.getRequest();
+      console.log(url)
 
       // alert(url)
       // var iframe = document.getElementById('iframe');
