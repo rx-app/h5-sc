@@ -82,7 +82,7 @@ export default {
     
    
     async getValidCode(){
-      const res = await this.$http.get(`sms/send/${this.mobile}/4`);
+      const res = await this.$http.get(`sms/send/${this.mobile}/3`);
       if( res.code == 200 ){
         this.isShow = false;
         this.timer = setInterval(() => {
