@@ -59,7 +59,8 @@ export default {
     let code = this.getUrlParam('code')
     if(code){
       let openid = await this.getOpenid(code)
-      this.wLongin(openid)
+      alert(`openid: ${openid}`)
+       let res = await this.wLongin(openid)
     }
   },
   // beforeRouteEnter (to, from, next) {
@@ -80,7 +81,7 @@ export default {
   methods: {
     async getOpenid(code){
       const res = await this.$http.get(`auth/wx/openid/${code}`);
-      alert(res.data.open_id)
+      // alert(res.data.open_id)
       return res.data.open_id
     },
     async wLongin(openid){
