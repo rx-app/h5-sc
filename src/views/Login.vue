@@ -55,10 +55,10 @@ export default {
     // alert('mounted'+location.href)
     
   },
-  created(){
+  async created(){
     let code = this.getUrlParam('code')
     if(code){
-      let openid = this.getOpenid(code)
+      let openid = await this.getOpenid(code)
       this.wLongin(openid)
     }
   },
