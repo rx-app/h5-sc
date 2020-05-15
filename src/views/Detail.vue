@@ -82,7 +82,7 @@ export default {
 
         }
       );
-      let d = res.data
+      let r = res.data
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
            "appId":r.app_id,     //公众号名称，由商户传入     
