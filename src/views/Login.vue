@@ -59,7 +59,7 @@ export default {
     let code = this.getUrlParam('code')
     if(code){
       let openid = await this.getOpenid(code)
-      alert(`openid: ${openid}`)
+      // alert(`openid: ${openid}`)
        let res = await this.wLongin(openid)
     }
   },
@@ -95,7 +95,7 @@ export default {
       }else if(res.code==200){
         // this.$router.push({name:'bindPhone',params:{openid}})
         localStorage.setItem('token',res.data.token)
-        this.$router.push({name:'main'})
+        this.$router.push({name:'main',query:{token:res.data.token}})
       }else{
         alert(res.msg)
       }
