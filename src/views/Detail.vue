@@ -82,8 +82,17 @@ export default {
 
         }
       );
+      let d = res.data
       WeixinJSBridge.invoke(
-        'getBrandWCPayRequest', res.data,
+        'getBrandWCPayRequest', {
+           "appId":r.app_id,     //公众号名称，由商户传入     
+         "timeStamp":r.time_stamp,         //时间戳，自1970年以来的秒数     
+         "nonceStr":r.nonce_str, //随机串     
+         "package":r.packages,     
+         "signType":r.sign_type,         //微信签名方式：     
+         "paySign":r.pay_sign //微信签名 
+
+        },
         function(res){
         if(res.err_msg == "get_brand_wcpay_request:ok" ){
           alert('支付回调')

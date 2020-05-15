@@ -95,7 +95,7 @@ export default {
       }else if(res.code==200){
         // this.$router.push({name:'bindPhone',params:{openid}})
         localStorage.setItem('token',res.data.token)
-        alert(res.data.token)
+        
         let res2 = await this.$http.get(`auth/info`)
         if(res.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
