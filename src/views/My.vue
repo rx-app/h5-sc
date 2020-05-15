@@ -40,7 +40,7 @@ export default {
       info: {},
       list: [],
       page_index: 1,
-      page_size: 2,
+      page_size: 5,
       loading: false,
       finished: false,
       firstLoad: true,
@@ -53,6 +53,7 @@ export default {
   },
   mounted() {
     this.getList();
+    this.firstLoad =false
   },
   methods: {
     async getList() {
@@ -63,6 +64,7 @@ export default {
           evaluation_status: 0
         }
       });
+      this.page_index++
       this.list = [...this.list, ...res.data.result];
       this.count = res.data.total_count;
       this.loading = false;
@@ -116,6 +118,9 @@ export default {
           color: #fff;
           font-size: 32px;
           margin-right: 15px;
+        }
+        .old{
+          text-decoration:line-through;
         }
         .time {
           margin: 26px 0;

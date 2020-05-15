@@ -95,7 +95,7 @@ export default {
       }else if(res.code==200){
         // this.$router.push({name:'bindPhone',params:{openid}})
         localStorage.setItem('token',res.data.token)
-        this.$router.push({name:'main',query:{token:res.data.token}})
+        this.$router.push({name:'main',query:{token:res.data.token,openid}})
       }else{
         alert(res.msg)
       }

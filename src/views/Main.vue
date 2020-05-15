@@ -25,7 +25,7 @@
           <div class="nav-items nav1">
             <div v-for="(item,index) in list1" :key="index" class="item " :class="`item${index+1}`">
               <div class="item-icon">
-                <img :src="require('../assets/img/img2.png')" alt />
+                <img :src="item.smallPic" alt />
               </div>
               <div class="title">{{item.name}}</div>
               <div class="price">¥{{item.present_price | cy}}</div>
@@ -57,7 +57,9 @@
       finished-text="没有更多了"
       @load="getList3"
       class="card-list"
+      v-if="(list3.length>0 || firstLoad)"   
     >
+    <!-- v-if 是修复重复加载问题 -->
           <div class="nav-items nav3">
             <div  @click="getDetail(item)" v-for="(item,index) in list3" :key="index" class="item ">
               <div class="left">
@@ -70,7 +72,7 @@
                 </div>
               </div>
               <div class="right">
-                <img :src="require('../assets/img/img1.png')" alt="">
+                <img :src="item.bigPic" alt="">
               </div>
             </div>
             
@@ -95,6 +97,9 @@ export default {
       count:0,
       loading: false,
       finished: false,
+      firstLoad:true, //修复重复加载问题
+      page_index:1,
+      page_size:2
     }
   },
   methods:{
@@ -114,24 +119,84 @@ export default {
         "test/question/page",
         {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2}}
       );
-      this.list1 = res.data.result;
-      console.log(this.list1)
+      let list = res.data.result;
+      list.map( (item,index)=>{
+        item.bigPic =''
+        item.smallPic= ''
+         if(item.image_list[1].type==1){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[1].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==0){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+       
+        return item
+      } )
+      
+      this.list1 = list
+      console.log('list1',this.list1)
     },
     async getList2(params){
       let res = await this.$http.get(
         "test/question/page",
         {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0}}
       );
-      this.list2 = res.data.result;
+      this.page_index++
+      let list = res.data.result;
+      list.map( (item,index)=>{
+        item.bigPic =''
+        item.smallPic= ''
+         if(item.image_list[1].type==1){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[1].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==0){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+       
+        return item
+      } )
+      this.list2 = list;
       console.log(this.list2)
     },
     async getList3(params){
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:1,page_size:5,order_type:'DESC',order_by:1}}
+        {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1}}
       );
       // this.list3 = res.data.result;
-      this.list3 = [...this.list3,...res.data.result]
+      let list = res.data.result;
+      list.map( (item,index)=>{
+        item.bigPic =''
+        item.smallPic= ''
+         if(item.image_list[1].type==1){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[1].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==0){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+       
+        return item
+      } )
+
+      this.list3 = this.list3.concat(list)
       this.count = res.data.total_count;
       this.loading = false;
       if(this.list3.length>=this.count){
@@ -147,6 +212,7 @@ export default {
     this.getList1();
     this.getList2();
     this.getList3();
+    this.firstLoad = false
     // this.fetch();
     // this.getUserInfo();
   },

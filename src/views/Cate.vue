@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="right">
-            <img :src="require('../assets/img/img1.png')" alt="">
+            <img :src="item.bigPic" alt="">
           </div>
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
@@ -61,7 +61,7 @@ import Footer  from "../components/Footer";
 export default {
   data() {
     return {
-      page_size:5,
+      page_size:2,
       page_index:1,
       order_by:1,
       order_type:'DESC',
@@ -90,7 +90,27 @@ export default {
         "test/question/page",
         {params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:this.keyword}}
       );
-      this.list = [...this.list,...res.data.result]
+      this.page_index++
+      let list = res.data.result;
+      list.map( (item,index)=>{
+        item.bigPic =''
+        item.smallPic= ''
+         if(item.image_list[1].type==1){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[1].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==0){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+       
+        return item
+      } )
+      this.list = [...this.list,...list]
       this.count = res.data.total_count;
       this.loading = false;
       if(this.list.length>=this.count){
