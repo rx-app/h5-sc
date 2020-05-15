@@ -95,16 +95,17 @@ export default {
       }else if(res.code==200){
         // this.$router.push({name:'bindPhone',params:{openid}})
         localStorage.setItem('token',res.data.token)
-        let res = await this.$http.get(`auth/info`)
+        alert(res.data.token)
+        let res2 = await this.$http.get(`auth/info`)
         if(res.code==200){
-          localStorage.setItem('nickname',res.data.nickname)
-          localStorage.setItem('gender',res.data.gender)
+          localStorage.setItem('nickname',res2.data.nickname)
+          localStorage.setItem('gender',res2.data.gender)
           // localStorage.setItem('mobile',res.data.mobile)
           // localStorage.setItem('email',res.data.email)
-          localStorage.setItem('avatar',res.data.avatar)
-          localStorage.setItem('level',res.data.level)
+          localStorage.setItem('avatar',res2.data.avatar)
+          localStorage.setItem('level',res2.data.level)
         }
-        this.$router.push({name:'main',query:{token:res.data.token,openid}})
+        this.$router.push({name:'main',query:{token:res2.data.token,openid}})
       }else{
         alert(res.msg)
       }
