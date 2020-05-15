@@ -97,7 +97,7 @@ export default {
         localStorage.setItem('token',res.data.token)
         this.$router.push({name:'main'})
       }else{
-        // alert('异常')
+        alert(res.msg)
       }
       
     },
