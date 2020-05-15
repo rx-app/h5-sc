@@ -2,9 +2,11 @@
   <div class="page-test">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">测试大厅</div>
-    <div class="process-bar"></div>
+    <!-- <div class="process-bar"></div> -->
+    <van-progress :percentage="current_index/length * 100" stroke-width="8" />
     <div class="info">
-      <span class="all"><span class="left">第<span class="index">14</span>题</span>/共30题目</span>
+      
+      <span class="all"><span class="left">第<span class="index">{{current_index+1}}</span>题</span>/共{{length}}题目</span>
     </div>
     
       <div class="question">{{list[current_index].name}}</div>
@@ -21,6 +23,7 @@
         上一题
       </div>
     </div>
+    
     
       
   </div>
