@@ -28,8 +28,9 @@ Vue.use(Vant);
 import http from './http'
 Vue.prototype.$http = http
 
-import {currency} from './tools'
+import {currency,LV} from './tools'
 Vue.filter('cy',currency)
+Vue.filter('lv',LV)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

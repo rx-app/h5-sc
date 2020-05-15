@@ -1,7 +1,16 @@
 <template>
   <div>
     <div class="page-my">
-      <div class="title">个人中心</div>
+      <div class="title">
+        <div class="avatar">
+          <img :src="avatar" alt="">
+        </div>
+        <div class="right">
+          <div class="nickname">{{nickname}} <span @click="logout">[注销]</span> </div>
+          <div class="level">{{level | lv}}</div>
+          
+        </div>
+      </div>
 
       <div class="card-list">
         <van-list
@@ -47,6 +56,17 @@ export default {
       count: 0
     };
   },
+  computed:{
+    avatar(){
+      return localStorage.getItem('avatar')
+    },
+    nickname(){
+      return localStorage.getItem('nickname')
+    },
+    level(){
+      return localStorage.getItem('level')
+    },
+  },
   components: {
     // Header,
     Footer
@@ -56,6 +76,15 @@ export default {
     this.firstLoad =false
   },
   methods: {
+    logout(){
+      localStorage.setItem('nickname','')
+      localStorage.setItem('gender','')
+      localStorage.setItem('mobile','')
+      localStorage.setItem('email','')
+      localStorage.setItem('avatar','')
+      localStorage.setItem('level','')
+      localStorage.setItem('token','')
+    },
     async getList() {
       let res = await this.$http.get(`test/question/paid/page`, {
         params: {
@@ -80,14 +109,41 @@ export default {
 <style  lang="scss"  scoped>
 .page-my {
   background: #261a58;
-  padding: 100px 26px 0;
+  padding: 20px 26px 0;
 
   .title {
     font-size: 48px;
     line-height: 48px;
     color: #fff;
     text-align: center;
-    margin-bottom: 78px;
+    padding: 20px 30px 60px;
+    // margin-bottom: 78px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .avatar{
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      img{
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+      }
+      
+    }
+    .right{
+      margin-left: 40px;
+      .nickname{font-size: 40px;line-height: 40px;color: #fff;
+      span{margin-left: 5px;}
+      margin-bottom: 10px;
+      }
+      .level{font-size: 32px;line-height: 32px;color: #fff;
+      background-color:rgb(30,21,70);
+      padding: 10px 30px;
+      border-radius: 26px;
+      }
+    }
   }
   .card-list {
     height: calc(100vh - 100px - 48px - 78px);

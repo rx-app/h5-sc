@@ -16,7 +16,7 @@
       <div id="main">
         <div class="nav-card section1">
           <div class="title">
-            <div @click="clear" class="text">栏目测试</div> 
+            <div class="text">栏目测试</div> 
             <span class="bar"></span>
           </div>
           <div @click="$router.push({name:'cate'})" class="more">
@@ -34,15 +34,19 @@
           </div>
         </div>
         
-        <div class="nav-card section2">
+        <div v-if="list2.length>=2" class="nav-card section2">
           <div class="title">
             <div class="text">精彩测评</div> 
             <span class="bar"></span>
           </div>
           <div @click="$router.push({name:'cate'})" class="more"></div>
           <div class="nav-items nav2">
-            <div class="item left"></div>
-            <div class="item right"></div>
+            <div @click="getDetail(list2[0])" class="item left">
+              <img :src="list2[0].bigPic" alt="">
+            </div>
+            <div @click="getDetail(list2[1])"  class="item right">
+              <img :src="list2[1].bigPic" alt="">
+            </div>
           </div>
         </div>
         <div class="nav-card section3">
@@ -102,6 +106,7 @@ export default {
       page_size:2
     }
   },
+  created(){},
   methods:{
     clear(){
       localStorage.setItem('token','')
@@ -392,9 +397,13 @@ export default {
             // flex:1;
             height: 200px;
             width: 320px;
+            img{
+              width: 320px;
+              height: 200px;
+            }
           }
-          .left{background: url('../assets/img/test2.png') no-repeat;background-size: cover;}
-          .right{background: url('../assets/img/test1.png') no-repeat;background-size: cover;}
+          // .left{background: url('../assets/img/test2.png') no-repeat;background-size: cover;}
+          // .right{background: url('../assets/img/test1.png') no-repeat;background-size: cover;}
         }
       }
       &.section3{

@@ -1,6 +1,10 @@
 
 //价格过滤
 const digitsRE = /(\d{3})(?=\d)/g
+
+export const LV = (value)=>{
+  return ['普通用户','月费会员','季度会员','年费会员'][value]
+}
  
 export function currency (value, currency, decimals) {
   value = parseFloat(value)
