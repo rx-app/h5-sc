@@ -16,7 +16,7 @@
       <div id="main">
         <div class="nav-card section1">
           <div class="title">
-            <div class="text">栏目测试</div> 
+            <div @click="clear" class="text">栏目测试</div> 
             <span class="bar"></span>
           </div>
           <div @click="$router.push({name:'cate'})" class="more">
@@ -114,6 +114,9 @@ export default {
     }
   },
   methods:{
+    clear(){
+      localStorage.setItem('token','')
+    },
     async fetch() {
       const res = await this.$http.get("card/page",{params:{page_index:this.pageIndex,page_size:this.pageSize}});
       console.log(res.data)
