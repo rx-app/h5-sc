@@ -93,9 +93,9 @@ export default {
       if(res.code==40008){
         this.$router.push({name:'bindPhone',params:{openid}})
       }else if(res.code==200){
-        this.$router.push({name:'bindPhone',params:{openid}})
-        // localStorage.setItem('token',res.data.token)
-        // this.$router.push({name:'main'})
+        // this.$router.push({name:'bindPhone',params:{openid}})
+        localStorage.setItem('token',res.data.token)
+        this.$router.push({name:'main'})
       }else{
         // alert('异常')
       }

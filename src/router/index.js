@@ -23,6 +23,11 @@ export default new Router({
       component: resolve => require(['@/views/Detail'], resolve)
     },
     {
+      path: '/buyVIP',
+      name: 'buyVIP',
+      component: resolve => require(['@/views/BuyVIP'], resolve)
+    },
+    {
       path: '/cate',
       name: 'cate',
       component: resolve => require(['@/views/Cate'], resolve)

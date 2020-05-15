@@ -79,11 +79,13 @@ export default {
       // alert(res.msg)
       if(res.code==200){
         let res = await this.$http.post(`auth/wx/login/${this.openid}`);
-        alert(res.code)
-        alert(res.msg)
+        // alert(res.code)
+        // alert(res.msg)
         if(res.code == 200){
           localStorage.setItem('token',res.data.token)
           this.$router.push({name:'main'})
+        }else{
+          alert(res.msg)
         }
         
       }
