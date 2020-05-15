@@ -62,7 +62,8 @@ export default {
       
     },
     buyVIP(){
-      this.price = this.VIP_price;
+      // this.price = this.VIP_price;
+      this.$router.push({name:'buyVIP'})
     },
     async getDetail(){
       if(!this.id){

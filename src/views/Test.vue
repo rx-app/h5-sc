@@ -3,7 +3,9 @@
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
-    <van-progress :percentage="current_index/length * 100" stroke-width="8" />
+    <van-progress :percentage="current_index/length * 100" stroke-width="8" 
+  pivot-color="#7232dd"
+  color="linear-gradient(to right, #be99ff, #7232dd)" />
     <div class="info">
       
       <span class="all"><span class="left">第<span class="index">{{current_index+1}}</span>题</span>/共{{length}}题目</span>
@@ -17,7 +19,9 @@
           {{item.name}}
 
         </div>
-        <div class="button on"><span class="iconfont icon-1"></span></div>
+        <div class="button on">
+          <!-- <span class="iconfont icon-1"></span> -->
+        </div>
       </div>
       <div @click="current_index--" class="pre">
         上一题
