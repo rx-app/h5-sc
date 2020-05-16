@@ -32,7 +32,7 @@
               <div class="number">订单标号: {{item.out_trade_no}}</div>
             </div>
             <div v-if="item.evaluation_status==2" class="bottom">查看报告</div>
-            <div v-if="item.evaluation_status==0" class="bottom">去测试</div>
+            <div v-if="item.evaluation_status==0" @click="$router.push({name:'tips',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">去测试</div>
           </div>
         </van-list>
       </div>
@@ -84,7 +84,7 @@ export default {
       localStorage.setItem('avatar','')
       localStorage.setItem('level','')
       localStorage.setItem('token','')
-      this.$router.push({name:'login'})
+      this.$router.push({name:login})
     },
     async getList() {
       let res = await this.$http.get(`test/question/paid/page`, {

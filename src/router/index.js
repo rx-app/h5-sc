@@ -12,12 +12,13 @@ export default new Router({
       component: resolve => require(['@/views/Main'], resolve)
     },
     {
-      path: '/test',
+      path: '/test/:id/:mid',
       name: 'test',
+      props: true,
       component: resolve => require(['@/views/Test'], resolve)
     },
     {
-      path: '/detail/:id',
+      path: '/detail/:id/:mid',
       name: 'detail',
       props: true,
       component: resolve => require(['@/views/Detail'], resolve)
@@ -33,8 +34,9 @@ export default new Router({
       component: resolve => require(['@/views/Cate'], resolve)
     },
     {
-      path: '/tips',
+      path: '/tips/:id/:mid',
       name: 'tips',
+      props:true,
       component: resolve => require(['@/views/Tips'], resolve)
     },
     {

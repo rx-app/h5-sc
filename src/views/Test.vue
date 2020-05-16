@@ -37,6 +37,7 @@
 import md5 from 'js-md5';
 
 export default {
+  props:{id:0,mid:0},
   data() {
     return {
       id:24,

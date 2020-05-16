@@ -13,7 +13,7 @@
 
 2>本测试8道题，5个答案，系统自动跳转。仅
 供娱乐，非专业心理指导。
-<router-link tag="div" :to="{name:'test'}" class="go">GO</router-link>
+<router-link tag="div" :to="{name:'test',params:{id:this.id,mid:this.mid}}" class="go">GO</router-link>
     </div>
     
     
@@ -25,6 +25,7 @@
 import md5 from 'js-md5';
 
 export default {
+  props:{id:0,mid:0},
   data() {
     return {
       
