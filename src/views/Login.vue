@@ -105,7 +105,7 @@ export default {
           localStorage.setItem('avatar',res2.data.avatar)
           localStorage.setItem('level',res2.data.level)
         }
-        this.$router.push({name:'main',query:{token:res2.data.token,openid}})
+        this.$router.push({name:'main',query:{token:res.data.token,openid}})
       }else{
         alert(res.msg)
       }
