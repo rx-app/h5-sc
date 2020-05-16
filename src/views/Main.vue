@@ -8,10 +8,8 @@
         <div class="img"></div>
       </router-link> -->
       <van-swipe class="banner" :autoplay="3000" indicator-color="white">
-        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
-        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
-        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
-        <van-swipe-item> <img src="../assets/img/banner.png" alt=""> </van-swipe-item>
+
+        <van-swipe-item v-for="(item,index) in list1" :key="index"> <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div></van-swipe-item>
       </van-swipe>
       <div id="main">
         <div class="nav-card section1">
@@ -210,6 +208,7 @@ export default {
       console.log(this.list3)
     },
     getDetail(item){
+      
       this.$router.push({name:'detail',params:{id:item.id}})
     },
   },
@@ -254,14 +253,20 @@ export default {
     }
   }
   .banner{
-    img{
-    width: 100vw;
-    height: 556px;
-    background: url('../assets/img/banner.png') no-repeat;
-    background-size: cover;
-    // position: absolute;  //不加会背景重叠
-    // margin-top:370px  这里不用margin-top，要给父元素加padding-top，否则背景色会丢失
+    .img-container{
+      width: 60vw;
+      height: 45vw;
+      margin: 0 auto;
+      img{
+        width: 100%;
+        height: 100%;
+        // background: url('../assets/img/banner.png') no-repeat;
+        // background-size: cover;
+        // position: absolute;  //不加会背景重叠
+        // margin-top:370px  这里不用margin-top，要给父元素加padding-top，否则背景色会丢失
+      }
     }
+    
   }
   #main{
     padding-top: 50px;

@@ -1,9 +1,9 @@
 <template>
   <div class="page-test">
-    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
+    <div tag="div" @click="$router.go(-1)" class="back"></div>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
-    <van-progress :percentage="current_index/length * 100" stroke-width="8" 
+    <van-progress v-if="length" :percentage="current_index/length * 100" stroke-width="8" 
   pivot-color="#7232dd"
   color="linear-gradient(to right, #be99ff, #7232dd)" />
     <div class="info">
@@ -11,8 +11,8 @@
       <span class="all"><span class="left">第<span class="index">{{current_index+1}}</span>题</span>/共{{length}}题目</span>
     </div>
     
-      <div class="question">{{list[current_index].name}}</div>
-    <div class="box">
+      <div v-if="list[current_index]" class="question">{{list[current_index].name}}</div>
+    <div  v-if="list[current_index]" class="box">
       <div @click="select(item)" v-for="(item,index)  in  list[current_index].option_list" :key="index" class="ans">
         <div class="option"><span>A</span></div>
         <div class="text">
@@ -40,7 +40,7 @@ export default {
   props:{id:0,mid:0},
   data() {
     return {
-      id:24,
+      // id:24,
       list:[],
       current_index:0,
       length:0,

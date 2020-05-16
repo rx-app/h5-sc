@@ -1,6 +1,6 @@
 <template>
   <div class="page-tips">
-    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
+    <div @click="$router.go(-1)" class="back"></div>
     <div class="title">测试大厅</div>
     <div class="tips-bar">
     </div>

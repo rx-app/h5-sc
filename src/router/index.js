@@ -18,7 +18,7 @@ export default new Router({
       component: resolve => require(['@/views/Test'], resolve)
     },
     {
-      path: '/detail/:id/:mid',
+      path: '/detail/:id/:mid?',
       name: 'detail',
       props: true,
       component: resolve => require(['@/views/Detail'], resolve)

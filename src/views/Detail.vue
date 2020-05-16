@@ -2,19 +2,22 @@
   <div class="page-tips">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">{{res.name}}</div>
-    <div class="tips-bar"></div>
+    <div class="tips-bar">
+      <img :src="res.bigPic" alt="">
+    </div>
     <div class="tips-bottom">
+      <div class="top-cover"></div>
       <div v-html="res.content" class="des">
         <!-- {{res.content}} -->
       </div>
-      <div @click="buyItem" class="price">
+      <!-- <div @click="buyItem" class="price">
         <div class="left">测试题</div>
         <div  class="right">¥{{res.present_price | cy}}</div>
       </div>
       <div @click="buyVIP" class="price">
         <div class="left">尊享年会会员会员免费答</div>
         <div class="right">¥99.00</div>
-      </div>
+      </div> -->
     </div>
     <van-popup position="bottom"  v-model="show">
       <div class="popup">
@@ -46,7 +49,7 @@
 
 <script>
 import md5 from "js-md5";
-
+import { Dialog } from 'vant';
 export default {
   props: {
     id: 0,
@@ -143,13 +146,31 @@ export default {
       this.$router.push({name:'buyVIP'})
     },
     async getDetail(){
+      
       if(!this.id){
+        debugger
+        Dialog({ message: '该题目不存在' });
         return
       }
       let res = await this.$http.get(
         `test/question/no_paid/${this.id}`
       );
-      this.res = res.data
+      res= res.data
+      res.bigPic =''
+      res.smallPic= ''
+        if(res.image_list[1].type==1){
+        res.bigPic = res.image_list[0].url
+      }
+      if(res.image_list[1].type==1){
+        res.smallPic = res.image_list[0].url
+      }
+      if(res.image_list[0].type==0){
+        res.bigPic = res.image_list[0].url
+      }
+      if(res.image_list[0].type==1){
+        res.smallPic = res.image_list[0].url
+      }
+      this.res = res
       // this.$nextTick(()=>{
         this.price = this.res.present_price
       // })
@@ -158,7 +179,7 @@ export default {
     }
   },
   mounted(){
-    
+    // Dialog({ message: '提示' });
     this.getDetail();
   },
 };
@@ -204,19 +225,37 @@ export default {
   }
   .tips-bar {
     position: absolute;
-    top: 220px;
-    left: 55px;
-    width: 640px;
-    height: 128px;
-    background: url("../assets/img/tips.png") no-repeat;
+    top: 190px;
+    left: 0px;
+    right: 0;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    // background: url("../assets/img/tips.png") no-repeat;
     background-size: cover;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    z-index: 10;
   }
   .tips-bottom {
+    position: relative;
+    // z-index: 5;
+    .top-cover{
+      height: 130px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 9;
+    }
     margin-top: 175px;
     height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
+    overflow: scroll;
     background: #400e8d;
     border-radius: 53px 53px 0px 0px;
-    padding: 180px 26px;
+    padding: 130px 26px 320px;
     font-size: 32px;
     color: #fff;
     line-height: 52px;
