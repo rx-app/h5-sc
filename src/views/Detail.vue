@@ -97,9 +97,6 @@ export default {
         this.$nextTick(r=>{
           document.querySelector('input[type=submit]').click()
         })
-        // setTimeout(() => {
-        //   document.querySelector('input[type=sbumit]').click()
-        // }, 1000);
       }
       console.log(res.data)
     },
