@@ -2,7 +2,7 @@
   <div class="page-login">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="container">
-      <div class="title">
+      <div @click="wechateLogin" class="title">
         手机号登录
       </div>
       <div class="input-box">
@@ -15,7 +15,7 @@
         <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
     </div>
-    <div @click="wechateLogin" class="login">
+    <div @click="login"  class="login">
       同意协议并登陆
     </div>
 
