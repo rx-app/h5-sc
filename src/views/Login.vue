@@ -287,20 +287,22 @@ export default {
   background: url('../assets/img/login-2x.png') no-repeat;
   background-size: cover;
   position: relative;
-  padding: 400px 60px 0;
+  padding: 40px 60px 0;
   .back{
     width:72px;
     height:67px;
     background: url('../assets/img/return.png') no-repeat;
     background-size: cover;
     position: absolute;
-    top:50px;
+    top:40px;
     left: 0px;
   }
   .container{
     // width: 630px;
     .title{
       font-size: 60px;
+      // margin: 0 auto;
+      text-align: center;
       color: #fff;
       margin-bottom: 122px;
     }
@@ -310,7 +312,7 @@ export default {
       margin-bottom: 88px;
       input{
         width: 100%;
-        border: none;background: #261A58;color:#fff;font-size: 28px;line-height: 3em;
+        border: none;background: transparent;color:#fff;font-size: 28px;line-height: 3em;
         border-bottom: 1px solid #4F19A2;
       }
       .close{
