@@ -57,6 +57,7 @@
 <script>
 import md5 from 'js-md5';
 import Footer  from "../components/Footer";
+import axios from 'axios'
 
 export default {
   data() {
@@ -75,6 +76,7 @@ export default {
       cate_index:-1,
       order_index:1,
       firstLoad:true,
+      cancelRequest:null,
     };
   },
   components:{
@@ -86,9 +88,17 @@ export default {
       this.$router.push({name:'detail',params:{id:item.id}})
     },
     async getTestList(){
+      if (this.cancelRequest){
+          this.cancelRequest()      //取消前一个请求
+      }
+      let CancelToken =  axios.CancelToken  // 这里，我看网上有些人是用 this.$http 代替 axios 的，但是我试了一下不行
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:this.keyword}}
+        
+        
+        {cancelToken:new CancelToken((c)=>{
+          this.cancelRequest = c    //保存当前请求
+        }),params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:this.keyword}}
       );
       this.page_index++
       let list = res.data.result;
