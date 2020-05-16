@@ -84,6 +84,7 @@ export default {
       localStorage.setItem('avatar','')
       localStorage.setItem('level','')
       localStorage.setItem('token','')
+      this.$router.push({name:'login'})
     },
     async getList() {
       let res = await this.$http.get(`test/question/paid/page`, {
