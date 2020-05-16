@@ -3,7 +3,7 @@
     <div tag="div" @click="$router.go(-1)" class="back"></div>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
-    <van-progress v-if="length" :percentage="current_index/length * 100" stroke-width="8" 
+    <van-progress v-if="length" :percentage="(current_index+1)/length * 100" stroke-width="8" 
   pivot-color="#7232dd"
   color="linear-gradient(to right, #be99ff, #7232dd)" />
     <div class="info">
@@ -23,7 +23,7 @@
           <!-- <span class="iconfont icon-1"></span> -->
         </div>
       </div>
-      <div @click="current_index--" class="pre">
+      <div v-show="current_index>0" @click="current_index--" class="pre">
         上一题
       </div>
     </div>
@@ -60,7 +60,7 @@ export default {
       console.log(this.result)
       this.result.option_list[this.current_index].question_item_id = this.list[this.current_index].id
       this.result.option_list[this.current_index].question_item_option_id = item.id
-      if(this.current_index == this.length){
+      if((this.current_index+1) == this.length){
         let res =this.addResult()
       }else{
         
@@ -82,7 +82,7 @@ export default {
       console.log(res)
       // debugger
       this.list = res.data.item_list
-      this.result.member_test_question_id = res.data.id;
+      this.result.member_test_question_id = this.mid;
       this.length = this.list.length
       this.result.option_list=Array( this.length ).fill({
             // "question_item_id": 0,

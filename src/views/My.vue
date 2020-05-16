@@ -28,10 +28,10 @@
                 <span class="new">¥ {{item.paid_price | cy}}</span>
                 <span class="old">¥{{item.origin_price | cy}}</span>
               </div>
-              <div class="time">完成时间: {{item.name}}</div>
+              <div class="time">完成时间: {{item.finished_at | dd}}</div>
               <div class="number">订单标号: {{item.out_trade_no}}</div>
             </div>
-            <div v-if="item.evaluation_status==2" class="bottom">查看报告</div>
+            <div v-if="item.evaluation_status==2" @click="$router.push({name:'share',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">查看报告</div>
             <div v-if="item.evaluation_status==0" @click="$router.push({name:'tips',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">去测试</div>
           </div>
         </van-list>
@@ -91,7 +91,7 @@ export default {
         params: {
           page_index: this.page_index,
           page_size: this.page_size,
-          evaluation_status: 0
+          evaluation_status: ''
         }
       });
       this.page_index++

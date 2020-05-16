@@ -40,8 +40,9 @@ export default new Router({
       component: resolve => require(['@/views/Tips'], resolve)
     },
     {
-      path: '/share',
+      path: '/share/:id/:mid',
       name: 'share',
+      props:true,
       component: resolve => require(['@/views/Share'], resolve)
     },
     // {

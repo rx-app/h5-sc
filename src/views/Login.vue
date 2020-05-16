@@ -97,7 +97,7 @@ export default {
         localStorage.setItem('token',res.data.token)
         
         let res2 = await this.$http.get(`auth/info`)
-        if(res.code==200){
+        if(res2.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
           localStorage.setItem('gender',res2.data.gender)
           // localStorage.setItem('mobile',res.data.mobile)
@@ -216,9 +216,18 @@ export default {
         //   message: "登录成功"
         // });
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("name", this.username);
-        let userInfo = await this.$http.get("auth/info")
-        localStorage.setItem('info',JSON.stringify(userInfo.data))
+        // localStorage.setItem("name", this.username);
+        // let userInfo = await this.$http.get("auth/info")
+        let res2 = await this.$http.get(`auth/info`)
+        if(res.code==200){
+          localStorage.setItem('nickname',res2.data.nickname)
+          localStorage.setItem('gender',res2.data.gender)
+          // localStorage.setItem('mobile',res.data.mobile)
+          // localStorage.setItem('email',res.data.email)
+          localStorage.setItem('avatar',res2.data.avatar)
+          localStorage.setItem('level',res2.data.level)
+        }
+        // localStorage.setItem('info',JSON.stringify(userInfo.data))
         this.$router.push("/");
       } else {
         // this.$message({
