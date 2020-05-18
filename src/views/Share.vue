@@ -202,7 +202,7 @@ export default {
     width: 200px;
     height: 200px;
     margin-bottom: -50Px;
-    margin-left: calc(50vw - 50Px);
+    // margin-left: calc(50vw - 50Px);
   }
   .content {
     // margin-top: 270px;
