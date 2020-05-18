@@ -201,12 +201,12 @@ export default {
   .circle {
     width: 200px;
     height: 200px;
-    margin-bottom: -50Px;
+    // margin-bottom: -50Px;
     // margin-left: calc(50vw - 50Px);
   }
   .content {
     // margin-top: 270px;
-    height: calc(100vh - 50px - 20px - 48px - 270px + 100px + 50Px);
+    // height: calc(100vh - 50px - 20px - 48px - 270px + 100px + 50Px);
     background: #400e8d;
     // overflow: scroll;
     border-radius: 53px 53px 0px 0px;
