@@ -65,6 +65,8 @@ export default {
       ispay:0,
       form:'',
       pop_show:false,
+      uuid:'',
+      timer:null,
 
     };
   },
@@ -96,11 +98,13 @@ export default {
         }
       );
       if(res.code == 200){
-        this.form = res.data.form
+        this.uuid = res.data.uuid;
+        this.form = res.data.form;
         this.$nextTick(r=>{
           document.querySelector('input[type=submit]').click()
         })
       }
+      
       console.log(res.data)
     },
     async weixin_pay(){
@@ -118,6 +122,20 @@ export default {
         
       );
       let r = res.data
+      this.uuid = res.data.uuid;
+      let check_pay = async()=>{
+        let payRes = await this.$http.get(`order/test_question/order/status/${this.uuid}`)
+        if(payRes.code==200 ){
+          if(payRes.data.status == 1){
+            alert('支付成功')
+          }else{
+            setTimeout(() => {
+              check_pay()
+            }, 2000);
+          }
+        }
+      } 
+      
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
            "appId":r.app_id,     //公众号名称，由商户传入     
@@ -129,9 +147,9 @@ export default {
 
         },
         function(res){
-          alert(JSON.stringify(res))
+          // alert(JSON.stringify(res))
         if(res.err_msg == "get_brand_wcpay_request:ok" ){
-          alert('支付回调')
+          // alert('支付回调')
         } 
     }); 
       console.log(res)

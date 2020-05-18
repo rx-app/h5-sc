@@ -3,7 +3,7 @@
     <div tag="div" @click="$router.go(-1)" class="back"></div>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
-    <van-progress v-if="length" :percentage="(current_index+1)/length * 100" stroke-width="8" 
+    <van-progress v-if="length" :percentage="(pecent)/length * 100" stroke-width="8" 
   pivot-color="#7232dd"
   color="linear-gradient(to right, #be99ff, #7232dd)" />
     <div class="info">
@@ -13,17 +13,17 @@
     
       <div v-if="list[current_index]" class="question">{{list[current_index].name}}</div>
     <div  v-if="list[current_index]" class="box">
-      <div @click="select(item)" v-for="(item,index)  in  list[current_index].option_list" :key="index" class="ans">
-        <div class="option"><span>A</span></div>
+      <div @click="select(item,current_index,index)"  v-for="(item,index)  in  list[current_index].option_list" :key="index" class="ans">
+        <div :class="{on:index==list[current_index].selectIndex}" class="option"><span>{{letter[index]}}</span></div>
         <div class="text">
           {{item.name}}
 
         </div>
         <div class="button on">
-          <!-- <span class="iconfont icon-1"></span> -->
+          <span v-show="index==list[current_index].selectIndex" class="iconfont icon-1"></span>
         </div>
       </div>
-      <div v-show="current_index>0" @click="current_index--" class="pre">
+      <div v-show="current_index>0" @click="current_index--&&pecent--" class="pre">
         上一题
       </div>
     </div>
@@ -43,7 +43,9 @@ export default {
       // id:24,
       list:[],
       current_index:0,
+      letter:['A','B','C','D','E','F','G','H'],
       length:0,
+      pecent:0,
       result:{
         "member_test_question_id": 0,
         "option_list": [
@@ -56,10 +58,14 @@ export default {
     };
   },
   methods: {
-    async select(item){
+    async select(item,cindex,index){
+      
       console.log(this.result)
+      this.list[cindex].selectIndex=index
+      console.log(this.list)
       this.result.option_list[this.current_index].question_item_id = this.list[this.current_index].id
       this.result.option_list[this.current_index].question_item_option_id = item.id
+      this.pecent++
       if((this.current_index+1) == this.length){
         let res =this.addResult()
       }else{
@@ -81,7 +87,12 @@ export default {
       );
       console.log(res)
       // debugger
-      this.list = res.data.item_list
+      let list = res.data.item_list
+      list = list.map(v=>{
+        v.selectIndex = -1;
+        return v
+      })
+      this.list = list
       this.result.member_test_question_id = this.mid;
       this.length = this.list.length
       this.result.option_list=Array( this.length ).fill({

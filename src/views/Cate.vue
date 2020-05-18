@@ -1,8 +1,18 @@
 <template>
 <div>
   <div class="page-cate">
-    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
-    <div class="top-title">专业心理测评</div>
+    <!-- <div class="back"></div> -->
+    
+    <div class="top-title">
+     
+      <!-- 专业心理测评 -->
+    </div>
+     <div class="search">
+       <div class="input-box">
+        <input v-model="keyword" type="text">
+       </div>
+       <div @click="searchByKeyword" class="search-icon"></div>
+     </div>
     <div class="nav-bar">
       <div class="nav-list">
         <div class="item" :class="{on:cate_index==-1}" @click="searchAll" >全部</div>
@@ -77,6 +87,7 @@ export default {
       order_index:1,
       firstLoad:true,
       cancelRequest:null,
+      searchWithKeyword:false,
     };
   },
   components:{
@@ -91,6 +102,12 @@ export default {
       if (this.cancelRequest){
           this.cancelRequest()      //取消前一个请求
       }
+      let keyword = ''
+      if(this.searchWithKeyword){
+        keyword = this.keyword
+        this.searchWithKeyword = false
+        
+      }
       let CancelToken =  axios.CancelToken  // 这里，我看网上有些人是用 this.$http 代替 axios 的，但是我试了一下不行
       let res = await this.$http.get(
         "test/question/page",
@@ -98,7 +115,7 @@ export default {
         
         {cancelToken:new CancelToken((c)=>{
           this.cancelRequest = c    //保存当前请求
-        }),params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:this.keyword}}
+        }),params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:keyword}}
       );
       this.page_index++
       let list = res.data.result;
@@ -155,6 +172,16 @@ export default {
       this.finished = false;
       this.getTestList();
     },
+    searchByKeyword(){
+      // this.order_index = 1
+      // this.order_by = 'DES';
+      this.list = [];
+      this.page_index = 1;
+      this.count = 0;
+      this.finished = false;
+      this.searchWithKeyword = true
+      this.getTestList();
+    },
     searchAll(item,index){
       this.cate_index = -1;
       this.category_id = '';
@@ -190,6 +217,27 @@ export default {
     position: absolute;
     top:50px;
     left: 0px;
+  }
+  .search{
+    margin-left: -25px;
+    margin-bottom: 40px;
+    display: flex;
+    // width: 300px;
+    height: 100px;
+    
+    .input-box{
+      // flex:1;
+      padding: 20px 0 20px 20px;
+      width: 400px;
+      background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
+      input{width: 100%;height: 60px;color: #666;font-size: 40px;line-height: 60px;text-indent: .2em;padding: 0;border: none;}
+    }
+    .search-icon{
+      width:108px;
+      height:100px;
+      background: url('../assets/img/search.png') no-repeat;
+      background-size: cover;
+    }
   }
   .top-title{
     font-size:48px;
