@@ -97,8 +97,8 @@ export default {
         localStorage.setItem('token',res.data.token)
         
         let res2 = await this.$http.get(`auth/info`)
-        alert(3+res.code)
-        alert(4+res.msg)
+        alert(3+res2.code)
+        alert(4+res2.msg)
         if(res2.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
           localStorage.setItem('gender',res2.data.gender)
@@ -107,7 +107,7 @@ export default {
           localStorage.setItem('avatar',res2.data.avatar)
           localStorage.setItem('level',res2.data.level)
         }
-        this.$router.push({name:'main',query:{token:res.data.token,openid}})
+        this.$router.push({name:'main'})
       }else{
         alert(5+res.msg)
       }
