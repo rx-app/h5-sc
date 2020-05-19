@@ -87,8 +87,8 @@ export default {
     async wLongin(openid){
       let res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
-      // alert(res.code)
-      // alert(res.msg)
+      alert(res.code)
+      alert(res.msg)
       
       if(res.code==40008){
         this.$router.push({name:'bindPhone',params:{openid}})
