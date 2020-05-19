@@ -87,8 +87,8 @@ export default {
     async wLongin(openid){
       let res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
-      alert(res.code)
-      alert(res.msg)
+      alert(1, res.code)
+      alert(2 ,res.msg)
       
       if(res.code==40008){
         this.$router.push({name:'bindPhone',params:{openid}})
@@ -97,8 +97,8 @@ export default {
         localStorage.setItem('token',res.data.token)
         
         let res2 = await this.$http.get(`auth/info`)
-        alert(res.code)
-        alert(res.msg)
+        alert(3,res.code)
+        alert(4,res.msg)
         if(res2.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
           localStorage.setItem('gender',res2.data.gender)
@@ -109,7 +109,7 @@ export default {
         }
         this.$router.push({name:'main',query:{token:res.data.token,openid}})
       }else{
-        alert(res.msg)
+        alert(5,res.msg)
       }
       
     },
