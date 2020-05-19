@@ -2,9 +2,9 @@
   <div class="page-tips">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
     <div class="title">{{res.name}}</div>
-    <div class="tips-bar">
+    <!-- <div class="tips-bar">
       <img :src="res.bigPic" alt="">
-    </div>
+    </div> -->
     <div class="tips-bottom">
       <div class="top-cover"></div>
       <div v-html="res.content" class="des">
@@ -22,7 +22,7 @@
     <van-popup position="bottom"  v-model="show">
       <div class="popup">
         <span @click="show=false" class="cha iconfont icon-cha"></span>
-        <div class="pop-price">¥1000.00</div>
+        <div class="pop-price">¥ {{price | cy}}</div>
         <div class="item">
           <span @click="ali_pay" class="left">
             <!-- <svg t="1589343378771" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2134" width="200" height="200"><path d="M845.87 659.697C991.05 709.256 1024 711.92 1024 711.92V186.187C1024 83.351 940.65 0 837.813 0H186.187C83.351 0 0 83.35 0 186.187v651.64C0 940.65 83.35 1024 186.187 1024h651.64c91.995 0 168.208-66.786 183.282-154.473-28.793-12.258-267.475-114.191-391.8-175.12-88.818 111.406-203.4 178.99-322.335 179.005-201.17 0-269.478-179.456-174.23-297.593 20.766-25.735 56.109-50.341 110.938-64.12 85.745-21.49 222.283 13.387 350.208 56.44a723.576 723.576 0 0 0 56.802-141.462H256.407v-40.75H459.7v-72.96H213.474v-40.749H459.7V168.132s0-17.529 17.438-17.529h99.373v121.615h243.44v40.75H576.498v72.96l198.731 0.015c-19.02 79.405-47.917 152.5-84.148 216.681 60.325 22.242 114.447 43.294 154.79 57.073z" fill="#00A0E9" p-id="2135"></path><path d="M260.819 572.642c-25.209 2.56-72.493 13.914-98.35 37.21-77.537 68.894-31.141 194.846 125.712 194.861 91.166 0 182.287-59.437 253.846-154.563-101.782-50.673-188.024-86.905-281.208-77.508z" fill="#00A0E9" p-id="2136"></path></svg> -->
@@ -40,9 +40,13 @@
     </van-overlay> -->
 
 
-    <div class="pay">
+    <div v-show="res.is_vip_free == 1 || !(level>0)" class="pay">
       <div class="left"> ¥ {{price | cy}}</div>
       <div class="right" @click="show=true">去支付</div>
+    </div>
+    <div v-show="res.is_vip_free == 0 && level>0" class="pay">
+      <div class="left"> ¥ {{0 | cy}}</div>
+      <div class="right" @click="buyAsVIP">VIP免费购买</div>
     </div>
   </div>
 </template>
@@ -67,8 +71,12 @@ export default {
       pop_show:false,
       uuid:'',
       timer:null,
-
     };
+  },
+  computed:{
+    level(){
+      return  localStorage.getItem('level')*1
+    },
   },
   created(){
     this.timer = setInterval(() =>{
@@ -82,6 +90,12 @@ export default {
             },500);
   },
   methods: {
+    async buyAsVIP(){
+      let res = await this.$http.post('order/test_question/paid_user/save',{
+        "platform_id": 0,
+	      "ref_ids": [this.id]
+      })
+    },
     async ali_pay(){
       this.pop_show = true
       this.show = false
@@ -261,14 +275,14 @@ export default {
     position: relative;
     // z-index: 5;
     .top-cover{
-      height: 130px;
+      height: 30px;
       width: 100%;
       position: absolute;
       left: 0;
       top: 0;
       z-index: 9;
     }
-    margin-top: 175px;
+    margin-top: 75px;
     height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
     overflow: scroll;
     background: #400e8d;
