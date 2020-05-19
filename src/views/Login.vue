@@ -97,6 +97,8 @@ export default {
         localStorage.setItem('token',res.data.token)
         
         let res2 = await this.$http.get(`auth/info`)
+        alert(res.code)
+        alert(res.msg)
         if(res2.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
           localStorage.setItem('gender',res2.data.gender)
