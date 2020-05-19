@@ -59,7 +59,7 @@ export default {
     let code = this.getUrlParam('code')
     if(code){
       let openid = await this.getOpenid(code)
-      // alert(`openid: ${openid}`)
+      alert(`openid: ${openid}`)
        let res = await this.wLongin(openid)
     }
   },

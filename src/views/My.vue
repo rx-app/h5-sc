@@ -151,11 +151,11 @@ export default {
 
         },
         function(res){
-          alert(JSON.stringify(res))
-        if(res.err_msg == "get_brand_wcpay_request:ok" ){
-          alert('支付回调')
-        } 
-    }); 
+              alert(JSON.stringify(res))
+            if(res.err_msg == "get_brand_wcpay_request:ok" ){
+              alert('支付回调')
+            } 
+        }); 
       console.log(res)
     },
     logout(){

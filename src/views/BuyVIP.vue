@@ -1,20 +1,20 @@
 <template>
   <div class="page-tips">
     <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
-    <div class="title">{{res.name}}</div>
-    <div class="tips-bar"></div>
-    <div class="tips-bottom">
-      <div v-html="res.content" class="des">
-        <!-- {{res.content}} -->
+    <div class="title">VIP会员套餐</div>
+    <!-- <div class="tips-bar"></div> -->
+    <div class="vip">
+      <div class="vip-list">
+        <div @click="current_index=0" :class="{on:current_index ==0}">¥100/月</div>
+        <div @click="current_index=1" :class="{on:current_index ==1}">¥200/年</div>
+        <div @click="current_index=2" :class="{on:current_index ==2}">¥100/永久</div>
       </div>
-      <div @click="buyItem" class="price">
-        <div class="left">测试题</div>
-        <div  class="right">¥{{res.present_price | cy}}</div>
+      <div @click="show = true" class="buy-button">
+        立即开通
       </div>
-      <div @click="buyVIP" class="price">
-        <div class="left">尊享年会会员会员免费答</div>
-        <!-- <div class="right">¥99.00</div> -->
-      </div>
+    </div>
+    <div class="des">
+      <div class="des-title">会员说明:</div>
     </div>
     <van-popup position="bottom"  v-model="show">
       <div class="popup">
@@ -31,10 +31,10 @@
       </div>
     </van-popup>
 
-    <div class="pay">
+    <!-- <div class="pay">
       <div class="left"> ¥ {{price | cy}}</div>
       <div class="right" @click="show=true">去支付</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -52,7 +52,8 @@ export default {
       res:{},
       index:1,
       show:false,
-
+      current_index:0,
+      packet_key_list:['vip_month','vip_year','vip_life'],
     };
   },
   methods: {
@@ -60,6 +61,66 @@ export default {
       
       this.price = this.res.present_price;
       
+    },
+    async ali_pay(){
+      this.pop_show = true
+      this.show = false
+      let res = await this.$http.post(
+        `pay/alipay/wappay`,{
+          
+          "number": 1,
+          "package_key": this.packet_key_list[this.current_index],
+          "package_type": 0,
+          "platform_id": 0,
+          // "ref_ids": [this.id],
+          "total_fee": 1,
+          
+
+        }
+      );
+      if(res.code == 200){
+        this.form = res.data.form
+        this.uuid = res.data.uuid;
+        this.$nextTick(r=>{
+          document.querySelector('input[type=submit]').click()
+        })
+      }
+      console.log(res.data)
+    },
+    async weixin_pay(){
+      let res = await this.$http.post(
+        `pay/wxpay/jsapi_prepay`,{
+          
+          "number": 1,
+          "package_key": this.packet_key_list[this.current_index],
+          "package_type": 0,
+          "platform_id": 0,
+          // "ref_ids": [this.id],
+          "total_fee": 1,
+          
+
+        }
+        
+      );
+      let r = res.data
+      this.uuid = res.data.uuid;
+      WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+           "appId":r.app_id,     //公众号名称，由商户传入     
+         "timeStamp":r.time_stamp,         //时间戳，自1970年以来的秒数     
+         "nonceStr":r.nonce_str, //随机串     
+         "package":r.packages,     
+         "signType":r.sign_type,         //微信签名方式：     
+         "paySign":r.pay_sign //微信签名 
+
+        },
+        function(res){
+              alert(JSON.stringify(res))
+            if(res.err_msg == "get_brand_wcpay_request:ok" ){
+              alert('支付回调')
+            } 
+        }); 
+      console.log(res)
     },
     buyVIP(){
       // this.price = this.VIP_price;
@@ -88,10 +149,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.vip{
+        // margin-bottom: 50px;
+        border-bottom: 1px solid #4F19A2;
+        .vip-list{
+          display: flex;
+          justify-content: space-around;
+          padding:30px 20px 50px;
+          div{
+            width: 200px;
+            height: 120px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 32px;color: #fff;
+            background: rgb(30,21,70);
+            border:10px solid #6331ca;
+            border-radius: 10px;
+            // border:10px solid rgb(38,26,88);
+            &.on{
+              border-color:rgb(255,228,126) ;
+            }
+          }
+        }
+        .buy-button{
+          background: linear-gradient(90deg,#904dff, #48c5ff, );
+          padding: 30px 100px;
+          border-radius: 55px;
+          font-size: 40px;
+          line-height: 40px;
+          margin: 0 40px;
+          text-align: center;
+          color: #fff;
+          margin-bottom: 50px;
+        }
+        
+
+        
+      }
+      .des{
+          padding: 20px 40px;
+          .des-title{
+            line-height: 40px;
+            font-size: 28px;
+            color: #ccc;
+          }
+        }
 .page-tips {
   height: 100vh;
 
-  background: #261a58;
+  background: #400e8d;
   background-size: cover;
   position: relative;
   padding: 40px 0 0;
@@ -104,6 +210,7 @@ export default {
     top: 50px;
     left: 0px;
   }
+  
   .title {
     font-size: 48px;
     color: rgba(255, 255, 255, 1);
