@@ -68,8 +68,8 @@ export default {
   methods: {
     async getOpenid(code){
       alert('length:'+code.length)
-      if(code.length>36){
-        code = code.substr(0,36)
+      if(code.length>32){
+        code = code.substr(0,32)
       }
       const res = await this.$http.get(`auth/wx/openid/${code}`);
       // alert(res.data.open_id)
