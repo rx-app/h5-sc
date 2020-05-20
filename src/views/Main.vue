@@ -150,7 +150,7 @@ export default {
         "test/question/page",
         {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0}}
       );
-      this.page_index++
+      // this.page_index++
       let list = res.data.result;
       list.map( (item,index)=>{
         item.bigPic =''
@@ -174,12 +174,17 @@ export default {
       console.log(this.list2)
     },
     async getList3(params){
+      this.loading = true;
       let res = await this.$http.get(
         "test/question/page",
         {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1}}
       );
       // this.list3 = res.data.result;
+      if(res.code != 200){
+        return 
+      }
       let list = res.data.result;
+      this.page_index++
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
@@ -412,7 +417,7 @@ export default {
         }
       }
       &.section3{
-        padding-bottom: 400px;
+        // padding-bottom: 400px;
         .nav-items{
           // display: flex;
           // justify-content: space-between;

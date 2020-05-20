@@ -20,6 +20,7 @@ line-height: 100%;
 div{line-height: 1em;}
 #app{height: 100vh;
 /* overflow: hidden; */
+background: #261A58;
 }
 .van-list__finished-text{
   font-size: 32px;

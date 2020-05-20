@@ -54,6 +54,12 @@
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
   </van-list>
+  <!-- <div v-if="(!list.length && loaded)" class="blank">
+    <div class="blank-img"></div>
+    <div class="blank-txt">暂无数据</div>
+  </div> -->
+  <!-- <Blank :list="list" :loaded="loaded" ></Blank> -->
+  
 
     
 
@@ -67,6 +73,7 @@
 <script>
 import md5 from 'js-md5';
 import Footer  from "../components/Footer";
+import Blank  from "../components/Blank";
 import axios from 'axios'
 
 export default {
@@ -88,17 +95,21 @@ export default {
       firstLoad:true,
       cancelRequest:null,
       searchWithKeyword:false,
+      loaded:false,//暂无数据
     };
   },
   components:{
     // Header,
     Footer,
+    Blank,
   },
   methods: {
     getDetail(item){
       this.$router.push({name:'detail',params:{id:item.id}})
     },
     async getTestList(){
+      this.loading = true;
+      this.loaded = false;
       if (this.cancelRequest){
           this.cancelRequest()      //取消前一个请求
       }
@@ -118,7 +129,9 @@ export default {
         }),params:{page_index:this.page_index,page_size:this.page_size,order_by:this.order_by,order_type:this.order_type,category_id:this.category_id,keyword:keyword}}
       );
       this.page_index++
+
       let list = res.data.result;
+      this.loaded = true;
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
@@ -202,8 +215,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .page-cate{
-  // height: 100vh;
+  // height: 150vh;
   
   background: #261A58;
   background-size: cover;
