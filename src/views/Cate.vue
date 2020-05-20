@@ -3,10 +3,10 @@
   <div class="page-cate">
     <!-- <div class="back"></div> -->
     
-    <div class="top-title">
+    <!-- <div class="top-title">
      
-      <!-- 专业心理测评 -->
-    </div>
+      专业心理测评
+    </div> -->
      <div class="search">
        <div class="input-box">
         <input v-model="keyword" type="text">
@@ -219,15 +219,20 @@ export default {
     left: 0px;
   }
   .search{
-    margin-left: -25px;
+    // margin-left: -25px;
+    margin: 0 auto;
     margin-bottom: 40px;
     display: flex;
     // width: 300px;
     height: 100px;
+   
     
     .input-box{
+      margin-left:96px;
       // flex:1;
       padding: 20px 0 20px 20px;
+      //  padding-left:70px;
+      // border-radius:50px 0 0 50px;
       width: 400px;
       background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
       input{width: 100%;height: 60px;color: #666;font-size: 40px;line-height: 60px;text-indent: .2em;padding: 0;border: none;}

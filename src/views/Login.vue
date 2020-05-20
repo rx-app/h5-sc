@@ -308,6 +308,8 @@ export default {
       font-size: 60px;
       // margin: 0 auto;
       text-align: center;
+      line-height: 67px;
+      height: 67px;
       color: #fff;
       margin-bottom: 122px;
     }
