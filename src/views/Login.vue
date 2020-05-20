@@ -56,33 +56,33 @@ export default {
     
   },
   async created(){
-    alert(location.search)
+    // alert(location.search)
     let code = this.getUrlParam('code')
-    this.mobile = code
-    alert(`code: ${code}`)
+    // this.mobile = code
+    // alert(`code: ${code}`)
     if(code){
-      // let openid = await this.getOpenid(code)
+      let openid = await this.getOpenid(code)
       // alert(`openid: ${openid}`)
-      //  let res = await this.wLongin(openid)
+       let res = await this.wLongin(openid)
     }
   },
   methods: {
     async getOpenid(code){
-      alert('length:'+code.length)
-      if(code.length>32){
-        code = code.substr(0,32)
-      }
+      // alert('length:'+code.length)
+      // if(code.length>32){
+      //   code = code.substr(0,32)
+      // }
       const res = await this.$http.get(`auth/wx/openid/${code}`);
       // alert(res.data.open_id)
-      alert('21:'+res.code)
-      alert('22:'+res.msg)
+      // alert('21:'+res.code)
+      // alert('22:'+res.msg)
       return res.data.open_id
     },
     async wLongin(openid){
       let res = await this.$http.post(`auth/wx/login/${openid}`);
       // localStorage.setItem('token',res.data.token)
-      alert('1:'+res.code)
-      alert('2:'+res.msg)
+      // alert('1:'+res.code)
+      // alert('2:'+res.msg)
       
       if(res.code==40008){
         this.$router.push({name:'bindPhone',params:{openid}})
@@ -91,8 +91,8 @@ export default {
         localStorage.setItem('token',res.data.token)
         
         let res2 = await this.$http.get(`auth/info`)
-        alert('3:'+res2.code)
-        alert('4:'+res2.msg)
+        // alert('3:'+res2.code)
+        // alert('4:'+res2.msg)
         if(res2.code==200){
           localStorage.setItem('nickname',res2.data.nickname)
           localStorage.setItem('gender',res2.data.gender)
