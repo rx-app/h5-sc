@@ -203,7 +203,7 @@ export default {
 
 <style lang="scss" scoped>
 .page-cate{
-  height: 100vh;
+  // height: 100vh;
   
   background: #261A58;
   background-size: cover;
@@ -294,7 +294,7 @@ export default {
           // display: flex;
           // justify-content: space-between;
           // padding-top: 53px ;
-          height: calc(100vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
+          // height: calc(100vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
           overflow-y: scroll;
           padding-bottom: 400px;
           .item{

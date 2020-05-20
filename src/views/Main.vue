@@ -412,6 +412,7 @@ export default {
         }
       }
       &.section3{
+        padding-bottom: 400px;
         .nav-items{
           // display: flex;
           // justify-content: space-between;
