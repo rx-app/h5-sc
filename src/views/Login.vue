@@ -57,6 +57,7 @@ export default {
   },
   async created(){
     let code = this.getUrlParam('code')
+    alert(`code: ${code}`)
     if(code){
       let openid = await this.getOpenid(code)
       alert(`openid: ${openid}`)

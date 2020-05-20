@@ -149,6 +149,7 @@ export default {
           }
         }
       } 
+      check_pay()
       
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
