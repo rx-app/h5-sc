@@ -208,7 +208,7 @@ export default {
   background: #261A58;
   background-size: cover;
   position: relative;
-  padding: 50px 25px 0;
+  padding: 50px 25px 200px;
   .back{
     width:72px;
     height:68px;
