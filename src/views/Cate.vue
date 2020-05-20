@@ -296,7 +296,7 @@ export default {
           // padding-top: 53px ;
           // height: calc(100vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
           overflow-y: scroll;
-          padding-bottom: 400px;
+          // padding-bottom: 400px;
           .item{
             // flex:1;
             height: 242px;
