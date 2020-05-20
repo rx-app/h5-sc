@@ -58,11 +58,12 @@ export default {
   async created(){
     alert(location.search)
     let code = this.getUrlParam('code')
+    this.mobile = code
     alert(`code: ${code}`)
     if(code){
-      let openid = await this.getOpenid(code)
-      alert(`openid: ${openid}`)
-       let res = await this.wLongin(openid)
+      // let openid = await this.getOpenid(code)
+      // alert(`openid: ${openid}`)
+      //  let res = await this.wLongin(openid)
     }
   },
   methods: {
