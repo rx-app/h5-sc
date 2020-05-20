@@ -56,6 +56,7 @@ export default {
     
   },
   async created(){
+    alert(location.search)
     let code = this.getUrlParam('code')
     alert(`code: ${code}`)
     if(code){
@@ -64,23 +65,12 @@ export default {
        let res = await this.wLongin(openid)
     }
   },
-  // beforeRouteEnter (to, from, next) {
-  //   // alert(to)
-  //   alert(from)
-  //   next(vm => {
-  //     // 通过 `vm` 访问组件实例
-  //     vm.deleteScan();
-  //   })
-  // },
-  // beforeCreate(){
-  //   alert('beforeCreate'+location.href)
-  // },
-//   https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
-
-
-// https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
   methods: {
     async getOpenid(code){
+      alert('length:'+code.lenth)
+      if(code.lenth>36){
+        code = code.substr(0,36)
+      }
       const res = await this.$http.get(`auth/wx/openid/${code}`);
       // alert(res.data.open_id)
       alert('21:'+res.code)
