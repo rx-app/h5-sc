@@ -34,9 +34,10 @@
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
+      offset="5"
       @load="getTestList"
       class="card-list"
-      v-if="(list.length>0 || firstLoad)"
+      
     >
     <div @click="getDetail(item)" v-for="(item,index) in list" :key="index" class="item">
           <div class="left">
@@ -308,7 +309,7 @@ export default {
           // display: flex;
           // justify-content: space-between;
           // padding-top: 53px ;
-          // height: calc(100vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
+          height: calc(130vh - 50px - 48px - 10px - 104px - 60px - 100px + 100px );
           overflow-y: scroll;
           // padding-bottom: 400px;
           .item{
