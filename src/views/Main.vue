@@ -235,8 +235,8 @@ export default {
 <style  lang="scss"  scoped>
 .page-main{
   background: #261A58;
-  height: 100vh;
-  overflow: scroll;
+  // height: 100vh;
+  // overflow: scroll;  // vant list 无限加载bug 原因
   // padding-top: 246px;   //头部空出的部分去掉
   padding-top: 30px;
   position: relative;
