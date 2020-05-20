@@ -217,7 +217,10 @@ export default {
   },
 };
 </script>
-
+<style>
+.tips-bottom img{max-width: 100%;}
+.tips-bottom p{max-width: 100%; overflow: hidden;word-wrap: break-word; word-break: normal;}
+</style>
 <style lang="scss" scoped>
 .hidden{}
 .wrapper {
@@ -273,6 +276,9 @@ export default {
     z-index: 10;
   }
   .tips-bottom {
+    img{
+      max-width: 100%;
+    }
     position: relative;
     // z-index: 5;
     .top-cover{
@@ -287,7 +293,7 @@ export default {
     height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
     overflow: scroll;
     background: #400e8d;
-    border-radius: 53px 53px 0px 0px;
+    // border-radius: 53px 53px 0px 0px;
     padding: 130px 26px 320px;
     font-size: 32px;
     color: #fff;
@@ -409,7 +415,7 @@ export default {
       display: flex;
       height: 106px;
       width: 100vw;
-      position: absolute;
+      position: fixed;
       bottom: 0;
       .left{
         flex: 1;

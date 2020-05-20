@@ -11,7 +11,10 @@ export default {
 </script>
 
 <style>
-body{height:100%;overflow: hidden;user-select: none;
+body{
+  height:100%;
+/* overflow: hidden; */
+user-select: none;
 line-height: 100%;
 }
 div{line-height: 1em;}
