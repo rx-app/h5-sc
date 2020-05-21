@@ -6,46 +6,74 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "1096947",
-      "name": "√1",
-      "font_class": "1",
-      "unicode": "e6c8",
-      "unicode_decimal": 59080
+      "icon_id": "1466714",
+      "name": "历史",
+      "font_class": "lishi",
+      "unicode": "e636",
+      "unicode_decimal": 58934
     },
     {
-      "icon_id": "3704903",
-      "name": "√",
-      "font_class": "icon-test",
-      "unicode": "e69b",
-      "unicode_decimal": 59035
+      "icon_id": "3096972",
+      "name": "右箭头",
+      "font_class": "icon",
+      "unicode": "e507",
+      "unicode_decimal": 58631
     },
     {
-      "icon_id": "4908493",
-      "name": "√1",
-      "font_class": "icon-test1",
-      "unicode": "e67c",
-      "unicode_decimal": 59004
+      "icon_id": "3640390",
+      "name": "右箭头",
+      "font_class": "arr-right",
+      "unicode": "e510",
+      "unicode_decimal": 58640
     },
     {
-      "icon_id": "4963595",
-      "name": "√",
-      "font_class": "icon-test2",
-      "unicode": "e662",
-      "unicode_decimal": 58978
+      "icon_id": "5661097",
+      "name": "历史",
+      "font_class": "lishi1",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
     },
     {
-      "icon_id": "6710142",
-      "name": "√",
-      "font_class": "icon-check",
-      "unicode": "e6ba",
-      "unicode_decimal": 59066
+      "icon_id": "7517890",
+      "name": "右箭头",
+      "font_class": "icon1",
+      "unicode": "e502",
+      "unicode_decimal": 58626
     },
     {
-      "icon_id": "8194627",
-      "name": "√",
-      "font_class": "check",
-      "unicode": "e60a",
-      "unicode_decimal": 58890
+      "icon_id": "8642437",
+      "name": "右箭头",
+      "font_class": "arrow-left",
+      "unicode": "e506",
+      "unicode_decimal": 58630
+    },
+    {
+      "icon_id": "9704263",
+      "name": "对话",
+      "font_class": "duihua",
+      "unicode": "e718",
+      "unicode_decimal": 59160
+    },
+    {
+      "icon_id": "10443431",
+      "name": "右箭头",
+      "font_class": "iconfontyoujiantou-copy",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "13999446",
+      "name": "历史",
+      "font_class": "lishi2",
+      "unicode": "e521",
+      "unicode_decimal": 58657
+    },
+    {
+      "icon_id": "14318610",
+      "name": "历史",
+      "font_class": "lishi3",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
     }
   ]
 }

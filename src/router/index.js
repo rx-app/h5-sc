@@ -29,6 +29,12 @@ export default new Router({
       component: resolve => require(['@/views/BuyVIP'], resolve)
     },
     {
+      path: '/testResult/:status',
+      name: 'testResult',
+      props: true,
+      component: resolve => require(['@/views/TestResult'], resolve)
+    },
+    {
       path: '/cate',
       name: 'cate',
       component: resolve => require(['@/views/Cate'], resolve)
@@ -59,6 +65,11 @@ export default new Router({
       path: '/my',
       name: 'my',
       component: resolve => require(['@/views/My'], resolve)
+    },
+    {
+      path: '/my2',
+      name: 'my2',
+      component: resolve => require(['@/views/My2'], resolve)
     },
     // {
     //   path: '/question',
