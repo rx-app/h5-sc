@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="page-my">
+      <router-link tag="div" :to="{name:'my2'}" class="back"></router-link>
       <div class="title">
-        历史测试结果
+        {{titName}}
       </div>
     
     <Totop></Totop>
@@ -59,6 +60,14 @@ export default {
     };
   },
   computed:{
+    titName(){
+      if(this.status == 0){
+        return '已购买的测试题'
+      }else if(this.status == 2){
+        return '历史测试结果'
+      }
+      return 
+    },
     avatar(){
       return localStorage.getItem('avatar')
     },
@@ -275,7 +284,15 @@ export default {
 .page-my {
   background: #261a58;
   padding: 20px 26px 0;
-
+  .back{
+    width:72px;
+    height:67px;
+    background: url('../assets/img/return.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    top:40px;
+    left: 0px;
+  }
   .title {
     font-size: 48px;
     line-height: 48px;
