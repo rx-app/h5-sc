@@ -6,11 +6,11 @@
         绑定手机号
       </div>
       <div class="input-box">
-        <input class="username" type="text" v-model="mobile" placeholder="手机号" />
+        <input class="username" type="tel" v-model="mobile" placeholder="手机号" />
         <span v-show="mobile" @click="mobile=''" class="close"></span>
       </div>
       <div class="input-box">
-        <input class="password" type="text" v-model="code" placeholder="验证码" />
+        <input class="password" type="number" v-model="code" placeholder="验证码" />
         <span v-show="code" @click="code=''" class="close"></span>
         <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
@@ -70,6 +70,15 @@ export default {
 
   methods: {
     async bind(code){
+      if(!/^\d{11}$/.test(this.mobile)){
+        this.$dialog.alert({
+          message: '请输入正确的手机号',
+        }).then(() => {
+              
+          // on close
+        })
+        return false
+      }
       // alert(this.openid)
       const res = await this.$http.post(`auth/wx/bind_phone`,{
         "code": this.code,
@@ -96,6 +105,15 @@ export default {
     
    
     async getValidCode(){
+      if(!/^\d{11}$/.test(this.mobile)){
+        this.$dialog.alert({
+          message: '请输入正确的手机号',
+        }).then(() => {
+              
+          // on close
+        })
+        return false
+      }
       const res = await this.$http.get(`sms/send/${this.mobile}/3`);
       if( res.code == 200 ){
         this.isShow = false;
@@ -151,20 +169,24 @@ export default {
   background: url('../assets/img/login-2x.png') no-repeat;
   background-size: cover;
   position: relative;
-  padding: 400px 60px 0;
+  padding: 40px 60px 0;
   .back{
     width:72px;
     height:67px;
     background: url('../assets/img/return.png') no-repeat;
     background-size: cover;
     position: absolute;
-    top:50px;
+    top:40px;
     left: 0px;
   }
   .container{
     // width: 630px;
     .title{
       font-size: 60px;
+      // margin: 0 auto;
+      text-align: center;
+      line-height: 67px;
+      height: 67px;
       color: #fff;
       margin-bottom: 122px;
     }
@@ -174,7 +196,7 @@ export default {
       margin-bottom: 88px;
       input{
         width: 100%;
-        border: none;background: #261A58;color:#fff;font-size: 28px;line-height: 3em;
+        border: none;background: transparent;color:#fff;font-size: 28px;line-height: 3em;
         border-bottom: 1px solid #4F19A2;
       }
       .close{
@@ -191,7 +213,7 @@ export default {
         color: #A19AB9;
         font-size: 28px;
         position: absolute;
-        right: 68px;
+        right: 100px;
         bottom: 28px;
       }
     }

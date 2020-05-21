@@ -6,11 +6,11 @@
         手机号登录
       </div>
       <div class="input-box">
-        <input class="username" type="text" v-model="mobile" placeholder="手机号" />
+        <input class="username" type="tel" v-model="mobile" placeholder="手机号" />
         <span v-show="mobile" @click="mobile=''" class="close"></span>
       </div>
       <div class="input-box">
-        <input class="password" type="text" v-model="code" placeholder="验证码" />
+        <input class="password" type="number" v-model="code" placeholder="验证码" />
         <span v-show="code" @click="code=''" class="close"></span>
         <div class="send-code"><span @click="getValidCode" v-show="isShow" class="send">发送验证码</span>  <span v-show="!isShow" class="time">{{time}}s</span></div>
       </div>
@@ -198,7 +198,12 @@ export default {
     },
     async login(){
       if(!/^\d{11}$/.test(this.mobile)){
-        
+        this.$dialog.alert({
+          message: '请输入正确的手机号',
+        }).then(() => {
+              
+          // on close
+        })
         return false
       }
       const res = await this.$http.post("auth/verification_code/login", {
@@ -237,6 +242,15 @@ export default {
     },
    
     async getValidCode(){
+      if(!/^\d{11}$/.test(this.mobile)){
+        this.$dialog.alert({
+          message: '请输入正确的手机号',
+        }).then(() => {
+              
+          // on close
+        })
+        return false
+      }
       const res = await this.$http.get(`sms/send/${this.mobile}/4`);
       if( res.code == 200 ){
         this.isShow = false;
@@ -336,8 +350,10 @@ export default {
         color: #A19AB9;
         font-size: 28px;
         position: absolute;
-        right: 68px;
+        right: 100px;
         bottom: 28px;
+        // background: #1e1546;
+        // padding: 15px;
       }
     }
   }

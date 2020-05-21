@@ -7,7 +7,7 @@
         </div>
         <div class="right">
           <div class="nickname">{{nickname}} <span @click="logout">[注销]</span> </div>
-          <div class="level">{{level | lv}} </div><div @click="show = true" class="vip">开通会员</div>
+          <div class="level">{{level | lv}} </div><div @click="toVipPage" class="vip">开通会员</div>
           
         </div>
       </div>
@@ -161,15 +161,27 @@ export default {
         }); 
       console.log(res)
     },
+    toVipPage(){
+      this.$router.push({name:'buyVIP'})
+    },
     logout(){
-      localStorage.setItem('nickname','')
-      localStorage.setItem('gender','')
-      localStorage.setItem('mobile','')
-      localStorage.setItem('email','')
-      localStorage.setItem('avatar','')
-      localStorage.setItem('level','')
-      localStorage.setItem('token','')
-      this.$router.push({name:login})
+      this.$dialog.confirm({
+        // title:'提示',
+        message: '确定要退出？',
+      }).then(() => {
+            // localStorage.setItem('nickname','')
+            // localStorage.setItem('gender','')
+            // localStorage.setItem('mobile','')
+            // localStorage.setItem('email','')
+            // localStorage.setItem('avatar','')
+            // localStorage.setItem('level','')
+            // localStorage.setItem('token','')
+            // this.$router.push({name:'login'})
+        // on close
+      }).catch(()=>{
+
+      });
+      
     },
     async getList() {
       let res = await this.$http.get(`test/question/paid/page`, {
@@ -210,25 +222,27 @@ export default {
 
       }
       .vip{
-        display: flex;
-        justify-content: space-around;
-        padding:30px 20px 50px;
-        border-bottom: 1px solid #4F19A2;
-        div{
-          width: 200px;
-          height: 120px;
-          text-align: center;
-          line-height: 100px;
-          font-size: 32px;color: #fff;
-          background: rgb(30,21,70);
-          border:10px solid #6331ca;
-          border-radius: 10px;
-          // border:10px solid rgb(38,26,88);
-          &.on{
-            border-color:rgb(255,228,126) ;
-          }
-        }
-        margin-bottom: 50px;
+        
+        // 底部弹出时用的样式
+        // display: flex;
+        // justify-content: space-around;
+        // padding:30px 20px 50px;
+        // border-bottom: 1px solid #4F19A2;
+        // div{
+        //   width: 200px;
+        //   height: 120px;
+        //   text-align: center;
+        //   line-height: 100px;
+        //   font-size: 32px;color: #fff;
+        //   background: rgb(30,21,70);
+        //   border:10px solid #6331ca;
+        //   border-radius: 10px;
+        //   // border:10px solid rgb(38,26,88);
+        //   &.on{
+        //     border-color:rgb(255,228,126) ;
+        //   }
+        // }
+        // margin-bottom: 50px;
       }
       .item{
         padding: 0 34px;
@@ -312,9 +326,14 @@ export default {
       margin-bottom: 10px;
       }
       .level{font-size: 32px;line-height: 32px;color: #fff;
-      background-color:rgb(30,21,70);
-      padding: 10px 30px;
-      border-radius: 26px;
+        background-color:rgb(30,21,70);
+        padding: 10px 30px;
+        border-radius: 26px;
+      }
+      .vip{
+        font-size: 28px;
+        margin-top: 10px;
+        color: #ccc;
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="page-test">
-    <div tag="div" @click="$router.go(-1)" class="back"></div>
+    <div tag="div" @click="back" class="back"></div>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
     <van-progress v-if="length" :percentage="(pecent)/length * 100" stroke-width="8" 
@@ -58,6 +58,26 @@ export default {
     };
   },
   methods: {
+    back(){
+      this.$dialog.confirm({
+        // title:'提示',
+        message: '退出后，下次要全部重新回答，确定吗？',
+      }).then(() => {
+            // localStorage.setItem('nickname','')
+            // localStorage.setItem('gender','')
+            // localStorage.setItem('mobile','')
+            // localStorage.setItem('email','')
+            // localStorage.setItem('avatar','')
+            // localStorage.setItem('level','')
+            // localStorage.setItem('token','')
+            // this.$router.push({name:'login'})
+            this.$router.push({name:'my'})
+        // on close
+      }).catch(()=>{
+
+      });
+      
+    },
     async select(item,cindex,index){
       
       console.log(this.result)
