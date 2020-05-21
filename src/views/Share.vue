@@ -1,7 +1,7 @@
 <template>
   <div class="page-tips">
     <!-- 这个页面不要自动格式化，Px会被转换掉 -->
-    <div @click="$router.go(-1)" class="back"></div>
+    <div @click="$router.push({name:'my'})" class="back"></div>
     <div class="top-title"></div>
     <div class="share-button" @click="saveImg"></div>
     <div class="share-content">

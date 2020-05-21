@@ -87,7 +87,19 @@ export default {
       this.result.option_list[this.current_index].question_item_option_id = item.id
       this.pecent++
       if((this.current_index+1) == this.length){
-        let res =this.addResult()
+        let res =await this.addResult()
+        debugger
+        if(res.code==200){
+          this.$router.push({name:'share',params:{id:this.id,mid:this.mid}})
+          // this.$dialog.alert({
+          //   title:'答题结束！',
+          //   message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+          // }).then(() => {
+                
+          //   // on close
+          // })
+        }
+        
       }else{
         
         this.current_index ++;
