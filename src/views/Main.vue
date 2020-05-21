@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="page-main">
       <div class="header">
         <!-- <div class="title">测试大厅</div> -->
@@ -52,6 +52,10 @@
             <div class="text">精彩测评</div> 
             <span class="bar"></span>
           </div>
+          <!-- <van-button type="default" class="backTop" @click="backTop" v-show="flag_scroll">
+              <van-icon name="arrow-up" size="20" />
+        </van-button> -->
+        <Totop></Totop>
           <div class="more" @click="$router.push({name:'cate'})"></div>
           <van-list
       v-model="loading"
@@ -90,6 +94,7 @@
 <script>
 // import Header  from "../components/Header";
 import Footer  from "../components/Footer";
+import Totop  from "../components/Totop";
 export default {
   data () {
     return {
@@ -105,6 +110,8 @@ export default {
     }
   },
   created(){},
+  computed:{
+  },
   methods:{
     clear(){
       localStorage.setItem('token','')
@@ -228,6 +235,7 @@ export default {
   components:{
     // Header,
     Footer,
+    Totop,
   },
 }
 </script>

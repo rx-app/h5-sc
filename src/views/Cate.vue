@@ -55,6 +55,7 @@
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
   </van-list>
+  <Totop></Totop>
   <!-- <div v-if="(!list.length && loaded)" class="blank">
     <div class="blank-img"></div>
     <div class="blank-txt">暂无数据</div>
@@ -75,12 +76,15 @@
 import md5 from 'js-md5';
 import Footer  from "../components/Footer";
 import Blank  from "../components/Blank";
+import Totop  from "../components/Totop";
+
+
 import axios from 'axios'
 
 export default {
   data() {
     return {
-      page_size:2,
+      page_size:3,
       page_index:1,
       order_by:1,
       order_type:'DESC',
@@ -103,6 +107,7 @@ export default {
     // Header,
     Footer,
     Blank,
+    Totop,
   },
   methods: {
     getDetail(item){

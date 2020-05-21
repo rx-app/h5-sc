@@ -30,6 +30,7 @@
         </div>
       </div>
     </van-popup>
+    <Totop></Totop>
 
       <div class="card-list">
         <van-list
@@ -62,6 +63,7 @@
 
 <script>
 import Footer from "../components/Footer";
+import Totop from "../components/Totop";
 export default {
   data() {
     return {
@@ -91,7 +93,8 @@ export default {
   },
   components: {
     // Header,
-    Footer
+    Footer,
+    Totop,
   },
   mounted() {
     this.getList();
@@ -316,8 +319,8 @@ export default {
     }
   }
   .card-list {
-    height: calc(100vh - 100px - 48px - 78px);
-    overflow-y: scroll;
+    // height: calc(100vh - 100px - 48px - 78px);
+    // overflow-y: scroll;   //无限加载bug
     padding-bottom: 300px; // ios 只设置100px,在iPhone 6p 下不够
     .card {
       width: 698px;
