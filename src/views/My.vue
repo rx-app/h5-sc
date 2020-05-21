@@ -2,7 +2,7 @@
   <div>
     <div class="page-my">
       <div class="title">
-        <div class="avatar">
+        <div @click="$router.push({name:'my2'})" class="avatar">
           <img :src="avatar" alt="">
         </div>
         <div class="right">

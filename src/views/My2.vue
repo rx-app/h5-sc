@@ -28,7 +28,7 @@
           <div class="text">待测试题库</div>
           <span class="iconfont icon-arr-right"></span>
         </div>
-        <div class="item">
+        <div @click="$router.push({name:'buyVIP'})" class="item">
           <i class="iconfont icon-duihua"></i>
           <div class="text">会员购买</div>
           <span class="iconfont icon-arr-right"></span>
