@@ -9,9 +9,9 @@
     </div> -->
      <div class="search">
        <div class="input-box">
-        <input v-model="keyword" type="text">
+        <input placeholder="请输入您要搜索的内容" v-model="keyword" type="text">
        </div>
-       <div @click="searchByKeyword" class="search-icon"></div>
+       <div @click="searchByKeyword" class="iconfont icon--search1 search-icon"></div>
      </div>
     <div class="nav-bar">
       <div class="nav-list">
@@ -141,11 +141,11 @@ export default {
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
-         if(item.image_list[1].type==1){
-          item.bigPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.bigPic = item.image_list[0].url;
         }
-        if(item.image_list[1].type==1){
-          item.smallPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.smallPic = item.image_list[0].url;
         }
         if(item.image_list[0].type==0){
           item.bigPic = item.image_list[0].url
@@ -248,20 +248,31 @@ export default {
    
     
     .input-box{
-      margin-left:96px;
+      margin-left:16px;
       // flex:1;
-      padding: 20px 0 20px 20px;
+      // padding: 20px 0 20px 20px;
       //  padding-left:70px;
-      // border-radius:50px 0 0 50px;
-      width: 400px;
-      background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
-      input{width: 100%;height: 60px;color: #666;font-size: 40px;line-height: 60px;text-indent: .2em;padding: 0;border: none;}
+      border-radius:40px 0 0 40px;
+      width: 560px;
+      // background: rgba(0,0,0,.2);
+      // background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
+      input{border-radius:40px 0 0 40px;background: rgba(0,0,0,.3);
+      width: 100%;height: 80px;color: #eee;
+      font-size: 32px;line-height: 80px;text-indent: .2em;
+      padding: 0 0 0 40px;border: none;}
     }
     .search-icon{
-      width:108px;
-      height:100px;
-      background: url('../assets/img/search.png') no-repeat;
-      background-size: cover;
+      width:100px;
+      height:80px;
+      font-size: 42px;
+      color: rgba(255,255,255,.7);
+      line-height: 80px;
+      text-align: left;
+      padding-left: 15px;
+      background: rgba(0,0,0,.3);
+      border-radius:0 50px 50px 0;
+      // background: url('../assets/img/search.png') no-repeat;
+      // background-size: cover;
     }
   }
   .top-title{

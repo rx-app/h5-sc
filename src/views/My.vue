@@ -3,7 +3,8 @@
     <div class="page-my">
       <div class="title">
         <div @click="$router.push({name:'my2'})" class="avatar">
-          <img :src="avatar" alt="">
+          <img v-if="!!avatar" :src="avatar" alt="">
+          <img src="../assets/img/avatar.png" alt="">
         </div>
         <div class="right">
           <div class="nickname">{{nickname}} <span @click="logout">[注销]</span> </div>

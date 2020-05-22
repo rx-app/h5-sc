@@ -2,6 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
 import router from './router'
 // router.beforeEach((to, from, next)=>{

@@ -7,14 +7,17 @@
       <!-- <router-link :to="{name:'tips'}" tag="div" class="banner">
         <div class="img"></div>
       </router-link> -->
-      <van-swipe class="banner" :autoplay="3000" indicator-color="white">
+      <!-- <van-swipe class="banner" :autoplay="3000" indicator-color="white">
 
-        <van-swipe-item v-for="(item,index) in list1" :key="index"> <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div></van-swipe-item>
-      </van-swipe>
+        <van-swipe-item v-for="(item,index) in list1" :key="index"> 
+          <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div>
+        </van-swipe-item>
+      </van-swipe> -->
+      <Swiper></Swiper>
       <div id="main">
         <div class="nav-card section1">
           <div class="title">
-            <div class="text">栏目测试</div> 
+            <div class="text">推荐测评</div> 
             <span class="bar"></span>
           </div>
           <div @click="$router.push({name:'cate'})" class="more">
@@ -34,7 +37,7 @@
         
         <div v-if="list2.length>=2" class="nav-card section2">
           <div class="title">
-            <div class="text">精彩测评</div> 
+            <div class="text">热门测评</div> 
             <span class="bar"></span>
           </div>
           <div @click="$router.push({name:'cate'})" class="more"></div>
@@ -95,6 +98,7 @@
 // import Header  from "../components/Header";
 import Footer  from "../components/Footer";
 import Totop  from "../components/Totop";
+import Swiper  from "../components/Swiper";
 export default {
   data () {
     return {
@@ -133,11 +137,11 @@ export default {
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
-         if(item.image_list[1].type==1){
-          item.bigPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.bigPic = item.image_list[0].url;
         }
-        if(item.image_list[1].type==1){
-          item.smallPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.smallPic = item.image_list[0].url;
         }
         if(item.image_list[0].type==0){
           item.bigPic = item.image_list[0].url
@@ -155,18 +159,18 @@ export default {
     async getList2(params){
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0}}
+        {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0,position:2}}
       );
       // this.page_index++
       let list = res.data.result;
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
-         if(item.image_list[1].type==1){
-          item.bigPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.bigPic = item.image_list[0].url;
         }
-        if(item.image_list[1].type==1){
-          item.smallPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.smallPic = item.image_list[0].url;
         }
         if(item.image_list[0].type==0){
           item.bigPic = item.image_list[0].url
@@ -184,7 +188,7 @@ export default {
       this.loading = true;
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1}}
+        {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1,position:3}}
       );
       // this.list3 = res.data.result;
       if(res.code != 200){
@@ -195,11 +199,11 @@ export default {
       list.map( (item,index)=>{
         item.bigPic =''
         item.smallPic= ''
-         if(item.image_list[1].type==1){
-          item.bigPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.bigPic = item.image_list[0].url;
         }
-        if(item.image_list[1].type==1){
-          item.smallPic = item.image_list[0].url
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.smallPic = item.image_list[0].url;
         }
         if(item.image_list[0].type==0){
           item.bigPic = item.image_list[0].url
@@ -236,6 +240,7 @@ export default {
     // Header,
     Footer,
     Totop,
+    Swiper,
   },
 }
 </script>

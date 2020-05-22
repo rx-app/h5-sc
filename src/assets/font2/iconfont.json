@@ -20,6 +20,13 @@
       "unicode_decimal": 58932
     },
     {
+      "icon_id": "10318793",
+      "name": "search",
+      "font_class": "-search1",
+      "unicode": "e503",
+      "unicode_decimal": 58627
+    },
+    {
       "icon_id": "10691276",
       "name": "微信",
       "font_class": "weixin",

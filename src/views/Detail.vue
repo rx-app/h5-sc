@@ -300,9 +300,9 @@ export default {
       z-index: 9;
     }
     margin-top: 75px;
-    height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
+    // height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
     overflow: scroll;
-    background: #400e8d;
+    background: #261a58;
     // border-radius: 53px 53px 0px 0px;
     padding: 130px 26px 320px;
     font-size: 32px;
@@ -429,7 +429,7 @@ export default {
       bottom: 0;
       .left{
         flex: 1;
-        background: #261A58;
+        background: #400e8d;
         font-size: 40px;
         color: #fff;
         line-height: 106px;
