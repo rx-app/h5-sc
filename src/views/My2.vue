@@ -5,7 +5,8 @@
       <div class="my">
         <div class="avatar2 " :class="`level-${level}`">
           <!-- <i class="icon-hat"></i> -->
-          <img :src="avatar" alt />
+          <img v-if="!!avatar" :src="avatar" alt="">
+          <img v-else src="../assets/img/avatar.png" alt="">
         </div>
         <div class="name">
           <span>{{nickname}}</span>

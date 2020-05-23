@@ -7,13 +7,13 @@
       <!-- <router-link :to="{name:'tips'}" tag="div" class="banner">
         <div class="img"></div>
       </router-link> -->
-      <!-- <van-swipe class="banner" :autoplay="3000" indicator-color="white">
+      <van-swipe class="banner" :autoplay="3000" indicator-color="white">
 
         <van-swipe-item v-for="(item,index) in list1" :key="index"> 
           <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div>
         </van-swipe-item>
-      </van-swipe> -->
-      <Swiper></Swiper>
+      </van-swipe>
+      <!-- <Swiper></Swiper> -->
       <div id="main">
         <div class="nav-card section1">
           <div class="title">
@@ -131,7 +131,7 @@ export default {
     async getList1(params){
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2}}
+        {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2,position:2}}
       );
       let list = res.data.result;
       list.map( (item,index)=>{
@@ -159,7 +159,7 @@ export default {
     async getList2(params){
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0,position:2}}
+        {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0,position:3}}
       );
       // this.page_index++
       let list = res.data.result;
@@ -188,7 +188,7 @@ export default {
       this.loading = true;
       let res = await this.$http.get(
         "test/question/page",
-        {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1,position:3}}
+        {params:{page_index:this.page_index,page_size:this.page_size,order_type:'DESC',order_by:1}}
       );
       // this.list3 = res.data.result;
       if(res.code != 200){

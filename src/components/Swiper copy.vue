@@ -27,11 +27,18 @@ export default {
     return {
       list1: [],
       swiperOption: {
-
+        effect: "coverflow",
+        grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
         loop:true,
-        
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true
+        },
         pagination: {
           el: ".swiper-pagination"
         }
@@ -77,12 +84,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.example-3d {
+  width: 100%;
+  height: 400px;
+  // padding-top: 50px;
+  // padding-bottom: 50px;
+}
 .img-container{
   img{
-    width: 100vw;
-    height: 50vw;
+    width: 100%;
+    height: 100%;
   }
 }
 
+.swiper {
+  height: 100%;
+  width: 100%;
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    background-color: #2c8dfb;
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+  }
+
+  .swiper-pagination {
+    /deep/ .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      background-color: #fff;
+    }
+  }
+}
 </style>

@@ -29,11 +29,15 @@ background: #261A58;
   background: #261A58;
   color: #fff;
   width: 60vw;
-  .van-dialog__message{
+  .van-dialog__content {
+    background: #261a58;
+  }
+  .van-dialog__message {
+    background: #261a58;
     line-height: 100px;
     font-size: 36px;
     text-align: center;
-    border-bottom: 1px solid #4F19A2;
+    border-bottom: 1px solid #4f19a2;
   }
   .van-dialog__cancel{
     height: 70px;

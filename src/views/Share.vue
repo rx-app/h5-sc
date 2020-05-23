@@ -18,7 +18,8 @@
       <div class="content">
         <div class="title">{{res.question_name}}</div>
         <div class="avatar">
-          <img :src="avatar" alt />
+          <img v-if="!!avatar" :src="avatar" alt="">
+          <img v-else src="../assets/img/avatar.png" alt="">
         </div>
         <div class="name">{{nickname}}</div>
         <div class="time">完成时间:{{res.finish_at | dd}}</div>

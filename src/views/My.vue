@@ -4,7 +4,9 @@
       <div class="title">
         <div @click="$router.push({name:'my2'})" class="avatar">
           <img v-if="!!avatar" :src="avatar" alt="">
-          <img src="../assets/img/avatar.png" alt="">
+          <img v-else src="../assets/img/avatar.png" alt="">
+          
+
         </div>
         <div class="right">
           <div class="nickname">{{nickname}} <span @click="logout">[注销]</span> </div>
@@ -53,7 +55,7 @@
               <div class="number">订单标号: {{item.out_trade_no}}</div>
             </div>
             <div v-if="item.evaluation_status==2" @click="$router.push({name:'share',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">查看报告</div>
-            <div v-if="item.evaluation_status==0" @click="$router.push({name:'tips',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">去测试</div>
+            <div v-if="item.evaluation_status==0" @click="$router.push({name:'test',params:{id:item.question_id,mid:item.member_test_question_id}})" class="bottom">去测试</div>
           </div>
         </van-list>
       </div>

@@ -19,8 +19,8 @@
           {{item.name}}
 
         </div>
-        <div class="button on">
-          <span v-show="index==list[current_index].selectIndex" class="iconfont icon-1"></span>
+        <div class="button" :class="{on:index==list[current_index].selectIndex}">
+          <!-- <span v-show="index==list[current_index].selectIndex" class="iconfont icon-1"></span> -->
         </div>
       </div>
       <div v-show="current_index>0" @click="current_index--&&pecent--" class="pre">
@@ -88,7 +88,7 @@ export default {
       this.pecent++
       if((this.current_index+1) == this.length){
         let res =await this.addResult()
-        debugger
+        
         if(res.code==200){
           this.$router.push({name:'share',params:{id:this.id,mid:this.mid}})
           // this.$dialog.alert({
@@ -246,9 +246,19 @@ export default {
       // }
     }
     .text{flex:1;font-size: 32px;line-height: 48px;color: #fff;}
-    .button{color:#fff;font-size: 30px;line-height: 54px;text-align: center; width: 54px;height: 54px;border: 3px solid #B5A8D1;border-radius: 50%;margin-left: 50px;}
-    .button.on{
-      border-color: #fff;
+    // .button{color:#fff;font-size: 30px;line-height: 54px;text-align: center; width: 54px;height: 54px;border: 3px solid #B5A8D1;border-radius: 50%;margin-left: 50px;}
+    // .button.on{
+    //   border-color: #fff;
+    // }
+    .button{
+      width:54px;
+      height: 54px;
+      background: url('../assets/img/chose.png') no-repeat;
+      background-size: 100% 100%;
+      &.on{
+        background: url('../assets/img/chosed.png') no-repeat;
+        background-size: 100% 100%;
+      }
     }
   }
   .pre{
