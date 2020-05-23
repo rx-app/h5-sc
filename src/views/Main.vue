@@ -272,8 +272,8 @@ export default {
   }
   .banner{
     .img-container{
-      width: 60vw;
-      height: 45vw;
+      width: 90vw;
+      height: 50.625vw;
       margin: 0 auto;
       img{
         width: 100%;

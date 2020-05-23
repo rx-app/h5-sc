@@ -2,7 +2,7 @@
   <div class="page-tips">
     <!-- 这个页面不要自动格式化，Px会被转换掉 -->
     <div @click="$router.push({name:'my'})" class="back"></div>
-    <div class="top-title"></div>
+    <!-- <div class="top-title"></div> -->
     <div class="share-button" @click="saveImg"></div>
     <div class="share-content">
       <van-circle
@@ -202,8 +202,8 @@ export default {
   .circle {
     width: 200px;
     height: 200px;
-    // margin-bottom: -50Px;
-    // margin-left: calc(50vw - 50Px);
+    margin-bottom: -50Px;
+    margin-left: calc(50vw - 50Px);
   }
   .content {
     // margin-top: 270px;
