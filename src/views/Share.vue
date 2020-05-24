@@ -162,6 +162,12 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.img-box{
+  width: 100vw;
+  img{
+    width: 100vw;
+  }
+}
 .popup{
   background:rgba(51,20,115,1);
   .icon-cha{
@@ -188,7 +194,8 @@ export default {
 .page-tips {
   // height: 100vh;
 
-  background: #261a58;
+  background: #400e8d;
+  height: 100%;
   background-size: cover;
   position: relative;
   // padding: 40px 0 0; // 50px -> 40px
@@ -205,11 +212,12 @@ export default {
   .top-title {
     font-size: 48px;
     line-height: 68px;
-    padding: 50px 0 0;
+    padding: 50px 0 45px 96px ;
     color: rgba(255, 255, 255, 1);
     // line-height:44px;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 0px 0px 45px 96px;  //页面的第一个子元素加了margin-top，导致页面顶部有白条
+        background: #261a58;
+    // margin: 0px 0px 45px 96px;  //页面的第一个子元素加了margin-top，导致页面顶部有白条
   }
   // .share-button {
   //   width: 34px;
@@ -221,6 +229,7 @@ export default {
   //   right: 28px;
   // }
   .score-box{
+    background: #261a58;
     .left{
       padding: 20px 0 0 100px;
       height: 190px;
