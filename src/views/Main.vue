@@ -9,7 +9,7 @@
       </router-link> -->
       <van-swipe class="banner" :autoplay="3000" indicator-color="white">
 
-        <van-swipe-item v-for="(item,index) in list1" :key="index"> 
+        <van-swipe-item v-for="(item,index) in list4" :key="index"> 
           <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div>
         </van-swipe-item>
       </van-swipe>
@@ -105,6 +105,7 @@ export default {
       list1:[],
       list2:[],
       list3:[],
+      list4:[],
       count:0,
       loading: false,
       finished: false,
@@ -127,6 +128,34 @@ export default {
         this.cards=res.data.result
       }
       
+    },
+    async getList4(params){
+      let res = await this.$http.get(
+        "test/question/page",
+        {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2,position:1}}
+      );
+      let list = res.data.result;
+      list.map( (item,index)=>{
+        item.bigPic =''
+        item.smallPic= ''
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.bigPic = item.image_list[0].url;
+        }
+        if (item.image_list[1] && item.image_list[1].type == 1) {
+          item.smallPic = item.image_list[0].url;
+        }
+        if(item.image_list[0].type==0){
+          item.bigPic = item.image_list[0].url
+        }
+        if(item.image_list[0].type==1){
+          item.smallPic = item.image_list[0].url
+        }
+       
+        return item
+      } )
+      
+      this.list4 = list
+      console.log('list4',this.list4)
     },
     async getList1(params){
       let res = await this.$http.get(
@@ -229,6 +258,7 @@ export default {
     },
   },
   mounted(){
+    this.getList4();
     this.getList1();
     this.getList2();
     this.getList3();

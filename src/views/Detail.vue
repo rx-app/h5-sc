@@ -39,16 +39,25 @@
         <div v-html="this.form" class="hidden" />
       <!-- </div>
     </van-overlay> -->
-
-
-    <div v-show="res.is_vip_free == 1 || !(level>0)" class="pay">
-      <div class="left"> ¥ {{price | cy}}</div>
-      <div class="right" @click="show=true">去支付</div>
+    <div v-show="finished">
+      <div v-show="res.is_vip_free == 1 || !(level>0)">
+        <div v-if="this.price>0" class="pay-copy"></div>
+        <div v-if="this.price>0" class="pay">
+          <div class="left"> ¥ {{price | cy}}</div>
+          <div class="right" @click="show=true">去支付</div>
+        </div>
+        <div v-else class="pay-free">
+          <div @click="pay_free" class="go">GO</div>
+        </div>
+      </div>
+      <div v-show="res.is_vip_free == 0 && level>0" class="pay-free">
+        <div @click="vip_pay_free" class="go">GO</div>
+      </div>
     </div>
-    <div v-show="res.is_vip_free == 0 && level>0" class="pay">
-      <div class="left"> ¥ {{0 | cy}}</div>
-      <div class="right" @click="buyAsVIP">VIP免费购买</div>
-    </div>
+    <!-- <div class="loading-layer">
+      <van-loading size="24px" vertical>加载中...</van-loading>
+      <van-overlay class-name="layer" :show="showloading" />
+    </div> -->
   </div>
 </template>
 
@@ -66,12 +75,15 @@ export default {
       res:{},
       index:1,
       show:false,
+      showloading:true,
       timer:null,
       ispay:0,
       form:'',
       pop_show:false,
       uuid:'',
       timer:null,
+      paying:false,
+      finished:false,
     };
   },
   computed:{
@@ -91,20 +103,49 @@ export default {
             },500);
   },
   methods: {
-    pay_success(){
+    pay_success(mid){
       this.$dialog.alert({
-        title:'支付成功！',
-        message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+        // title:'支付成功！',
+        // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+        message:'支付成功'
       }).then(() => {
-            
+            this.$router.push({name:'test',params:{id:this.id,mid}})
         // on close
       })
     },
-    async buyAsVIP(){
+    async vip_pay_free(){
+      // debugger
+      // if(this.paying = true){
+      //   return
+      // }
+      // this.paying = true
       let res = await this.$http.post('order/test_question/paid_user/save',{
         "platform_id": 0,
 	      "ref_ids": [this.id]
       })
+      if(res.code == 200){
+         let res2 = await this.$http.get(`order/test_question/order/question`,{params:{uuid:res.data.uuid}})
+         if(res2.code == 200){
+           this.$router.push({name:'test',params:{id:this.id,mid:res2.data.order_question_list[0].member_test_question_id}})
+         }
+      }
+    },
+    async pay_free(){
+      // debugger
+      // if(this.paying = true){
+      //   return
+      // }
+      // this.paying = true
+      let res = await this.$http.post('order/test_question/free/save',{
+        "platform_id": 0,
+	      "ref_ids": [this.id]
+      })
+      if(res.code == 200){
+         let res2 = await this.$http.get(`order/test_question/order/question`,{params:{uuid:res.data.uuid}})
+         if(res2.code == 200){
+           this.$router.push({name:'test',params:{id:this.id,mid:res2.data.order_question_list[0].member_test_question_id}})
+         }
+      }
     },
     async ali_pay(){
       this.pop_show = true
@@ -151,7 +192,11 @@ export default {
         let payRes = await this.$http.get(`order/test_question/order/status/${this.uuid}`)
         if(payRes.code==200 ){
           if(payRes.data.status == 1){
-            this.pay_success();
+            let res2 = await this.$http.get(`order/test_question/order/question`,{params:{uuid:this.uuid}})
+            if(res2.code == 200){
+              this.pay_success(res2.data.order_question_list[0].member_test_question_id);
+            }
+            
           }else{
             setTimeout(() => {
               check_pay()
@@ -217,7 +262,7 @@ export default {
       // this.$nextTick(()=>{
         this.price = this.res.present_price
       // })
-      
+      this.finished = true
       console.log(this.res)
     }
   },
@@ -299,35 +344,20 @@ export default {
       top: 0;
       z-index: 9;
     }
-    margin-top: 75px;
+    // margin-top: 75px;
     // height: calc(100vh - 50px - 20px - 48px - 75px - 100px + 300px);
     overflow: scroll;
     background: #261a58;
     // border-radius: 53px 53px 0px 0px;
-    padding: 130px 26px 320px;
+    padding: 10px 26px 0px;
     font-size: 32px;
     color: #fff;
     line-height: 52px;
     .des{
       padding: 0 24px;
-      margin-bottom: 130px;
+      // margin-bottom: 130px;
     }
-    .go {
-      width: 153px;
-      height: 153px;
-      background: linear-gradient(
-        90deg,
-        rgba(72, 197, 255, 1),
-        rgba(144, 77, 255, 1)
-      );
-      border-radius: 50%;
-      font-size: 40px;
-      line-height: 153px;
-      text-align: center;
-      position: absolute;
-      left: 300px;
-      bottom: 15vw;
-    }
+    
   }
   .price {
     width: 696px;
@@ -421,6 +451,11 @@ export default {
       }
       // border-radius:13px 13px 0px 0px;
     }
+    .pay-copy{
+      height: 136px;
+      width: 100vw;
+      background:#261a58;
+    }
     .pay{
       display: flex;
       height: 106px;
@@ -442,6 +477,45 @@ export default {
         color: #fff;
         text-align: center;
         background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
+      }
+    }
+    .pay-free{
+      background:#261a58 ;
+      // position: fixed;
+      // width: 100vw;
+      // bottom: 0;
+      display: flex;
+      justify-content: center;
+      padding: 40px 0 180px;
+      .go {
+        color: #fff;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(
+          90deg,
+          rgba(72, 197, 255, 1),
+          rgba(144, 77, 255, 1)
+        );
+        border-radius: 50%;
+        font-size: 40px;
+        line-height: 150px;
+        text-align: center;
+      
+      }
+    }
+    .loading-layer{
+      // position: fixed;
+      // top: 49vh;
+      // left: 48vw;
+      // height: 100vh;
+      // width: 100vw;
+      .layer{
+        background: transparent;
+      }
+      .van-loading{
+        width: 100vw;
+        position: fixed;
+        top:50vh;
       }
     }
 }

@@ -40,7 +40,7 @@ export default new Router({
       component: resolve => require(['@/views/Cate'], resolve)
     },
     {
-      path: '/tips/:id/:mid',
+      path: '/tips/:id?/:mid?',
       name: 'tips',
       props:true,
       component: resolve => require(['@/views/Tips'], resolve)
