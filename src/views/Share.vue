@@ -2,10 +2,16 @@
   <div class="page-tips">
     <!-- 这个页面不要自动格式化，Px会被转换掉 -->
     <div @click="$router.push({name:'my'})" class="back"></div>
-    <!-- <div class="top-title"></div> -->
+    <div class="top-title">测试大厅</div>
     <div class="share-button" @click="saveImg"></div>
+    <div class="score-box">
+      <div class="left">
+        <div class="txt">您的总得分</div>
+        <div class="num">{{res.score}}</div>
+      </div>
+    </div>
     <div class="share-content">
-      <van-circle
+      <!-- <van-circle
         class="circle"
         v-model="currentRate"
         :rate="res.score"
@@ -13,19 +19,31 @@
         :text="res.score.toString()"
         layer-color="transparent"
         :stroke-width="60"
-      />
+      /> -->
 
       <div class="content">
-        <div class="title">{{res.question_name}}</div>
-        <div class="avatar">
-          <img v-if="!!avatar" :src="avatar" alt="">
-          <img v-else src="../assets/img/avatar.png" alt="">
+        <div class="user-info">
+          <div class="avatar">
+            <img v-if="!!avatar" :src="avatar" alt="">
+            <img v-else src="../assets/img/avatar.png" alt="">
+          </div>
+          <div class="center">
+            <div class="name">{{nickname}}</div>
+            <div class="time">完成时间:{{res.finish_at | dd}}</div>
+          </div>
+          <div class="right">
+            <span class="share-button">分享</span>
+          </div>
         </div>
-        <div class="name">{{nickname}}</div>
-        <div class="time">完成时间:{{res.finish_at | dd}}</div>
-        <div class="res">{{res.result_content}}</div>
-        <div class="qrcode"></div>
-        <div class="text">长按保存图片，分享给他人</div>
+        <div class="test-result">
+          <div class="title">{{res.question_name}}</div>
+        
+        
+          <div class="res">{{res.result_content}}</div>
+          <div class="qrcode"></div>
+          <div class="text">长按保存图片，分享给他人</div>
+        </div>
+        
       </div>
     </div>
     <van-popup position="bottom"  v-model="show">
@@ -168,12 +186,12 @@ export default {
   }
 }
 .page-tips {
-  height: 100vh;
+  // height: 100vh;
 
   background: #261a58;
   background-size: cover;
   position: relative;
-  padding: 40px 0 0; // 50px -> 40px
+  // padding: 40px 0 0; // 50px -> 40px
   .back {
     width: 72px;
     height: 68px;
@@ -185,25 +203,37 @@ export default {
   }
   .top-title {
     font-size: 48px;
+    line-height: 68px;
+    padding: 50px 0 0;
     color: rgba(255, 255, 255, 1);
     // line-height:44px;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 20px 0px 75px 96px;
+    margin: 20px 0px 45px 96px;
   }
-  .share-button {
-    width: 34px;
-    height: 34px;
-    position: absolute;
-    background: url("../assets/img/share.png") no-repeat;
-    background-size: contain;
-    top: 67px;
-    right: 28px;
+  // .share-button {
+  //   width: 34px;
+  //   height: 34px;
+  //   position: absolute;
+  //   background: url("../assets/img/share.png") no-repeat;
+  //   background-size: contain;
+  //   top: 67px;
+  //   right: 28px;
+  // }
+  .score-box{
+    .left{
+      padding: 20px 0 0 100px;
+      height: 190px;
+      width: 300px;
+      .txt{color:#fff;font-size:30px;line-height: 30px;margin-bottom: 10px;}
+      .num{color:#fff;font-size:85px;line-height: 80px;}
+
+    }
   }
   .circle {
     width: 200px;
     height: 200px;
     margin-bottom: -50Px;
-    margin-left: calc(50vw - 50Px);
+    // margin-left: calc(50vw - 50Px);
   }
   .content {
     // margin-top: 270px;
@@ -215,37 +245,64 @@ export default {
     font-size: 32px;
     color: #fff;
     line-height: 52px;
-    padding: 130px 72px 300px;
+    padding: 50px 22px 300px;
     text-align: center;
+    .user-info{
+      display: flex;
+      .avatar {
+          width: 136px;
+          height: 106px;
+          border-radius: 50%;
+          // background: url('../assets/img/img1.png') no-repeat;
+          background-size: cover;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+          padding-left: 30px;;
+        }
+        .center{
+          margin-left: 25px;
+          .name {
+              font-size: 36px;
+              line-height: 36px;
+              color: #fff;
+              margin-bottom: 20px;
+              // font-weight: bold;
+              text-align: left;
+              padding-top: 20px;
+            }
+            .time {
+              font-size: 24px;
+              color: rgba(255, 255, 255, 0.39);
+              margin-bottom: 72px;
+            }
+        }
+        .right{
+          flex:1;
+          text-align: right;
+          padding: 25px 40px 0 0;
+          .share-button{
+            color:#fff;
+            font-size: 32px;
+            padding: 10px 25px;
+            line-height: 32px;
+            background: linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
+            border-radius: 0 26px 26px 26px;
+          }
+
+        }
+        border-bottom: 1px solid rgb(78,25,157);
+    }
     .title {
       font-size: 40px;
       color: #fff;
       margin-bottom: 57px;
+      margin-top: 60px;
     }
-    .avatar {
-      width: 106px;
-      height: 106px;
-      border-radius: 50%;
-      // background: url('../assets/img/img1.png') no-repeat;
-      background-size: cover;
-      margin-bottom: 25px;
-      margin-left: 250px;
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-      }
-    }
-    .name {
-      font-size: 40px;
-      color: #fff;
-      margin-bottom: 34px;
-    }
-    .time {
-      font-size: 24px;
-      color: rgba(255, 255, 255, 0.39);
-      margin-bottom: 72px;
-    }
+    
+    
     .res {
       font-size: 32px;
       color: #fff;
@@ -253,16 +310,18 @@ export default {
       line-height: 52px;
     }
     .qrcode {
-      width: 234px;
-      height: 234px;
+      width: 200px;
+      height: 200px;
       background: url("../assets/img/qrcode.png") no-repeat;
+      background-size: 100% 100%;
       margin-bottom: 25px;
-      margin-left: 187px;
+      margin: auto;
     }
-    .title {
-      font-size: 40px;
+    .text {
+      font-size: 32px;
+      line-height: 32px;
       color: #fff;
-      margin-bottom: 57px;
+      margin-top: 27px;
     }
   }
 }
