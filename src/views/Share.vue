@@ -192,6 +192,7 @@ export default {
   background-size: cover;
   position: relative;
   // padding: 40px 0 0; // 50px -> 40px
+  // padding-top: 7px;
   .back {
     width: 72px;
     height: 68px;
@@ -208,7 +209,7 @@ export default {
     color: rgba(255, 255, 255, 1);
     // line-height:44px;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 20px 0px 45px 96px;
+    margin: 0px 0px 45px 96px;  //页面的第一个子元素加了margin-top，导致页面顶部有白条
   }
   // .share-button {
   //   width: 34px;
