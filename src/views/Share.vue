@@ -105,7 +105,7 @@ export default {
 
       const width = dom.offsetWidth; // 可见屏幕的宽
       const height = dom.offsetHeight; // 可见屏幕的高
-      const scale =1; window.devicePixelRatio/2; // 设备的devicePixelRatio
+      const scale =6; window.devicePixelRatio/2; // 设备的devicePixelRatio
 
       // 将Canvas画布放大scale倍，然后放在小的屏幕里，解决模糊问题
       Canvas.width = width * scale;
