@@ -32,7 +32,7 @@
             <div class="time">完成时间:{{res.finish_at | dd}}</div>
           </div>
           <div class="right">
-            <span class="share-button">分享</span>
+            <span class="share-button"  @click="saveImg">分享</span>
           </div>
         </div>
         <div class="test-result">
@@ -168,7 +168,7 @@ export default {
         color: #ADA7C1;
         font-size: 40px;
         position: absolute;
-        top:32px;
+        top:2px;
         right: 32px;
       }
   .top{
