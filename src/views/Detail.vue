@@ -91,18 +91,33 @@ export default {
       return  localStorage.getItem('level')*1
     },
   },
-  created(){
-    this.timer = setInterval(() =>{
-                //超时处理
-                //WeixinJSBridge加载需要1-2秒  WeixinJSBridge is not defined
-                if (typeof WeixinJSBridge != "undefined" && this.ispay == 0) {
-                    this.ispay = 1
-                    this.jsApiCall(this.oqqq)
-                    clearInterval(this.timer)
-                }
-            },500);
+  async created(){
+    // this.timer = setInterval(() =>{
+    //             //超时处理
+    //             //WeixinJSBridge加载需要1-2秒  WeixinJSBridge is not defined
+    //             if (typeof WeixinJSBridge != "undefined" && this.ispay == 0) {
+    //                 this.ispay = 1
+    //                 this.jsApiCall(this.oqqq)
+    //                 clearInterval(this.timer)
+    //             }
+    //         },500);
+
+    let code = this.getUrlParam('code')
+    // this.mobile = code
+    // alert(`code: ${code}`)
+    if(code){
+      let openid = await this.getOpenid(code)
+      // alert(`openid: ${openid}`)
+       let res = await this.wLongin(openid)
+    }
   },
   methods: {
+    getUrlParam(name) {//封装方法
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg); //匹配目标参数
+      if (r != null) return unescape(r[2]);
+      return null; //返回参数值
+    },
     pay_success(mid){
       this.$dialog.alert({
         // title:'支付成功！',
@@ -190,8 +205,10 @@ export default {
         if(res.code == 200){
           let r = res.data
           this.uuid = res.data.uuid;
+          alert('url:'+res.data.url)
           let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}`
-          let ulr = `${res.data.url}&redirect_uri=${encodeURIComponent(back_url)}`
+          let ulr = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
+          window.location.href = url;
         }
     },
     async weixin_pay(){
