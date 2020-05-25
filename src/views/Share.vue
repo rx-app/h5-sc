@@ -56,7 +56,7 @@
         </div>
         <span @click="show=false" class="cha iconfont icon-cha"></span>
         <div class="img-box">
-          <img class="share-img" src="" alt="">
+          <img class="share-img" :src="src" alt="">
           
         </div>
       </div>
@@ -76,6 +76,7 @@ export default {
       score: "80",
       res: {},
       show:false,
+      src:''
     };
   },
   computed: {
@@ -120,14 +121,16 @@ export default {
         width: width + "px",
         hegiht: height + "px"
       }).then(canvas => {
-        const context = canvas.getContext("2d");
-        // 关闭抗锯齿形
-        context.mozImageSmoothingEnabled = false;
-        context.webkitImageSmoothingEnabled = false;
-        context.msImageSmoothingEnabled = false;
-        context.imageSmoothingEnabled = false;
-        // canvas转化为图片
-        const img = this.canvas2Image(canvas, canvas.width, canvas.height);
+        this.scr= canvas.toDataURL(); 
+        // const context = canvas.getContext("2d");
+        // // 关闭抗锯齿形
+        // context.mozImageSmoothingEnabled = false;
+        // context.webkitImageSmoothingEnabled = false;
+        // context.msImageSmoothingEnabled = false;
+        // context.imageSmoothingEnabled = false;
+        // // canvas转化为图片
+        // const img = this.canvas2Image(canvas, canvas.width, canvas.height);
+        
         // document.body.appendChild(img);
         // img.style.cssText =
         //   "width:100%;height:100%;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;";
