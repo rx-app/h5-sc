@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="right">
-            <img :src="item.bigPic" alt="">
+            <img :src="item.pic" alt="">
           </div>
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
@@ -139,20 +139,10 @@ export default {
       let list = res.data.result;
       this.loaded = true;
       list.map( (item,index)=>{
-        item.bigPic =''
-        item.smallPic= ''
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.bigPic = item.image_list[0].url;
-        }
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.smallPic = item.image_list[0].url;
-        }
-        if(item.image_list[0].type==0){
-          item.bigPic = item.image_list[0].url
-        }
-        if(item.image_list[0].type==1){
-          item.smallPic = item.image_list[0].url
-        }
+        let type = item.image_list.find(v=>{
+          return v.type==0
+        })
+        item.pic = type.url
        
         return item
       } )

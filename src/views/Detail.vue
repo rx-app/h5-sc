@@ -1,6 +1,6 @@
 <template>
   <div class="page-tips">
-    <router-link tag="div" :to="{name:'main'}" class="back"></router-link>
+    <div @click="$router.go(-1)" class="back"></div>
     <div class="title">{{res.name}}</div>
     <!-- <div class="tips-bar">
       <img :src="res.bigPic" alt="">
@@ -169,26 +169,75 @@ export default {
           document.querySelector('input[type=submit]').click()
         })
       }
+      this.check_pay()
       
       console.log(res.data)
     },
-    async weixin_pay(){
+    async h5_pay(){
       let res = await this.$http.post(
-        `pay/wxpay/jsapi_prepay`,{
-          
-          "number": 1,
-          "package_key": "num_1",
-          "package_type": 1,
-          "platform_id": 0,
-          "ref_ids": [this.id],
-          "total_fee": 1
+          `pay/wxpay/h5_url`,{
+            
+            "number": 1,
+            "package_key": "num_1",
+            "package_type": 1,
+            "platform_id": 0,
+            "ref_ids": [this.id],
+            "total_fee": 1
 
+          }
+          
+        );
+        if(res.code == 200){
+          let r = res.data
+          this.uuid = res.data.uuid;
+          let back_url = `${location.href}`
+          let ulr = `${res.data.url}&redirect_uri=${encodeURIComponent()}`
         }
+    },
+    async weixin_pay(){
+      if(!this.is_weixn){
+        let res = await this.$http.post(
+          `pay/wxpay/jsapi_prepay`,{
+            
+            "number": 1,
+            "package_key": "num_1",
+            "package_type": 1,
+            "platform_id": 0,
+            "ref_ids": [this.id],
+            "total_fee": 1
+
+          }
+          
+        );
+        let r = res.data
+        this.uuid = res.data.uuid;
         
-      );
-      let r = res.data
-      this.uuid = res.data.uuid;
-      let check_pay = async()=>{
+        
+        
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            "appId":r.app_id,     //公众号名称，由商户传入     
+          "timeStamp":r.time_stamp,         //时间戳，自1970年以来的秒数     
+          "nonceStr":r.nonce_str, //随机串     
+          "package":r.packages,     
+          "signType":r.sign_type,         //微信签名方式：     
+          "paySign":r.pay_sign //微信签名 
+
+          },
+          function(res){
+            // alert(JSON.stringify(res))
+          if(res.err_msg == "get_brand_wcpay_request:ok" ){
+            // alert('支付回调')
+          } 
+        }); 
+        this.check_pay()
+      }else{
+        this.h5_pay()
+      }
+      
+      console.log(res)
+    },
+    async check_pay(){
         let payRes = await this.$http.get(`order/test_question/order/status/${this.uuid}`)
         if(payRes.code==200 ){
           if(payRes.data.status == 1){
@@ -199,30 +248,18 @@ export default {
             
           }else{
             setTimeout(() => {
-              check_pay()
+              this.check_pay()
             }, 2000);
           }
         }
-      } 
-      check_pay()
-      
-      WeixinJSBridge.invoke(
-        'getBrandWCPayRequest', {
-           "appId":r.app_id,     //公众号名称，由商户传入     
-         "timeStamp":r.time_stamp,         //时间戳，自1970年以来的秒数     
-         "nonceStr":r.nonce_str, //随机串     
-         "package":r.packages,     
-         "signType":r.sign_type,         //微信签名方式：     
-         "paySign":r.pay_sign //微信签名 
-
-        },
-        function(res){
-          // alert(JSON.stringify(res))
-        if(res.err_msg == "get_brand_wcpay_request:ok" ){
-          // alert('支付回调')
-        } 
-    }); 
-      console.log(res)
+      }, 
+    is_weixn(){
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
     },
     buyItem(){
       

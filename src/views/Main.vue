@@ -10,7 +10,7 @@
       <van-swipe class="banner" :autoplay="3000" indicator-color="white">
 
         <van-swipe-item v-for="(item,index) in list4" :key="index"> 
-          <div @click="getDetail(itme)" class="img-container"> <img :src="item.smallPic" alt=""> </div>
+          <div @click="getDetail(itme)" class="img-container"> <img :src="item.pic" alt=""> </div>
         </van-swipe-item>
       </van-swipe>
       <!-- <Swiper></Swiper> -->
@@ -26,7 +26,7 @@
           <div class="nav-items nav1">
             <div v-for="(item,index) in list1" :key="index" class="item " :class="`item${index+1}`">
               <div class="item-icon">
-                <img :src="item.smallPic" alt />
+                <img :src="item.pic" alt />
               </div>
               <div class="title">{{item.name}}</div>
               <div class="price">¥{{item.present_price | cy}}</div>
@@ -43,10 +43,10 @@
           <div @click="$router.push({name:'cate'})" class="more"></div>
           <div class="nav-items nav2">
             <div @click="getDetail(list2[0])" class="item left">
-              <img :src="list2[0].bigPic" alt="">
+              <img :src="list2[0].pic" alt="">
             </div>
             <div @click="getDetail(list2[1])"  class="item right">
-              <img :src="list2[1].bigPic" alt="">
+              <img :src="list2[1].pic" alt="">
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
                 </div>
               </div>
               <div class="right">
-                <img :src="item.bigPic" alt="">
+                <img :src="item.pic" alt="">
               </div>
             </div>
             
@@ -129,27 +129,31 @@ export default {
       }
       
     },
-    async getList4(params){
+    async getList4(params){  // 轮播图片 type =1
       let res = await this.$http.get(
         "test/question/page",
         {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2,position:1}}
       );
       let list = res.data.result;
       list.map( (item,index)=>{
-        item.bigPic =''
-        item.smallPic= ''
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.bigPic = item.image_list[0].url;
-        }
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.smallPic = item.image_list[0].url;
-        }
-        if(item.image_list[0].type==0){
-          item.bigPic = item.image_list[0].url
-        }
-        if(item.image_list[0].type==1){
-          item.smallPic = item.image_list[0].url
-        }
+        // item.bigPic =''
+        // item.smallPic= ''
+        let type1 = item.image_list.find(v=>{
+          return v.type==1
+        })
+        item.pic= type1.url
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.bigPic = item.image_list[0].url;
+        // }
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.smallPic = item.image_list[0].url;
+        // }
+        // if(item.image_list[0].type==0){
+        //   item.bigPic = item.image_list[0].url
+        // }
+        // if(item.image_list[0].type==1){
+        //   item.smallPic = item.image_list[0].url
+        // }
        
         return item
       } )
@@ -157,27 +161,31 @@ export default {
       this.list4 = list
       console.log('list4',this.list4)
     },
-    async getList1(params){
+    async getList1(params){  // 推荐图片 type = 2 
       let res = await this.$http.get(
         "test/question/page",
         {params:{page_index:1,page_size:3,order_type:'ASC',order_by:2,position:2}}
       );
       let list = res.data.result;
       list.map( (item,index)=>{
-        item.bigPic =''
-        item.smallPic= ''
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.bigPic = item.image_list[0].url;
-        }
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.smallPic = item.image_list[0].url;
-        }
-        if(item.image_list[0].type==0){
-          item.bigPic = item.image_list[0].url
-        }
-        if(item.image_list[0].type==1){
-          item.smallPic = item.image_list[0].url
-        }
+        let type2 = item.image_list.find(v=>{
+          return v.type==2
+        })
+        item.pic= type2.url
+        // item.bigPic =''
+        // item.smallPic= ''
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.bigPic = item.image_list[0].url;
+        // }
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.smallPic = item.image_list[0].url;
+        // }
+        // if(item.image_list[0].type==0){
+        //   item.bigPic = item.image_list[0].url
+        // }
+        // if(item.image_list[0].type==1){
+        //   item.smallPic = item.image_list[0].url
+        // }
        
         return item
       } )
@@ -185,31 +193,37 @@ export default {
       this.list1 = list
       console.log('list1',this.list1)
     },
-    async getList2(params){
+    async getList2(params){   // 默认type = 0
       let res = await this.$http.get(
         "test/question/page",
         {params:{page_index:1,page_size:2,order_type:'ASC',order_by:0,position:3}}
       );
       // this.page_index++
       let list = res.data.result;
+      
       list.map( (item,index)=>{
-        item.bigPic =''
-        item.smallPic= ''
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.bigPic = item.image_list[0].url;
-        }
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.smallPic = item.image_list[0].url;
-        }
-        if(item.image_list[0].type==0){
-          item.bigPic = item.image_list[0].url
-        }
-        if(item.image_list[0].type==1){
-          item.smallPic = item.image_list[0].url
-        }
+        let type = item.image_list.find(v=>{
+          return v.type==0
+        })
+        item.pic = type.url
+        // item.bigPic =''
+        // item.smallPic= ''
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.bigPic = item.image_list[0].url;
+        // }
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.smallPic = item.image_list[0].url;
+        // }
+        // if(item.image_list[0].type==0){
+        //   item.bigPic = item.image_list[0].url
+        // }
+        // if(item.image_list[0].type==1){
+        //   item.smallPic = item.image_list[0].url
+        // }
        
         return item
       } )
+      
       this.list2 = list;
       console.log(this.list2)
     },
@@ -226,20 +240,24 @@ export default {
       let list = res.data.result;
       this.page_index++
       list.map( (item,index)=>{
-        item.bigPic =''
-        item.smallPic= ''
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.bigPic = item.image_list[0].url;
-        }
-        if (item.image_list[1] && item.image_list[1].type == 1) {
-          item.smallPic = item.image_list[0].url;
-        }
-        if(item.image_list[0].type==0){
-          item.bigPic = item.image_list[0].url
-        }
-        if(item.image_list[0].type==1){
-          item.smallPic = item.image_list[0].url
-        }
+        // item.bigPic =''
+        // item.smallPic= ''
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.bigPic = item.image_list[0].url;
+        // }
+        // if (item.image_list[1] && item.image_list[1].type == 1) {
+        //   item.smallPic = item.image_list[0].url;
+        // }
+        // if(item.image_list[0].type==0){
+        //   item.bigPic = item.image_list[0].url
+        // }
+        // if(item.image_list[0].type==1){
+        //   item.smallPic = item.image_list[0].url
+        // }
+        let type = item.image_list.find(v=>{
+          return v.type==0
+        })
+        item.pic = type.url
        
         return item
       } )
