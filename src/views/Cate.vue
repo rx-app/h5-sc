@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="right">
-            <img :src="item.pic" alt="">
+            <img :src="item.bigPic" alt="">
           </div>
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
