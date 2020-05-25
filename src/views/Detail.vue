@@ -209,7 +209,8 @@ export default {
           alert('url:'+res.data.url)
           let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}&payback=1`
           let ulr = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
-          window.location.href = url;
+          window.location.replace(url)
+          // window.location.href = url;
         }
     },
     async weixin_pay(){
