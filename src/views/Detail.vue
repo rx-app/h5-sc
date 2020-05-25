@@ -101,14 +101,15 @@ export default {
     //                 clearInterval(this.timer)
     //             }
     //         },500);
-
-    let code = this.getUrlParam('code')
+    let payback = this.$route.query.payback
     // this.mobile = code
     // alert(`code: ${code}`)
-    if(code){
-      let openid = await this.getOpenid(code)
-      // alert(`openid: ${openid}`)
-       let res = await this.wLongin(openid)
+    if(payback){
+      this.uuid=this.$route.query.uuid
+      this.id=this.$route.query.id
+      alert('h5支付完成')
+      alert('uuid:'+this.uuid)
+      alert('id:'+this.id)
     }
   },
   methods: {
@@ -206,7 +207,7 @@ export default {
           let r = res.data
           this.uuid = res.data.uuid;
           alert('url:'+res.data.url)
-          let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}`
+          let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}&payback=1`
           let ulr = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
           window.location.href = url;
         }
