@@ -28,7 +28,7 @@
               <div class="item-icon">
                 <img :src="item.pic" alt />
               </div>
-              <div class="title">{{item.name}}</div>
+              <div class="title">{{item.category_name}}</div>
               <div class="price">¥{{item.present_price | cy}}</div>
               <div class="button" @click="getDetail(item)" >去看看</div>
             </div>

@@ -190,8 +190,8 @@ export default {
         if(res.code == 200){
           let r = res.data
           this.uuid = res.data.uuid;
-          let back_url = `${location.href}`
-          let ulr = `${res.data.url}&redirect_uri=${encodeURIComponent()}`
+          let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}`
+          let ulr = `${res.data.url}&redirect_uri=${encodeURIComponent(back_url)}`
         }
     },
     async weixin_pay(){
