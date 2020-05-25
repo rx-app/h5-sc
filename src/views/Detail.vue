@@ -208,15 +208,15 @@ export default {
           this.uuid = res.data.uuid;
           alert('url:'+res.data.url)
           let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}&payback=1`
-          alert('back_url'+back_url)
-          let ulr = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
+          alert('back_url:'+back_url)
+          let url = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
           alert('url2:'+url)
           window.location.replace(url)
           // window.location.href = url;
         }
     },
     async weixin_pay(){
-      if(!this.is_weixn){
+      if(this.is_weixn()){
         let res = await this.$http.post(
           `pay/wxpay/jsapi_prepay`,{
             
