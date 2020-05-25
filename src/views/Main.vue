@@ -326,6 +326,7 @@ export default {
       img{
         width: 100%;
         height: 100%;
+        border-radius: 3vw;
         // background: url('../assets/img/banner.png') no-repeat;
         // background-size: cover;
         // position: absolute;  //不加会背景重叠
@@ -415,6 +416,9 @@ export default {
               }
               .title{
                 height: 48px;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
               }
               .price{
                 margin:6px 0 22px;
@@ -471,6 +475,7 @@ export default {
             img{
               width: 320px;
               height: 200px;
+              border-radius: 10px;
             }
           }
           // .left{background: url('../assets/img/test2.png') no-repeat;background-size: cover;}

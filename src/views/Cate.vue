@@ -337,10 +337,18 @@ export default {
               width: 363px;
               margin-right: 27px;
               .title{
+                // display: block;
                 font-size: 32px;
-                vertical-align: top;
-                line-height: 40px;
+                // vertical-align: top;
+                line-height: 41px;   //这里多给1px， 转化为rem 时，精度丢失，导致字超出后，下一行字的顶部会显示出来
+                text-overflow:ellipsis;
+// white-space: nowrap;
+                width: 363px;
                 height: 80px;
+                display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
               }
               .cate{
                 width:175px;
