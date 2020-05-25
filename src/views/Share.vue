@@ -56,7 +56,7 @@
         </div>
         <span @click="show=false" class="cha iconfont icon-cha"></span>
         <div class="img-box">
-          <img class="share-img" :src="src" alt="">
+          <img class="share-img" :src="urlImg" alt="">
           
         </div>
       </div>
@@ -76,7 +76,7 @@ export default {
       score: "80",
       res: {},
       show:false,
-      src:''
+      urlImg:''
     };
   },
   computed: {
@@ -98,6 +98,18 @@ export default {
       this.show = true
       // 想要保存的图片节点
       const dom = document.querySelector(".content");
+
+      html2canvas(document.querySelector(".content"), {
+          allowTaint: false,
+          useCORS: true
+        }).then(canvas => { 
+          console.log(canvas.toDataURL())
+          // alert(222222)
+          // let dataUrl = canvas.toDataURL("image/jpeg");
+          this.urlImg = canvas.toDataURL(); 
+        }); 
+
+        return
 
       // 创建一个新的canvas
       const Canvas = document.createElement("canvas");
@@ -121,16 +133,14 @@ export default {
         width: width + "px",
         hegiht: height + "px"
       }).then(canvas => {
-        this.scr= canvas.toDataURL(); 
-        // const context = canvas.getContext("2d");
-        // // 关闭抗锯齿形
-        // context.mozImageSmoothingEnabled = false;
-        // context.webkitImageSmoothingEnabled = false;
-        // context.msImageSmoothingEnabled = false;
-        // context.imageSmoothingEnabled = false;
-        // // canvas转化为图片
-        // const img = this.canvas2Image(canvas, canvas.width, canvas.height);
-        
+        const context = canvas.getContext("2d");
+        // 关闭抗锯齿形
+        context.mozImageSmoothingEnabled = false;
+        context.webkitImageSmoothingEnabled = false;
+        context.msImageSmoothingEnabled = false;
+        context.imageSmoothingEnabled = false;
+        // canvas转化为图片
+        const img = this.canvas2Image(canvas, canvas.width, canvas.height);
         // document.body.appendChild(img);
         // img.style.cssText =
         //   "width:100%;height:100%;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;";
