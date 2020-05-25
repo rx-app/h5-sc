@@ -245,8 +245,9 @@ export default {
     background: #261a58;
     .left{
       padding: 20px 0 0 100px;
-      height: 190px;
+      height: 250px;
       width: 300px;
+
       .txt{color:#fff;font-size:30px;line-height: 30px;margin-bottom: 10px;}
       .num{color:#fff;font-size:85px;line-height: 80px;}
 
@@ -258,13 +259,20 @@ export default {
     margin-bottom: -50Px;
     // margin-left: calc(50vw - 50Px);
   }
+  .share-content{
+    margin-top: -60px;
+    padding-top: 60px;
+    border-radius: 53px 53px 0px 0px;
+    background: #400e8d;
+  }
   .content {
     // margin-top: 270px;
     // height: calc(100vh - 50px - 20px - 48px - 270px + 100px + 50Px);
+    
     background: #400e8d;
     // overflow: scroll;
-    border-radius: 53px 53px 0px 0px;
-    padding: 180px 50px;
+    
+    padding: 120px 50px;
     font-size: 32px;
     color: #fff;
     line-height: 52px;
