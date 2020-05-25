@@ -208,6 +208,7 @@ export default {
           this.uuid = res.data.uuid;
           alert('url:'+res.data.url)
           let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}&payback=1`
+          alert('back_url'+back_url)
           let ulr = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
           alert('url2:'+url)
           window.location.replace(url)
