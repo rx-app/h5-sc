@@ -30,7 +30,9 @@
       <span @click="searchByOrder(1)" :class="{active:order_index==1}">按时间</span>
       <span @click="searchByOrder(2)" :class="{active:order_index==2}">按热度</span>
     </div>
+    <div >
     <van-list
+    v-show="count>0"
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
@@ -55,12 +57,13 @@
       </div>
     <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
   </van-list>
+  </div>
   <Totop></Totop>
   <!-- <div v-if="(!list.length && loaded)" class="blank">
     <div class="blank-img"></div>
     <div class="blank-txt">暂无数据</div>
   </div> -->
-  <!-- <Blank :list="list" :loaded="loaded" ></Blank> -->
+  <Blank :list="list" :loaded="loaded" ></Blank>
   
 
     
@@ -138,6 +141,7 @@ export default {
 
       let list = res.data.result;
       this.loaded = true;
+      if(!!list){
       list.map( (item,index)=>{
         let type = item.image_list.find(v=>{
           return v.type==0
@@ -147,6 +151,7 @@ export default {
         return item
       } )
       this.list = [...this.list,...list]
+      }
       this.count = res.data.total_count;
       this.loading = false;
       if(this.list.length>=this.count){
