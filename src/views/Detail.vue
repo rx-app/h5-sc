@@ -7,7 +7,7 @@
     </div> -->
     <div class="tips-bottom">
       <div class="top-cover"></div>
-      <div v-html="res.content" class="des">
+      <div v-html="res.content" style="line-height: normal;" class="des">
         <!-- {{res.content}} -->
       </div>
       <!-- <div @click="buyItem" class="price">
@@ -365,12 +365,13 @@ export default {
     left: 0px;
   }
   .title {
-    font-size: 48px;
+    font-size: 40px;
+    line-height: 44px;
     color: rgba(255, 255, 255, 1);
     // line-height:44px;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px 96px 75px 96px;
-    text-align: center;
+    text-align: left;
   }
   .tips-bar {
     position: absolute;

@@ -3,240 +3,258 @@
     <div tag="div" @click="back" class="back"></div>
     <div class="title">测试大厅</div>
     <!-- <div class="process-bar"></div> -->
-    <van-progress v-if="length" :percentage="(pecent)/length * 100" stroke-width="8" 
-  pivot-color="#7232dd"
-  color="linear-gradient(to right, #be99ff, #7232dd)" />
+    <van-progress
+      v-if="length"
+      :percentage="((pecent)/length * 100).toFixed(0)"
+      stroke-width="8"
+      pivot-color="#7232dd"
+      color="linear-gradient(to right, #be99ff, #7232dd)"
+    />
     <div class="info">
-      
-      <span class="all"><span class="left">第<span class="index">{{current_index+1}}</span>题</span>/共{{length}}题目</span>
+      <span class="all">
+        <span class="left">
+          第
+          <span class="index">{{current_index+1}}</span>题
+        </span>
+        /共{{length}}题目
+      </span>
     </div>
-    
-      <div v-if="list[current_index]" class="question">{{list[current_index].name}}</div>
-    <div  v-if="list[current_index]" class="box">
-      <div @click="select(item,current_index,index)"  v-for="(item,index)  in  list[current_index].option_list" :key="index" class="ans">
-        <div :class="{on:index==list[current_index].selectIndex}" class="option"><span>{{letter[index]}}</span></div>
-        <div class="text">
-          {{item.name}}
 
+    <div v-if="list[current_index]" class="question">{{list[current_index].name}}</div>
+    <div v-if="list[current_index]" class="box">
+      <div
+        @click="select(item,current_index,index)"
+        v-for="(item,index)  in  list[current_index].option_list"
+        :key="index"
+        class="ans"
+      >
+        <div :class="{on:index==list[current_index].selectIndex}" class="option">
+          <span>{{letter[index]}}</span>
         </div>
+        <div class="text">{{item.name}}</div>
         <div class="button" :class="{on:index==list[current_index].selectIndex}">
           <!-- <span v-show="index==list[current_index].selectIndex" class="iconfont icon-1"></span> -->
         </div>
       </div>
-      <div v-show="current_index>0" @click="current_index--&&pecent--" class="pre">
-        上一题
-      </div>
+      <div v-show="current_index>0" @click="current_index--&&pecent--" class="pre">上一题</div>
     </div>
-    
-    
-      
   </div>
 </template>
 
 <script>
-import md5 from 'js-md5';
+import md5 from "js-md5";
 
 export default {
-  props:{id:0,mid:0},
+  props: { id: 0, mid: 0 },
   data() {
     return {
       // id:24,
-      list:[],
-      current_index:0,
-      letter:['A','B','C','D','E','F','G','H'],
-      length:0,
-      pecent:0,
-      result:{
-        "member_test_question_id": 0,
-        "option_list": [
+      list: [],
+      current_index: 0,
+      letter: ["A", "B", "C", "D", "E", "F", "G", "H"],
+      length: 0,
+      pecent: 0,
+      result: {
+        member_test_question_id: 0,
+        option_list: [
           {
-            "question_item_id": 0,
-            "question_item_option_id": 0
+            question_item_id: 0,
+            question_item_option_id: 0
           }
         ]
-      },
+      }
     };
   },
   methods: {
-    back(){
-      this.$dialog.confirm({
-        // title:'提示',
-        message: '退出后，下次要全部重新回答，确定吗？',
-      }).then(() => {
-            // localStorage.setItem('nickname','')
-            // localStorage.setItem('gender','')
-            // localStorage.setItem('mobile','')
-            // localStorage.setItem('email','')
-            // localStorage.setItem('avatar','')
-            // localStorage.setItem('level','')
-            // localStorage.setItem('token','')
-            // this.$router.push({name:'login'})
-            this.$router.push({name:'my'})
-        // on close
-      }).catch(()=>{
-
-      });
-      
+    back() {
+      this.$dialog
+        .confirm({
+          // title:'提示',
+          message: "退出后将清空本次操作！"
+        })
+        .then(() => {
+          // localStorage.setItem('nickname','')
+          // localStorage.setItem('gender','')
+          // localStorage.setItem('mobile','')
+          // localStorage.setItem('email','')
+          // localStorage.setItem('avatar','')
+          // localStorage.setItem('level','')
+          // localStorage.setItem('token','')
+          // this.$router.push({name:'login'})
+          this.$router.push({ name: "my" });
+          // on close
+        })
+        .catch(() => {});
     },
-    async select(item,cindex,index){
-      
-      console.log(this.result)
-      this.list[cindex].selectIndex=index
-      console.log(this.list)
-      this.result.option_list[this.current_index].question_item_id = this.list[this.current_index].id
-      this.result.option_list[this.current_index].question_item_option_id = item.id
-      this.pecent++
-      if((this.current_index+1) == this.length){
-        let res =await this.addResult()
-        
-        if(res.code==200){
-          this.$router.push({name:'share',params:{id:this.id,mid:this.mid}})
+    async select(item, cindex, index) {
+      console.log(this.result);
+      this.list[cindex].selectIndex = index;
+      console.log(this.list);
+      this.result.option_list[this.current_index].question_item_id = this.list[
+        this.current_index
+      ].id;
+      this.result.option_list[this.current_index].question_item_option_id =
+        item.id;
+      this.pecent++;
+      if (this.current_index + 1 == this.length) {
+        let res = await this.addResult();
+
+        if (res.code == 200) {
+          this.$router.push({
+            name: "share",
+            params: { id: this.id, mid: this.mid }
+          });
           // this.$dialog.alert({
           //   title:'答题结束！',
           //   message: '请到<span style="color:#f26161">【我的】</span>里面查看',
           // }).then(() => {
-                
+
           //   // on close
           // })
         }
-        
-      }else{
-        
-        this.current_index ++;
-        
+      } else {
+        this.current_index++;
       }
-
     },
-    async addResult(){
+    async addResult() {
       let res = await this.$http.post(
-        `test/question//result/create`,this.result
+        `test/question//result/create`,
+        this.result
       );
       return res;
     },
-    async getData(){
-      let res = await this.$http.get(
-        `test/question/${this.id}`
-      );
-      console.log(res)
+    async getData() {
+      let res = await this.$http.get(`test/question/${this.id}`);
+      console.log(res);
       // debugger
-      let list = res.data.item_list
-      list = list.map(v=>{
+      let list = res.data.item_list;
+      list = list.map(v => {
         v.selectIndex = -1;
-        return v
-      })
-      this.list = list
+        return v;
+      });
+      this.list = list;
       this.result.member_test_question_id = this.mid;
-      this.length = this.list.length
-      this.result.option_list=Array( this.length ).fill({
-            // "question_item_id": 0,
-            // "question_item_option_id": 0
-          })
-      
-      this.result.option_list = this.result.option_list.map(v=>{
-        return  {
-            "question_item_id": 0,
-            "question_item_option_id": 0
-          }//JSON.parse( JSON.stringify(v) )
-      })
+      this.length = this.list.length;
+      this.result.option_list = Array(this.length).fill({
+        // "question_item_id": 0,
+        // "question_item_option_id": 0
+      });
+
+      this.result.option_list = this.result.option_list.map(v => {
+        return {
+          question_item_id: 0,
+          question_item_option_id: 0
+        }; //JSON.parse( JSON.stringify(v) )
+      });
       // this.result.option_list[0].question_item_id =2;
       // console.log(this.list)
       // console.log(this.result.option_list[1].question_item_id)
       // console.log(this.result)
     }
   },
-  mounted(){
+  mounted() {
     this.getData();
   }
 };
 </script>
-
+<style >
+.van-progress__pivot {
+  line-height: 40px;
+  font-size: 14px;
+}
+</style>
 <style lang="scss" scoped>
-.page-test{
+.page-test {
   height: 100vh;
-  
-  background: #261A58;
+
+  background: #261a58;
   background-size: cover;
   position: relative;
-  padding: 40px 28px 0;  //ios 6sp和安卓上 title位置偏上 50px -> 40px
-  .back{
-    width:72px;
-    height:68px;
-    background: url('../assets/img/return.png') no-repeat;
+  padding: 40px 28px 0; //ios 6sp和安卓上 title位置偏上 50px -> 40px
+  .back {
+    width: 72px;
+    height: 68px;
+    background: url("../assets/img/return.png") no-repeat;
     background-size: cover;
     position: absolute;
-    top:50px;
+    top: 50px;
     left: 0px;
   }
-  .title{
-    font-size:48px;
-    color:rgba(255,255,255,1);
+  .title {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 1);
     // line-height:44px;
-    text-shadow:0px 2px 5px rgba(0, 0, 0, 0.3);
-    margin:20px 0px 75px 96px;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px 0px 75px 96px;
   }
-  .process-bar{
-    width:696px;
-    height:13px;
-    background:rgba(51,20,115,1);
-    border-radius:7px;
+  .process-bar {
+    width: 696px;
+    height: 13px;
+    background: rgba(51, 20, 115, 1);
+    border-radius: 7px;
   }
-  .info{
-    margin:35px 0 80px 0px;
-    color:#AFA0D2;
+  .info {
+    margin: 35px 0 80px 0px;
+    color: #afa0d2;
     font-size: 24px;
     text-align: center;
-    .left{
-      color:#fff;
-      .index{color: #FFD02C;}
-    }
-  }
-  .box{// 这里的写法可能有问题，不确定问题的高度
-    height: calc( 100vh - 50px - 20px - 48px - 50px - 24px - 230px);
-    overflow-y: scroll;
-    padding-bottom: 300px;
-    overflow-x:hidden;
-  }
-  .question{
-    font-size: 32px!important;
-    color:#fff;
-    line-height: 52px!important;
-    width: 515px;
-    margin-left: 90px;
-    text-align: center;
-    margin-bottom: 40px;
-    .on{
-      span:before{
-
+    .left {
+      color: #fff;
+      .index {
+        color: #ffd02c;
       }
     }
   }
-  .ans{
+  .box {
+    // 这里的写法可能有问题，不确定问题的高度
+    height: calc(100vh - 50px - 20px - 48px - 50px - 24px - 230px);
+    overflow-y: scroll;
+    padding-bottom: 300px;
+    overflow-x: hidden;
+  }
+  .question {
+    font-size: 32px !important;
+    color: #fff;
+    line-height: 52px !important;
+    width: 515px;
+    // margin-left: 90px;
+    text-align: left;
+    margin-bottom: 40px;
+    .on {
+      span:before {
+      }
+    }
+  }
+  .ans {
     width: 696px;
     // height: 150px;
     padding: 45px 26px;
-    background: #400E8D;
+    background: #400e8d;
     display: flex;
     align-items: center;
     margin-bottom: 26px;
-    border-radius:13px;
-    
+    border-radius: 13px;
+
     // justify-content: center;
-    .option{
-      width:96px;
-      height:96px;
-      background: #6F5C9D;
-      border-radius:50%;
+    .option {
+      width: 96px;
+      height: 96px;
+      background: #6f5c9d;
+      border-radius: 50%;
       font-size: 40px;
       font-weight: bold;
       color: #fff;
       text-align: center;
       line-height: 96px;
       margin-right: 25px;
-      &.on{
-        background:linear-gradient(45deg,rgba(72,197,255,1),rgba(144,77,255,1));
+      &.on {
+        background: linear-gradient(
+          45deg,
+          rgba(72, 197, 255, 1),
+          rgba(144, 77, 255, 1)
+        );
       }
-      
-      
+
       // display: table;
       // height: 100%;
       // span{
@@ -245,32 +263,41 @@ export default {
       //   text-align: center;
       // }
     }
-    .text{flex:1;font-size: 32px;line-height: 48px;color: #fff;}
+    .text {
+      flex: 1;
+      font-size: 32px;
+      line-height: 48px;
+      color: #fff;
+    }
     // .button{color:#fff;font-size: 30px;line-height: 54px;text-align: center; width: 54px;height: 54px;border: 3px solid #B5A8D1;border-radius: 50%;margin-left: 50px;}
     // .button.on{
     //   border-color: #fff;
     // }
-    .button{
-      width:54px;
+    .button {
+      width: 54px;
       height: 54px;
-      background: url('../assets/img/chose.png') no-repeat;
+      background: url("../assets/img/chose.png") no-repeat;
       background-size: 100% 100%;
-      &.on{
-        background: url('../assets/img/chosed.png') no-repeat;
+      &.on {
+        background: url("../assets/img/chosed.png") no-repeat;
         background-size: 100% 100%;
       }
     }
   }
-  .pre{
+  .pre {
     margin-top: 28px;
-    width:690px;
-    height:106px;
+    width: 690px;
+    height: 106px;
     line-height: 106px;
     color: #fff;
     font-size: 40px;
     text-align: center;
-    background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
-    border-radius:53px;
+    background: linear-gradient(
+      90deg,
+      rgba(72, 197, 255, 1),
+      rgba(144, 77, 255, 1)
+    );
+    border-radius: 53px;
   }
 }
 </style>

@@ -97,10 +97,7 @@ export default {
     saveImg() {
       this.show = true
       // 想要保存的图片节点
-      // const dom = document.querySelector(".content");
-      if(this.urlImg){
-        return
-      }
+      const dom = document.querySelector(".content");
 
       html2canvas(document.querySelector(".content"), {
           allowTaint: false,
