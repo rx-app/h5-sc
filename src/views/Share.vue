@@ -6,8 +6,10 @@
     <div class="share-button" @click="saveImg"></div>
     <div class="score-box">
       <div class="left">
-        <div class="txt">您的总得分</div>
-        <div class="num">{{res.score}}</div>
+        <div class="txt">您的测试结果</div>
+        <div class="num">{{res.score}}<span v-if="res.result_type == 1" class="unit">分</span><span v-else-if="res.result_type == 2">%</span>
+        </div>
+           
       </div>
     </div>
     <div class="share-content">
@@ -249,7 +251,7 @@ export default {
       width: 300px;
 
       .txt{color:#fff;font-size:30px;line-height: 30px;margin-bottom: 10px;}
-      .num{color:#fff;font-size:85px;line-height: 80px;}
+      .num{color:#fff;font-size:85px;line-height: 80px;.unit{font-size: 50px;margin-left: 15px;}}
 
     }
   }
