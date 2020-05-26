@@ -52,6 +52,16 @@ Vue.filter('myDate', function (txData) {
   let dateT = txData ? new Date(txData) : new Date();    
   return `星期${dateT.getDay()}`;
 });
+
+
+// router.beforeEach((to, from, next) => {
+//   let id = 0
+//   if(from.query.platform_id){
+//     next({query:{platform_id:from.query.platform_id}})
+//   }else{
+//     next()
+//   }
+// })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

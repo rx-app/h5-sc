@@ -90,8 +90,12 @@ export default {
     level(){
       return  localStorage.getItem('level')*1
     },
+    platform_id(){
+      return this.getUrlParam('platform_id')
+    }
   },
   async created(){
+    alert(this.getUrlParam('platform_id'))
     // this.timer = setInterval(() =>{
     //             //超时处理
     //             //WeixinJSBridge加载需要1-2秒  WeixinJSBridge is not defined
@@ -107,9 +111,17 @@ export default {
     if(payback){
       this.uuid=this.$route.query.uuid
       this.id=this.$route.query.id
-      alert('h5支付完成')
-      alert('uuid:'+this.uuid)
-      alert('id:'+this.id)
+      this.$dialog.alert({
+        // title:'支付成功！',
+        // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+        message:'支付成功'
+      }).then(() => {
+            this.$router.push({name:'test',params:{id:this.id,mid}})
+        // on close
+      })
+      // alert('h5支付完成')
+      // alert('uuid:'+this.uuid)
+      // alert('id:'+this.id)
     }
   },
   methods: {
@@ -136,7 +148,7 @@ export default {
       // }
       // this.paying = true
       let res = await this.$http.post('order/test_question/paid_user/save',{
-        "platform_id": 0,
+        "platform_id": this.platform_id,
 	      "ref_ids": [this.id]
       })
       if(res.code == 200){
@@ -153,7 +165,7 @@ export default {
       // }
       // this.paying = true
       let res = await this.$http.post('order/test_question/free/save',{
-        "platform_id": 0,
+        "platform_id": this.platform_id,
 	      "ref_ids": [this.id]
       })
       if(res.code == 200){
@@ -172,7 +184,7 @@ export default {
           "number": 1,
           "package_key": "num_1",
           "package_type": 1,
-          "platform_id": 0,
+          "platform_id": this.platform_id,
           "ref_ids": [this.id],
           "total_fee": 1
 
@@ -196,7 +208,7 @@ export default {
             "number": 1,
             "package_key": "num_1",
             "package_type": 1,
-            "platform_id": 0,
+            "platform_id": this.platform_id,
             "ref_ids": [this.id],
             "total_fee": 1
 
@@ -206,11 +218,11 @@ export default {
         if(res.code == 200){
           let r = res.data
           this.uuid = res.data.uuid;
-          alert('url:'+res.data.url)
+          // alert('url:'+res.data.url)
           let back_url = `${location.href}?uuid=${this.uuid}&id=${this.id}&payback=1`
-          alert('back_url:'+back_url)
+          // alert('back_url:'+back_url)
           let url = `${res.data.url}&redirect_url=${encodeURIComponent(back_url)}`
-          alert('url2:'+url)
+          // alert('url2:'+url)
           window.location.replace(url)
           // window.location.href = url;
         }
@@ -223,7 +235,7 @@ export default {
             "number": 1,
             "package_key": "num_1",
             "package_type": 1,
-            "platform_id": 0,
+            "platform_id": this.platform_id,
             "ref_ids": [this.id],
             "total_fee": 1
 
