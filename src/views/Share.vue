@@ -41,7 +41,7 @@
           <div class="title">{{res.question_name}}</div>
         
         
-          <div class="res">{{res.result_content}}</div>
+          <div class="res" :class="{fontleft:res.result_content.length>20}">{{res.result_content}}</div>
           <div class="qrcode"></div>
           <div v-show="showtxt" class="text">长按保存图片，分享给他人</div>
         </div>
@@ -200,6 +200,10 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.fontleft{
+  text-align: left;
+  text-indent: 2em;
+}
 .img-box{
   width: 100vw;
   img{
