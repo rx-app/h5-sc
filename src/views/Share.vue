@@ -43,7 +43,7 @@
         
           <div class="res">{{res.result_content}}</div>
           <div class="qrcode"></div>
-          <div class="text">长按保存图片，分享给他人</div>
+          <div v-show="showtxt" class="text">长按保存图片，分享给他人</div>
         </div>
         
       </div>
@@ -78,7 +78,8 @@ export default {
       score: "80",
       res: {},
       show:false,
-      urlImg:''
+      urlImg:'',
+      showtxt:false,
     };
   },
   computed: {
@@ -95,11 +96,18 @@ export default {
   created() {
     this.getResult();
   },
+  mounted(){
+    
+  },
   methods: {
     saveImg() {
       this.show = true
+      // this.showtxt=true
       // 想要保存的图片节点
-      const dom = document.querySelector(".content");
+      // const dom = document.querySelector(".content");
+      if(this.urlImg){
+        return
+      }
 
       html2canvas(document.querySelector(".content"), {
           allowTaint: false,
@@ -166,6 +174,21 @@ export default {
         console.log(res.data);
       }
       this.res = res.data;
+      this.showtxt = true
+      this.$nextTick(
+        ()=>{
+          html2canvas(document.querySelector(".content"), {
+            allowTaint: false,
+            useCORS: true
+          }).then(canvas => { 
+            console.log(canvas.toDataURL())
+            // alert(222222)
+            // let dataUrl = canvas.toDataURL("image/jpeg");
+            this.urlImg = canvas.toDataURL(); 
+            this.showtxt = false
+          }); 
+        }
+      )
     }
   }
 };
