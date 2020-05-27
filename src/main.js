@@ -33,6 +33,9 @@ Vue.use(Vant);
 import http from './http'
 Vue.prototype.$http = http
 
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 import {currency,LV} from './tools'
 Vue.filter('cy',currency)
 Vue.filter('lv',LV)

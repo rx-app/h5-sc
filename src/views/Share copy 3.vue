@@ -7,7 +7,11 @@
     <div class="score-box">
       <div class="left">
         <div class="txt">您的测试结果</div>
-        <div class="num"> <span v-if="res.result_type == 3">{{res.result_name}}</span><span v-else>{{res.score}}</span>  <span v-if="res.result_type == 1" class="unit">分</span><span v-else-if="res.result_type == 2">%</span></div>
+        <div class="num">
+          {{res.score}}
+          <span v-if="res.result_type == 1" class="unit">分</span>
+          <span v-else-if="res.result_type == 2">%</span>
+        </div>
       </div>
       <div class="right">
         <div id="echarts" :style="{width: '350px', height: '240px'}"></div>
@@ -40,10 +44,10 @@
           </div>
         </div>
         <div class="test-result">
-          <!-- <div class="title" :class="{textleft:res.question_name.length>15}">{{res.question_name}}</div> -->
+          <div class="title">{{res.question_name}}</div>
 
           <div class="res" :class="{fontleft:res.result_content.length>20}">{{res.result_content}}</div>
-          <div v-show="showtxt" class="qrcode"></div>
+          <div class="qrcode"></div>
           <div v-show="showtxt" class="text">长按保存图片，分享给他人</div>
         </div>
       </div>
@@ -99,90 +103,81 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      // this.echartsMit();
+      this.echartsMit();
     }, 1000);
   },
   methods: {
     echartsMit() {
       var dom = document.getElementById("echarts");
       var myChart = echarts.init(dom);
-      // alert(this.res.score/100)
-      var value = this.res.score/100;
-      if(value<0.2){
-        value=0.2
-      }
- var data = [value, value, value, ];
- let option = {
-     backgroundColor:"transparent",
-     series: [{
-         type: 'liquidFill',
-         radius: '80%',
-         center: ['50%', '50%'],
-         //  shape: 'roundRect',
-         data: data,
-         backgroundStyle: {
-             color: {
-                 type: 'linear',
-                 x: 1,
-                 y: 0,
-                 x2: 0.5,
-                 y2: 1,
-                 colorStops: [{
-                     offset: 1,
-                     color: '#331473'
-                 }],
-                 globalCoord: false
-             },
-         },
-         outline: {
-             borderDistance: 0,
-             itemStyle: {
-                 borderWidth: 10,
-                 borderColor: {
-                     type: 'linear',
-                     x:0,
-                     y: 0,
-                     x2: 0,
-                     y2: 1,
-                     colorStops: [{
-                         offset: 0,
-                         color: '#52b5ff'
-                     }, {
-                         offset: 1,
-                         color: '#8264ff'
-                     }],
-                     globalCoord: false
-                 },
-                 shadowBlur: 13,
-                 shadowColor: '#000',
-             }
-         },
-        //  color: {
-        //      type: 'linear',
-        //      x: 0,
-        //      y: 0,
-        //      x2: 0,
-        //      y2: 1,
-        //      colorStops: [{
-        //          offset: 1,
-        //          color:'rgba(255,255,255,.3)'
-        //      }, {
-        //          offset: 0.5,
-        //          color: 'rgba(75,167,255,0.8)'
-        //      }, {
-        //          offset: 0,
-        //          color: 'rgba(75,167,255,0.3)'
-        //      }],
-        //      globalCoord: false
-        //  },
-         label: {
-             normal: {
-                 formatter: '',
-             }
-         }
-     }, ]
- };
-      myChart.setOption(option);
+      myChart.setOption({
+        series: [
+          {
+            type: "liquidFill",
+            radius: "80%",
+            data: [0.6, 0.5, 0.4, 0.3],
+            backgroundStyle: {
+              color: {
+                type: "linear",
+                x: 1,
+                y: 0,
+                x2: 0.5,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 1,
+                    color: "rgba(68, 145, 253, 0)"
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(68, 145, 253, .25)"
+                  },
+                  {
+                    offset: 0,
+                    color: "rgba(68, 145, 253, 1)"
+                  }
+                ],
+                globalCoord: false
+              }
+            },
+            outline: {
+              borderDistance: 0,
+              itemStyle: {
+                borderWidth: 10,
+                borderColor: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(69, 73, 240, 0)"
+                    },
+                    {
+                      offset: 0.5,
+                      color: "rgba(69, 73, 240, .25)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(69, 73, 240, 1)"
+                    }
+                  ],
+                  globalCoord: false
+                },
+                shadowBlur: 10,
+                shadowColor: "#000"
+              }
+            }, 
+            label: {
+              normal: {
+                formatter: ""
+              }
+            }
+          }
+        ]
+      });
     },
     saveImg() {
       this.show = true;
@@ -260,7 +255,6 @@ export default {
       this.res = res.data;
       this.showtxt = true;
       this.$nextTick(() => {
-        this.echartsMit();
         html2canvas(document.querySelector(".content"), {
           allowTaint: false,
           useCORS: true
@@ -286,10 +280,6 @@ export default {
 .fontleft {
   text-align: left;
   text-indent: 2em;
-}
-.textleft{
-  text-align: left;
-  line-height: 1.2em;
 }
 .img-box {
   width: 100vw;
@@ -362,7 +352,7 @@ export default {
     background: #261a58;
     position: relative;
     .left {
-      padding: 20px 0 0 70px;
+      padding: 20px 0 0 100px;
       height: 250px;
       width: 320px;
 
@@ -376,11 +366,9 @@ export default {
         color: #fff;
         font-size: 85px;
         line-height: 80px;
-        // margin-left: 10px;
-        padding-top: 20px;;
         .unit {
-          font-size: 32px;
-          margin-left: 5px;
+          font-size: 50px;
+          margin-left: 15px;
         }
       }
     }
@@ -475,14 +463,13 @@ export default {
     .title {
       font-size: 40px;
       color: #fff;
-      
+      margin-bottom: 57px;
       margin-top: 60px;
     }
 
     .res {
       font-size: 32px;
       color: #fff;
-      margin-top: 57px;
       margin-bottom: 100px;
       line-height: 52px;
     }

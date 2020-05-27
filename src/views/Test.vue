@@ -216,7 +216,7 @@ export default {
     font-size: 32px !important;
     color: #fff;
     line-height: 52px !important;
-    width: 515px;
+    // width: 515px;
     // margin-left: 90px;
     text-align: left;
     margin-bottom: 40px;

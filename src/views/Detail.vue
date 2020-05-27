@@ -95,7 +95,7 @@ export default {
     }
   },
   async created(){
-    alert(this.getUrlParam('platform_id'))
+    // alert(this.getUrlParam('platform_id'))
     // this.timer = setInterval(() =>{
     //             //超时处理
     //             //WeixinJSBridge加载需要1-2秒  WeixinJSBridge is not defined

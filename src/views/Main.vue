@@ -9,7 +9,7 @@
       </router-link>-->
       <van-swipe class="banner" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(item,index) in list4" :key="index">
-          <div @click="getDetail(itme)" class="img-container">
+          <div @click="getDetail(item)" class="img-container">
             <img :src="item.pic" alt />
           </div>
         </van-swipe-item>
