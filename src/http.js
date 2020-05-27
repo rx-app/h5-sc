@@ -30,6 +30,7 @@ http.interceptors.response.use(res => {
     //   confirmButtonText: '确定',
     //   callback: action => {
       // is_weixn(){
+        // debugger
         var ua = navigator.userAgent.toLowerCase();
         if(ua.match(/MicroMessenger/i)=="micromessenger") {
           router.push('/wlogin')
