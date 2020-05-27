@@ -87,6 +87,11 @@ export default new Router({
       component: resolve => require(['@/views/Login'], resolve)
     },
     {
+      path: '/wlogin',
+      name: 'wlogin',
+      component: resolve => require(['@/views/Wlogin'], resolve)
+    },
+    {
       path: '/bindPhone/:openid',
       name: 'bindPhone',
       props: true,

@@ -67,24 +67,32 @@ export default {
   },
   methods: {
     back() {
-      this.$dialog
-        .confirm({
-          // title:'提示',
-          message: "退出后将清空本次操作！"
-        })
-        .then(() => {
-          // localStorage.setItem('nickname','')
-          // localStorage.setItem('gender','')
-          // localStorage.setItem('mobile','')
-          // localStorage.setItem('email','')
-          // localStorage.setItem('avatar','')
-          // localStorage.setItem('level','')
-          // localStorage.setItem('token','')
-          // this.$router.push({name:'login'})
-          this.$router.push({ name: "my" });
-          // on close
-        })
-        .catch(() => {});
+      this.$dialog.alert({
+        // title:'支付成功！',
+        // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+        message:'支付成功'
+      }).then(() => {
+            this.$router.push({name:'test',params:{id:this.id,mid}})
+        // on close
+      })
+      // this.$dialog
+      //   .confirm({
+      //     // title:'提示',
+      //     message: "退出后将清空本次操作！"
+      //   })
+      //   .then(() => {
+      //     // localStorage.setItem('nickname','')
+      //     // localStorage.setItem('gender','')
+      //     // localStorage.setItem('mobile','')
+      //     // localStorage.setItem('email','')
+      //     // localStorage.setItem('avatar','')
+      //     // localStorage.setItem('level','')
+      //     // localStorage.setItem('token','')
+      //     // this.$router.push({name:'login'})
+      //     this.$router.push({ name: "my" });
+      //     // on close
+      //   })
+      //   .catch(() => {});
     },
     async select(item, cindex, index) {
       console.log(this.result);

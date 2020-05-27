@@ -29,7 +29,15 @@ http.interceptors.response.use(res => {
     // Vue.prototype.$alert('身份信息无效或已过期，请重新登录', {
     //   confirmButtonText: '确定',
     //   callback: action => {
-        router.push('/login')
+      // is_weixn(){
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+          router.push('/wlogin')
+        } else {
+          router.push('/login')
+        }
+    // }
+        
         // Vue.prototype.$message({
         //   type: 'error',
         //   message: '身份信息无效或已过期，请重新登录'

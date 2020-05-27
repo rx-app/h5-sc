@@ -77,6 +77,33 @@ background: #261A58;
     color: #fff;
     border-bottom: 1px solid #4F19A2;
   }
+  .van-hairline--top::after{
+  border:none!important;
+}
+.no-centent-dialog {
+  color: #fff;
+  background: #2e1148!important;
+  width: 60vw;
+  border: 6px solid rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 0px 10px 5px rgba(199, 199, 199, 0.5) */
+}
+.no-centent-dialog .van-dialog__message {
+  height: 22vw!important;
+  line-height: 28vw!important;
+  padding: 0px;
+  font-size: 0.48rem!important;
+  overflow: hidden;
+}
+.no-centent-dialog .van-dialog__footer {
+  text-align: center;
+}
+.no-centent-dialog .van-button--default {
+  color: #fff;
+  width: 28vw!important;
+  background: #250e3a;
+  border-radius: 100px;
+  margin-bottom: 8vw!important;
+}
   
 }
 
