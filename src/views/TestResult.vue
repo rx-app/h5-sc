@@ -153,6 +153,7 @@ export default {
     },
     logout(){
       this.$dialog.confirm({
+        cancelButtonText: "X",
         // title:'提示',
         message: '确定要退出？',
       }).then(() => {

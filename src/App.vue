@@ -108,3 +108,42 @@ background: #261A58;
 }
 
 </style>
+<style >
+.van-progress__pivot {
+  line-height: 40px;
+  font-size: 14px;
+}
+.van-dialog .van-dialog__cancel {
+  position: absolute;
+  border-radius: 100px;
+  width: 54px;
+  height: 54px;
+  display: block;
+  background: rgb(0, 0, 0, 0.2);
+  position: absolute;
+  top: -155px;
+  z-index: 1;
+  right: 10px;
+}
+.van-dialog .van-dialog__confirm {
+  display: block;
+  position:absolute;
+  border-radius: 100px;
+  width: 250px;
+  height: 54px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: rgb(0, 0, 0, 0.2);
+}
+.van-dialog .van-dialog__footer {
+  text-align: center;
+  padding-bottom:100px;
+  overflow: visible;
+}
+.van-dialog .van-dialog__message {
+  border: 0px;
+  padding: 50px 20px 20px 20px;
+  text-align: center;
+}
+</style>

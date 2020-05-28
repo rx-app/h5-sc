@@ -9,7 +9,7 @@
 
         </div>
         <div class="right">
-          <div class="nickname">{{nickname}} <span @click="logout">[注销]</span> </div>
+          <div class="nickname">{{nickname}} <span v-show="!isweixin" @click="logout">[注销]</span> </div>
           <div class="level">{{level | lv}} </div><div @click="toVipPage" class="vip">开通会员</div>
           
         </div>
@@ -84,6 +84,14 @@ export default {
     };
   },
   computed:{
+    isweixin(){
+      var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+          return true
+        } else {
+          return false
+        }
+    },
     avatar(){
       return localStorage.getItem('avatar')
     },
@@ -168,18 +176,20 @@ export default {
       this.$router.push({name:'buyVIP'})
     },
     logout(){
+      
       this.$dialog.confirm({
+        cancelButtonText: "X",
         // title:'提示',
         message: '确定要退出？',
       }).then(() => {
-            // localStorage.setItem('nickname','')
-            // localStorage.setItem('gender','')
-            // localStorage.setItem('mobile','')
-            // localStorage.setItem('email','')
-            // localStorage.setItem('avatar','')
-            // localStorage.setItem('level','')
-            // localStorage.setItem('token','')
-            // this.$router.push({name:'login'})
+            localStorage.setItem('nickname','')
+            localStorage.setItem('gender','')
+            localStorage.setItem('mobile','')
+            localStorage.setItem('email','')
+            localStorage.setItem('avatar','')
+            localStorage.setItem('level','')
+            localStorage.setItem('token','')
+            this.$router.push({name:'login'})
         // on close
       }).catch(()=>{
 
