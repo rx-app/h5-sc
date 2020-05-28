@@ -207,6 +207,11 @@ export default {
   padding: 50px 20px 20px 20px;
   text-align: center;
 }
+.van-progress__pivot {
+  line-height: 40px;
+  font-size: 14px;
+}
+
 </style>
 <style lang="scss" scoped>
 .page-test {
