@@ -19,12 +19,12 @@
       同意协议并登陆
     </div>
 
-    <div class="wechat-login">
+    <div v-show="isweixin" class="wechat-login">
       <div class="line"></div>
       <div class="text">其它登录</div>
       <div class="line"></div>
     </div>
-    <div @click="wechateLogin"  class="wechat-icon">
+    <div v-show="isweixin" @click="wechateLogin"  class="wechat-icon">
       
     </div>
     
@@ -47,6 +47,16 @@ export default {
       timer:null,
       code:''
     };
+  },
+  computed:{
+    isweixin(){
+      var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+          return true
+        } else {
+          return false
+        }
+    }
   },
   updated(){
     // alert('update'+location.href)
