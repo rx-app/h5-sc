@@ -29,7 +29,8 @@ div {
   font-size: 0.426667rem!important;
 }
 .van-dialog {
-  background: #261a58;
+  background: #261a58!important;
+  overflow: hidden!important;
   color: #fff;
   width: 6rem!important;
 }
