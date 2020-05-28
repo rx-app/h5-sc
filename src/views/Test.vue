@@ -67,32 +67,36 @@ export default {
   },
   methods: {
     back() {
-      this.$dialog.alert({
-        // title:'支付成功！',
-        // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
-        message:'支付成功'
-      }).then(() => {
-            this.$router.push({name:'test',params:{id:this.id,mid}})
-        // on close
-      })
       // this.$dialog
-      //   .confirm({
-      //     // title:'提示',
-      //     message: "退出后将清空本次操作！"
+      //   .alert({
+      //     className:'dialogclassName',
+      //     // title:'支付成功！',
+      //     // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
+      //     message: "支付成功"
       //   })
       //   .then(() => {
-      //     // localStorage.setItem('nickname','')
-      //     // localStorage.setItem('gender','')
-      //     // localStorage.setItem('mobile','')
-      //     // localStorage.setItem('email','')
-      //     // localStorage.setItem('avatar','')
-      //     // localStorage.setItem('level','')
-      //     // localStorage.setItem('token','')
-      //     // this.$router.push({name:'login'})
-      //     this.$router.push({ name: "my" });
+      //     this.$router.push({ name: "test", params: { id: this.id, mid } });
       //     // on close
-      //   })
-      //   .catch(() => {});
+      //   });
+      this.$dialog
+        .confirm({
+          cancelButtonText: "X",
+          // title:'提示',
+          message: "退出后将清空本次操作!"
+        })
+        .then(() => {
+          // localStorage.setItem('nickname','')
+          // localStorage.setItem('gender','')
+          // localStorage.setItem('mobile','')
+          // localStorage.setItem('email','')
+          // localStorage.setItem('avatar','')
+          // localStorage.setItem('level','')
+          // localStorage.setItem('token','')
+          // this.$router.push({name:'login'})
+          this.$router.push({ name: "my" });
+          // on close
+        })
+        .catch(() => {});
     },
     async select(item, cindex, index) {
       console.log(this.result);
@@ -169,6 +173,39 @@ export default {
 .van-progress__pivot {
   line-height: 40px;
   font-size: 14px;
+}
+.van-dialog .van-dialog__cancel {
+  position: absolute;
+  border-radius: 100px;
+  width: 54px;
+  height: 54px;
+  display: block;
+  background: rgb(0, 0, 0, 0.2);
+  position: absolute;
+  top: -155px;
+  z-index: 1;
+  right: 10px;
+}
+.van-dialog .van-dialog__confirm {
+  display: block;
+  position:absolute;
+  border-radius: 100px;
+  width: 250px;
+  height: 54px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: rgb(0, 0, 0, 0.2);
+}
+.van-dialog .van-dialog__footer {
+  text-align: center;
+  padding-bottom:100px;
+  overflow: visible;
+}
+.van-dialog .van-dialog__message {
+  border: 0px;
+  padding: 50px 20px 20px 20px;
+  text-align: center;
 }
 </style>
 <style lang="scss" scoped>

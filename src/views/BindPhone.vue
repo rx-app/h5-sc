@@ -92,7 +92,12 @@ export default {
         // alert(res.msg)
         if(res.code == 200){
           localStorage.setItem('token',res.data.token)
-          this.$router.push({name:'main'})
+          let url = localStorage.getItem('url');
+          if(url){
+            window.location.href = localStorage.getItem('url');
+          }else{
+            this.$router.push({name:'main'})
+          }
         }else{
           alert(res.msg)
         }

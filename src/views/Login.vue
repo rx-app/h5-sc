@@ -101,7 +101,12 @@ export default {
           localStorage.setItem('avatar',res2.data.avatar)
           localStorage.setItem('level',res2.data.level)
         }
-        this.$router.push({name:'main'})
+        let url = localStorage.getItem('url');
+        if(url){
+           window.location.href = localStorage.getItem('url');
+        }else{
+          this.$router.push({name:'main'})
+        }
       }else{
         alert('5:'+res.msg)
       }
@@ -229,7 +234,12 @@ export default {
           localStorage.setItem('level',res2.data.level)
         }
         // localStorage.setItem('info',JSON.stringify(userInfo.data))
-        this.$router.push("/");
+        let url = localStorage.getItem('url');
+        if(url){
+           window.location.href = localStorage.getItem('url');
+        }else{
+          this.$router.push({name:'main'})
+        }
       } else {
         // this.$message({
         //   type: "error",

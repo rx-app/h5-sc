@@ -77,7 +77,12 @@ export default {
           localStorage.setItem('avatar',res2.data.avatar)
           localStorage.setItem('level',res2.data.level)
         }
-        this.$router.push({name:'main'})
+        let url = localStorage.getItem('url');
+        if(url){
+           window.location.href = localStorage.getItem('url');
+        }else{
+          this.$router.push({name:'main'})
+        }
       }else{
         alert('5:'+res.msg)
       }
@@ -276,103 +281,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-login{
-  height: 100vh;
-  width: 101vw; //这个地方如果不设置101vw,右上位置的背景图片会有一个小小的白色间隙
-  background: url('../assets/img/login-2x.png') no-repeat;
-  background-size: cover;
-  position: relative;
-  padding: 40px 60px 0;
-  .back{
-    width:72px;
-    height:67px;
-    background: url('../assets/img/return.png') no-repeat;
-    background-size: cover;
-    position: absolute;
-    top:40px;
-    left: 0px;
-  }
-  .container{
-    // width: 630px;
-    .title{
-      font-size: 60px;
-      // margin: 0 auto;
-      text-align: center;
-      line-height: 67px;
-      height: 67px;
-      color: #fff;
-      margin-bottom: 122px;
-    }
-    .input-box{
-      width: 100%;
-      position: relative;
-      margin-bottom: 88px;
-      input{
-        width: 100%;
-        border: none;background: transparent;color:#fff;font-size: 28px;line-height: 3em;
-        border-bottom: 1px solid #4F19A2;
-      }
-      .close{
-        width:40px;
-        height:40px;
-        background: url('../assets/img/close.png') no-repeat;
-        background-size: contain;
-        border-radius:50%;
-        position: absolute;
-        right: 0px;
-        bottom:28px;
-      }
-      .send-code{
-        color: #A19AB9;
-        font-size: 28px;
-        position: absolute;
-        right: 100px;
-        bottom: 28px;
-        // background: #1e1546;
-        // padding: 15px;
-      }
-    }
-  }
-  .login{
-    width:690px;
-    height:96px;
-    margin:0 -30px;
-    background:linear-gradient(90deg,rgba(72,197,255,1),rgba(144,77,255,1));
-    border-radius:0px 48px 48px 72px;
-    font-size:36px;
-    // font-family:PingFang SC;
-    // font-weight:bold;
-    color:rgba(255,255,255,1);
-    line-height:96px;
-    text-align: center;
-  }
-  .wechat-login{
-    position: relative;
-    margin:125px 100px 0;
-    display: flex;
-    .text{
-      color:#9C8DBE;
-      font-size: 26px;
-      width: 170px;
-      // flex: 1;
-      text-align: center;
-      // z-index: 100;
-    }
-    .line{
-      width:145px;
-      height:3px;
-      background:rgba(79,25,162,1);
-      margin-top: 11px;
-    }
-   
-  }
-   .wechat-icon{
-      height: 60px;
-      width: 60px;
-      margin-left: 285px;
-      margin-top: 50px;
-      background: url('../assets/img/wechat.png') no-repeat;
-      background-size: contain;
-    }
-}
+
 </style>

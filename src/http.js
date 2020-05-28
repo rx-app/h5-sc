@@ -31,6 +31,8 @@ http.interceptors.response.use(res => {
     //   callback: action => {
       // is_weixn(){
         // debugger
+        console.log(router)
+        localStorage.setItem('url',location.href)
         var ua = navigator.userAgent.toLowerCase();
         if(ua.match(/MicroMessenger/i)=="micromessenger") {
           router.push('/wlogin')
