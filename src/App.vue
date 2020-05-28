@@ -26,12 +26,12 @@ div {
   background: #261a58;
 }
 .van-list__finished-text {
-  font-size: 32px;
+  font-size: 0.426667rem!important;
 }
 .van-dialog {
   background: #261a58;
   color: #fff;
-  width: 450px;
+  width: 6rem!important;
 }
 .van-dialog .van-dialog__content {
   background: #261a58;

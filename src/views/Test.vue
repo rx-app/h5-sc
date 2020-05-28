@@ -208,8 +208,8 @@ export default {
   text-align: center;
 }
 .van-progress__pivot {
-  line-height: 40px;
-  font-size: 14px;
+    line-height: 0.533333rem!important;
+    font-size: 0.186667rem!important;
 }
 
 </style>
