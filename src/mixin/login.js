@@ -7,7 +7,7 @@ let login = {
           // alert(`openid: ${openid}`)
            let res = await this.wLongin(openid)
         }else{
-          this.wechateLogin()
+          // this.wechateLogin()
         }
       },
       methods:{
