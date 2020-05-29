@@ -1,6 +1,6 @@
 <template>
   <div class="page-tips">
-    <div @click="$router.go(-1)" class="back"></div>
+    <div @click="back" class="back"></div>
     <div class="title">VIP会员套餐</div>
     <!-- <div class="tips-bar"></div> -->
     <div class="vip">
@@ -57,6 +57,14 @@ export default {
     };
   },
   methods: {
+    back(){
+      alert(1)
+      if(window.history.length<=1){
+        this.$router.push({name:'main'})
+      }else{
+        this.$router.go(-1)
+      }
+    },
     buyItem(){
       
       this.price = this.res.present_price;

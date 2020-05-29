@@ -1,6 +1,6 @@
 <template>
   <div class="page-tips">
-    <div @click="$router.go(-1)" class="back"></div>
+    <div @click="back" class="back"></div>
     <div class="title">{{res.name}}</div>
     <!-- <div class="tips-bar">
       <img :src="res.bigPic" alt="">
@@ -133,7 +133,14 @@ export default {
     }
   },
   methods: {
-    
+    back(){
+      alert(1)
+      if(window.history.length<=10){
+        this.$router.push({name:'main'})
+      }else{
+        this.$router.go(-1)
+      }
+    },
     getUrlParam(name) {//封装方法
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
       var r = window.location.search.substr(1).match(reg); //匹配目标参数
