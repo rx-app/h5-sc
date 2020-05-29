@@ -66,6 +66,9 @@ Vue.filter('myDate', function (txData) {
 //   }
 // })
 /* eslint-disable no-new */
+import login from './mixin/login'
+Vue.mixin(login)
+
 new Vue({
   el: '#app',
   router,
