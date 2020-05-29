@@ -43,7 +43,7 @@ let login = {
               localStorage.setItem('avatar',res2.data.avatar)
               localStorage.setItem('level',res2.data.level)
             }
-            let url = this.getCookie('url')
+            // let url = this.getCookie('url')
             // alert('url2:'+url)
             if(url){
               window.location.href = localStorage.getItem('url')
@@ -85,7 +85,7 @@ let login = {
             // .replace(/[&]/g, "%26")
             // .replace(/[=]/g, "%3d");
             console.log(reurl)
-            let url1 = this.getCookie('url')
+            // let url1 = this.getCookie('url')
             // alert('url1:'+url1)
             // alert('url3:'+localStorage.getItem('url'))
             var url =
