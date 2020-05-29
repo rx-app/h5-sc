@@ -134,8 +134,7 @@ export default {
   },
   methods: {
     back(){
-      alert(1)
-      if(window.history.length<=10){
+      if(window.history.length<=1){
         this.$router.push({name:'main'})
       }else{
         this.$router.go(-1)
