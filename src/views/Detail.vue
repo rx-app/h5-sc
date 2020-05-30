@@ -159,7 +159,7 @@ export default {
         // message: '请到<span style="color:#f26161">【我的】</span>里面查看',
         message:'支付成功'
       }).then(() => {
-            this.$router.push({name:'test',params:{id:this.id,mid}})
+            this.$router.push({name:'test',params:{id:this.id,mid:this.uuid}})
         // on close
       })
       // alert('h5支付完成')
