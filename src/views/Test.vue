@@ -166,8 +166,12 @@ export default {
           }; //JSON.parse( JSON.stringify(v) )
         });
       }else{
+        let message='请先购买该测试题';
+        if(res.code == 40030){
+          message = '您已答过该测试题'
+        }
         this.$dialog.alert({
-          message: '请先购买该测试题',
+          message,
         }).then(() => {
           this.$router.push({name:'main'})
           // on close
