@@ -40,7 +40,7 @@
       <!-- <van-cell is-link @click="show=true">展示弹出层</van-cell> -->
 <!-- <van-popup v-model="show"><van-loading color="#1989fa" size="4rem" />
 <div style="font-size:0.4rem;text-align:center;color:#fff">正在计算测试结果</div></van-popup> -->
-<van-loading v-show="show" color="#7334d4" size="3.5rem" vertical="true" >正在计算测试结果...</van-loading>
+<van-loading v-show="show" color="#7334d4" size="3.5rem" :vertical="true" >正在计算测试结果...</van-loading>
     </div>
   </div>
 </template>
@@ -59,6 +59,7 @@ export default {
       length: 0,
       pecent: 0,
       show:false,
+      finish:false,
       result: {
         member_test_question_id: 0,
         option_list: [
@@ -105,6 +106,10 @@ export default {
     },
     async select(item, cindex, index) {
       console.log(this.result);
+      
+       if (this.finish) {
+         return
+       }
       this.list[cindex].selectIndex = index;
       console.log(this.list);
       this.result.option_list[this.current_index].question_item_id = this.list[
@@ -115,6 +120,7 @@ export default {
       this.pecent++;
       if (this.current_index + 1 == this.length) {
         this.show=true
+        this.finish =true
         let res = await this.addResult();
 
         if (res.code == 200) {
