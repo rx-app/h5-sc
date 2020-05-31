@@ -144,26 +144,35 @@ export default {
     async getData() {
       let res = await this.$http.get(`test/question/${this.id}`);
       console.log(res);
-      // debugger
-      let list = res.data.item_list;
-      list = list.map(v => {
-        v.selectIndex = -1;
-        return v;
-      });
-      this.list = list;
-      this.result.member_test_question_id = this.mid;
-      this.length = this.list.length;
-      this.result.option_list = Array(this.length).fill({
-        // "question_item_id": 0,
-        // "question_item_option_id": 0
-      });
+      if(res.code==200){
+        // debugger
+        let list = res.data.item_list;
+        list = list.map(v => {
+          v.selectIndex = -1;
+          return v;
+        });
+        this.list = list;
+        this.result.member_test_question_id = this.mid;
+        this.length = this.list.length;
+        this.result.option_list = Array(this.length).fill({
+          // "question_item_id": 0,
+          // "question_item_option_id": 0
+        });
 
-      this.result.option_list = this.result.option_list.map(v => {
-        return {
-          question_item_id: 0,
-          question_item_option_id: 0
-        }; //JSON.parse( JSON.stringify(v) )
-      });
+        this.result.option_list = this.result.option_list.map(v => {
+          return {
+            question_item_id: 0,
+            question_item_option_id: 0
+          }; //JSON.parse( JSON.stringify(v) )
+        });
+      }else{
+        this.$dialog.alert({
+          message: '请先购买该测试题',
+        }).then(() => {
+          this.$router.push({name:'main'})
+          // on close
+        })
+      }
       // this.result.option_list[0].question_item_id =2;
       // console.log(this.list)
       // console.log(this.result.option_list[1].question_item_id)
