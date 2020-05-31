@@ -37,6 +37,10 @@
         </div>
       </div>
       <div v-show="current_index>0" @click="current_index--&&pecent--" class="pre">上一题</div>
+      <!-- <van-cell is-link @click="show=true">展示弹出层</van-cell> -->
+<!-- <van-popup v-model="show"><van-loading color="#1989fa" size="4rem" />
+<div style="font-size:0.4rem;text-align:center;color:#fff">正在计算测试结果</div></van-popup> -->
+<van-loading v-show="show" color="#7334d4" size="3.5rem" vertical="true" >正在计算测试结果...</van-loading>
     </div>
   </div>
 </template>
@@ -54,6 +58,7 @@ export default {
       letter: ["A", "B", "C", "D", "E", "F", "G", "H"],
       length: 0,
       pecent: 0,
+      show:false,
       result: {
         member_test_question_id: 0,
         option_list: [
@@ -109,6 +114,7 @@ export default {
         item.id;
       this.pecent++;
       if (this.current_index + 1 == this.length) {
+        this.show=true
         let res = await this.addResult();
 
         if (res.code == 200) {
@@ -211,7 +217,17 @@ export default {
     line-height: 0.533333rem!important;
     font-size: 0.186667rem!important;
 }
-
+.van-popup{
+  background: transparent!important;
+}
+.van-loading__text{
+  margin-top: 1.2rem;
+  font-size: 0.6rem;
+}
+.van-loading--vertical .van-loading__text{
+  margin-top: 0.4rem;
+  color:#a372f0;
+}
 </style>
 <style lang="scss" scoped>
 .page-test {
