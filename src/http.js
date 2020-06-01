@@ -32,6 +32,13 @@ http.interceptors.response.use(res => {
       // is_weixn(){
         // debugger
         console.log(router)
+        //防止跳转后登录卡在wlogin空白页
+        var reg = new RegExp("(^|&)" + 'code' + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);
+        if(r&&r[2]){
+          // alert('存在code')
+          return
+        }
         localStorage.setItem('url',location.href)
         var ua = navigator.userAgent.toLowerCase();
         if(ua.match(/MicroMessenger/i)=="micromessenger") {
