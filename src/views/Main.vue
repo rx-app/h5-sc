@@ -145,7 +145,7 @@ export default {
         let type1 = item.image_list.find(v => {
           return v.type == 1;
         });
-        item.pic = type1.url;
+        type1 && ( item.pic = type1.url);
         // if (item.image_list[1] && item.image_list[1].type == 1) {
         //   item.bigPic = item.image_list[0].url;
         // }
@@ -181,7 +181,7 @@ export default {
         let type2 = item.image_list.find(v => {
           return v.type == 2;
         });
-        item.pic = type2.url;
+        type2 && ( item.pic = type2.url);
         // item.bigPic =''
         // item.smallPic= ''
         // if (item.image_list[1] && item.image_list[1].type == 1) {
@@ -221,7 +221,7 @@ export default {
         let type = item.image_list.find(v => {
           return v.type == 0;
         });
-        item.pic = type.url;
+        type && (item.pic = type.url);
         // item.bigPic =''
         // item.smallPic= ''
         // if (item.image_list[1] && item.image_list[1].type == 1) {
@@ -277,7 +277,7 @@ export default {
         let type = item.image_list.find(v => {
           return v.type == 0;
         });
-        item.pic = type.url;
+        type && ( item.pic = type.url);
 
         return item;
       });
